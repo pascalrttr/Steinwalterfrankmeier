@@ -5,34 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>stein walter frank meier</title>
   <!--
-  ═══════════════════════════════════════════════════════════════
-   ORDNERSTRUKTUR:
-     index.html
-     foto.jpg          ← euer Bandfoto
-     notwehr-bg.png    ← Video-Thumbnail
-     logo.png          ← Band-Logo (transparent)
-     fonts/
-       (alle EuropaGroteskSH .otf Dateien)
-
-   NEWSLETTER (Formspree):
-   1. Geh auf https://formspree.io und registriere dich kostenlos
-   2. Klick "New Form" → Name vergeben → Submit
-   3. Kopiere die Form-ID (z.B. "xpwzgkba")
-   4. Trag sie unten bei FORMSPREE_ID ein
-   Dann landen alle Anmeldungen in deinem Formspree-Dashboard
-   und du bekommst eine E-Mail-Benachrichtigung!
-  ═══════════════════════════════════════════════════════════════
+  ORDNERSTRUKTUR:
+    index.html
+    foto.jpg
+    notwehr-bg.png
+    logo.png
+    fonts/ (alle EuropaGroteskSH .otf Dateien)
   -->
   <style>
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLig.otf') format('opentype'); font-weight:100; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLigIta.otf') format('opentype'); font-weight:100; font-style:italic; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Lig.otf') format('opentype'); font-weight:200; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-LigIta.otf') format('opentype'); font-weight:200; font-style:italic; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Reg.otf') format('opentype'); font-weight:400; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Ita.otf') format('opentype'); font-weight:400; font-style:italic; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Med.otf') format('opentype'); font-weight:500; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-DemBol.otf') format('opentype'); font-weight:600; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Bol.otf') format('opentype'); font-weight:700; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Ita.otf') format('opentype'); font-weight:400; font-style:italic; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-LigIta.otf') format('opentype'); font-weight:200; font-style:italic; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-BolIta.otf') format('opentype'); font-weight:700; font-style:italic; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-LigCon.otf') format('opentype'); font-weight:200; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-MedCon.otf') format('opentype'); font-weight:500; }
@@ -46,7 +34,6 @@
 
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; }
-
     body {
       background: var(--black);
       color: var(--off);
@@ -60,56 +47,56 @@
     a { color:inherit; text-decoration:none; }
     ::selection { background:var(--pink); color:var(--black); }
 
-    /* ── CURSOR ── */
-    #cur {
+    /* ══════════════════════════════════
+       CURSOR — simpel & zuverlässig
+    ══════════════════════════════════ */
+    #molotov {
       position: fixed;
-      left: -100px;
-      top: -100px;
-      width: 32px;
-      height: 32px;
+      top: 0;
+      left: 0;
+      width: 36px;
+      height: 36px;
       pointer-events: none;
-      z-index: 99999;
-      will-change: left, top;
+      z-index: 999999;
+      transform-origin: center center;
+      /* startet ausserhalb des Bildschirms */
+      transform: translate(-200px, -200px) rotate(-40deg);
     }
-    #cur.thrown {
-      animation: throw-anim .6s ease-out forwards;
-    }
-    @keyframes throw-anim {
-      0%   { transform: rotate(-35deg) scale(1);    opacity:1; }
-      35%  { transform: rotate(-90deg) scale(1.15) translate(0, -80px); opacity:1; }
-      65%  { transform: rotate(-160deg) scale(1.0) translate(40px, -20px); opacity:.8; }
-      100% { transform: rotate(-240deg) scale(.3)  translate(80px, 60px);  opacity:0; }
-    }
+
     .click-ring {
       position: fixed;
       pointer-events: none;
-      z-index: 99998;
+      z-index: 999998;
       border-radius: 50%;
       border: 2px solid var(--pink);
-      transform: translate(-50%,-50%);
-      animation: ring-pop .5s ease-out forwards;
+      width: 0; height: 0;
+      transform: translate(-50%, -50%);
+      animation: ring-expand .5s ease-out forwards;
     }
-    @keyframes ring-pop {
-      0%   { width:10px;  height:10px;  opacity:1; }
-      100% { width:64px;  height:64px;  opacity:0; }
-    }
-    .burst {
-      position: fixed;
-      pointer-events: none;
-      z-index: 99998;
-      font-size: 40px;
-      line-height: 1;
-      transform: translate(-50%,-50%);
-      animation: burst-anim .65s ease-out forwards;
-    }
-    @keyframes burst-anim {
-      0%   { opacity:1; transform:translate(-50%,-50%) scale(.4); }
-      45%  { opacity:1; transform:translate(-50%,-50%) scale(1.5); }
-      100% { opacity:0; transform:translate(-50%,-50%) scale(2);   }
+    @keyframes ring-expand {
+      0%   { width:8px;  height:8px;  opacity:1; }
+      100% { width:60px; height:60px; opacity:0; }
     }
 
-    /* ── TILT + GLOSS ── */
-    .tilt-container {
+    .fire-burst {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999998;
+      font-size: 36px;
+      line-height: 1;
+      transform: translate(-50%, -50%);
+      animation: fire-pop .6s ease-out forwards;
+    }
+    @keyframes fire-pop {
+      0%   { opacity:1; transform:translate(-50%,-50%) scale(.3); }
+      50%  { opacity:1; transform:translate(-50%,-50%) scale(1.4); }
+      100% { opacity:0; transform:translate(-50%,-50%) scale(1.8); }
+    }
+
+    /* ══════════════════════════════════
+       TILT CARD
+    ══════════════════════════════════ */
+    .tilt-card {
       position: relative;
       overflow: hidden;
       perspective: 900px;
@@ -118,9 +105,8 @@
       position: absolute;
       inset: 0;
       transform-style: preserve-3d;
-      will-change: transform;
     }
-    .tilt-img {
+    .tilt-photo {
       position: absolute;
       inset: -8%;
       width: 116%;
@@ -128,59 +114,64 @@
       object-fit: cover;
       object-position: center 25%;
       display: block;
-      will-change: transform;
     }
-    .gloss-layer {
+
+    /* Gloss sweep on hover */
+    .gloss {
       position: absolute;
       inset: 0;
       z-index: 2;
       pointer-events: none;
       overflow: hidden;
     }
-    .gloss-layer::after {
+    .gloss::after {
       content: '';
       position: absolute;
       top: -50%; left: -80%;
-      width: 60%; height: 200%;
-      background: linear-gradient(
-        105deg,
+      width: 55%; height: 200%;
+      background: linear-gradient(105deg,
         transparent 30%,
-        rgba(255,255,255,.07) 45%,
-        rgba(255,255,255,.20) 50%,
-        rgba(255,255,255,.07) 55%,
+        rgba(255,255,255,.06) 44%,
+        rgba(255,255,255,.18) 50%,
+        rgba(255,255,255,.06) 56%,
         transparent 70%
       );
       transform: skewX(-15deg);
       opacity: 0;
     }
-    .tilt-container:hover .gloss-layer::after {
+    .tilt-card:hover .gloss::after {
       opacity: 1;
-      animation: gloss-sweep .75s cubic-bezier(.4,0,.2,1) forwards;
+      animation: gloss-go .8s cubic-bezier(.4,0,.2,1) forwards;
     }
-    @keyframes gloss-sweep {
+    @keyframes gloss-go {
       from { left:-80%; }
       to   { left:160%; }
     }
 
-    /* ── HERO ── */
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
     #hero {
       position: relative;
       width: 100vw;
       height: 100dvh;
     }
-    .hero-wrap {
+    #hero .tilt-card {
       width: 100%;
       height: 100%;
     }
+    #hero .tilt-photo {
+      object-position: center 25%;
+    }
     .hero-grad {
-      position: absolute; inset:0; z-index:3;
+      position:absolute; inset:0; z-index:3;
       background:
-        linear-gradient(to bottom, rgba(8,8,8,.52) 0%, rgba(8,8,8,0) 28%, rgba(8,8,8,0) 50%, rgba(8,8,8,.96) 100%),
+        linear-gradient(to bottom, rgba(8,8,8,.5) 0%, rgba(8,8,8,0) 28%, rgba(8,8,8,0) 50%, rgba(8,8,8,.95) 100%),
         linear-gradient(to right,  rgba(8,8,8,.25) 0%, rgba(8,8,8,0) 38%);
     }
     .hero-grain {
-      position: absolute; inset:0; z-index:4; pointer-events:none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.065'/%3E%3C/svg%3E");
+      position:absolute; inset:0; z-index:4; pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
       background-size: 250px;
     }
 
@@ -192,28 +183,25 @@
       align-items: center;
       padding: 28px 44px;
     }
-    .hero-nav .spacer { /* leer, linke Spalte */ }
     .hero-nav .logo img {
       height: clamp(40px, 5.5vw, 70px);
       width: auto;
       display: block;
     }
     .hero-nav .socials {
-      display:flex; gap:28px; justify-content:flex-end;
-      font-weight:200; font-size:13px;
-      letter-spacing:0; text-transform:uppercase;
+      grid-column: 3;
+      display:flex; gap:24px; justify-content:flex-end;
+      font-weight:200; font-size:13px; text-transform:uppercase;
     }
-    .hero-nav .socials a { opacity:.7; transition:opacity .2s, color .2s; }
+    .hero-nav .socials a { opacity:.65; transition:opacity .2s, color .2s; }
     .hero-nav .socials a:hover { opacity:1; color:var(--pink); }
 
-    /* Newsletter zentriert im Hero */
+    /* Newsletter */
     .hero-center {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+      position: absolute; top:50%; left:50%;
+      transform: translate(-50%,-50%);
       z-index: 10;
-      display: flex; flex-direction: column;
-      align-items: center; gap: 12px;
+      display: flex; flex-direction:column; align-items:center; gap:12px;
       text-align: center;
     }
     .nl-label {
@@ -222,35 +210,34 @@
     }
     .nl-form {
       display:flex;
-      border: 1px solid rgba(232,228,221,.28);
-      background: rgba(8,8,8,.6);
-      backdrop-filter: blur(14px);
+      border:1px solid rgba(232,228,221,.28);
+      background:rgba(8,8,8,.6);
+      backdrop-filter:blur(14px);
     }
     .nl-form input {
       background:transparent; border:none; outline:none;
-      font-family:'EG', sans-serif; font-size:13px; font-weight:200;
+      font-family:'EG',sans-serif; font-size:13px; font-weight:200;
       color:var(--off); padding:12px 18px; width:220px;
     }
     .nl-form input::placeholder { opacity:.38; }
     .nl-form button {
       background:var(--pink); border:none; color:var(--black);
-      font-family:'EG', sans-serif; font-weight:600;
+      font-family:'EG',sans-serif; font-weight:600;
       font-size:11px; letter-spacing:.18em; text-transform:uppercase;
       padding:12px 22px; cursor:none; transition:background .2s;
     }
     .nl-form button:hover { background:#ff62c4; }
-    .nl-success {
+    .nl-ok {
       font-size:11px; letter-spacing:.15em; text-transform:uppercase;
       color:var(--pink); font-weight:600;
       opacity:0; transition:opacity .4s; min-height:16px;
     }
-    .nl-success.show { opacity:1; }
+    .nl-ok.show { opacity:1; }
 
     .hero-tagline {
       position:absolute; bottom:42px; left:44px; z-index:10;
       font-weight:200; font-size:12px;
-      letter-spacing:.22em; text-transform:uppercase;
-      opacity:.5; line-height:2;
+      letter-spacing:.22em; text-transform:uppercase; opacity:.5; line-height:2;
     }
     .scroll-hint {
       position:absolute; bottom:44px; left:50%;
@@ -265,7 +252,9 @@
       50%      { transform:translateX(-50%) translateY(7px); }
     }
 
-    /* ── TICKER ── */
+    /* ══════════════════════════════════
+       TICKER
+    ══════════════════════════════════ */
     .ticker-wrap {
       overflow:hidden;
       border-top:1px solid rgba(254,64,185,.14);
@@ -273,43 +262,40 @@
       background:rgba(254,64,185,.03); padding:9px 0;
     }
     .ticker { display:flex; white-space:nowrap; animation:tick 22s linear infinite; }
-    .ticker-inner { display:flex; }
+    .ticker-row { display:flex; }
     .ticker span {
-      font-family:'EG', sans-serif; font-weight:600;
+      font-family:'EG',sans-serif; font-weight:600;
       font-size:10px; letter-spacing:.3em; text-transform:uppercase;
       color:var(--pink); opacity:.6; padding:0 34px;
     }
     @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* ── SECTIONS ── */
-    .section-wrap {
-      max-width:960px; margin:0 auto; padding:88px 44px;
-    }
-    .section-label {
+    /* ══════════════════════════════════
+       SECTIONS
+    ══════════════════════════════════ */
+    .wrap { max-width:960px; margin:0 auto; padding:88px 44px; }
+    .sec-label {
       font-size:10px; letter-spacing:.32em; text-transform:uppercase;
       color:var(--pink); font-weight:600; margin-bottom:26px;
       display:flex; align-items:center; gap:14px;
     }
-    .section-label::after {
-      content:''; width:34px; height:1px;
-      background:var(--pink); opacity:.45;
-    }
+    .sec-label::after { content:''; width:34px; height:1px; background:var(--pink); opacity:.45; }
     .divider {
       max-width:960px; margin:0 auto; height:1px;
       background:linear-gradient(to right, transparent, rgba(232,228,221,.1), transparent);
     }
 
-    /* ── VIDEO ── */
+    /* VIDEO */
     #video { padding-bottom:0; }
     .video-card {
       position:relative; width:100%; aspect-ratio:16/9; display:block;
     }
-    .video-card .tilt-img { object-position:center center; }
-    .video-overlay {
+    .video-card .tilt-photo { object-position:center center; }
+    .video-veil {
       position:absolute; inset:0; z-index:3;
       background:rgba(8,8,8,.22); transition:background .3s;
     }
-    .video-card:hover .video-overlay { background:rgba(8,8,8,.08); }
+    .video-card:hover .video-veil { background:rgba(8,8,8,.08); }
     .video-play {
       position:absolute; inset:0; z-index:5;
       display:flex; flex-direction:column;
@@ -318,47 +304,46 @@
     .play-btn {
       width:clamp(60px,8vw,100px); height:clamp(60px,8vw,100px);
       border-radius:50%;
-      border:2px solid rgba(232,228,221,.9);
+      border:2px solid rgba(232,228,221,.85);
       display:flex; align-items:center; justify-content:center;
       background:rgba(8,8,8,.45);
       backdrop-filter:blur(6px);
       transition:transform .25s, background .25s, border-color .25s;
-      flex-shrink:0;
     }
-    .play-btn svg { width:35%; height:35%; fill:var(--off); margin-left:8%; transition:fill .25s; }
+    .play-btn svg { width:36%; height:36%; fill:var(--off); margin-left:8%; transition:fill .25s; }
     .video-card:hover .play-btn { transform:scale(1.1); background:rgba(254,64,185,.25); border-color:var(--pink); }
     .video-card:hover .play-btn svg { fill:var(--pink); }
     .play-label {
       font-weight:600; font-size:clamp(9px,1vw,11px);
       letter-spacing:.3em; text-transform:uppercase;
-      color:var(--off); opacity:.6; transition:opacity .25s, color .25s;
+      color:var(--off); opacity:.55; transition:opacity .25s, color .25s;
     }
     .video-card:hover .play-label { opacity:1; color:var(--pink); }
 
-    /* ── BIO ── */
-    #bio .bio-text {
+    /* BIO */
+    .bio-text {
       font-weight:200; font-size:clamp(15px,1.75vw,20px);
       line-height:1.85; max-width:680px; opacity:.88;
     }
-    #bio .bio-text p + p { margin-top:1.4em; }
-    #bio .bio-text strong { font-weight:600; }
-    #bio .bio-text em { font-style:italic; color:var(--pink); }
+    .bio-text p + p { margin-top:1.4em; }
+    .bio-text strong { font-weight:600; }
+    .bio-text em { font-style:italic; color:var(--pink); }
 
-    /* ── INSTAGRAM ── */
+    /* INSTAGRAM */
     #instagram { padding-bottom:0; }
     .ig-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
-    .ig-placeholder {
+    .ig-box {
       aspect-ratio:1; background:rgba(232,228,221,.05);
       display:flex; align-items:center; justify-content:center;
-      font-size:11px; letter-spacing:.2em; text-transform:uppercase;
-      opacity:.3; font-weight:200; text-align:center; line-height:1.8;
+      font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+      opacity:.28; font-weight:200; text-align:center; line-height:1.9;
       transition:opacity .2s, background .2s;
     }
-    .ig-placeholder:hover { opacity:.7; background:rgba(254,64,185,.06); }
+    .ig-box:hover { opacity:.65; background:rgba(254,64,185,.06); }
 
-    /* ── MUSIK ── */
+    /* MUSIK */
     #musik { padding-top:0; }
-    .music-links { display:flex; flex-wrap:wrap; gap:14px; margin-top:6px; }
+    .music-links { display:flex; flex-wrap:wrap; gap:14px; }
     .music-link {
       display:inline-flex; align-items:center; gap:10px;
       border:1px solid rgba(232,228,221,.18);
@@ -368,50 +353,44 @@
       transition:border-color .2s, color .2s, background .2s;
     }
     .music-link:hover { border-color:var(--pink); color:var(--pink); }
-    .music-link.featured { background:var(--pink); border-color:var(--pink); color:var(--black); }
-    .music-link.featured:hover { background:#ff62c4; border-color:#ff62c4; }
+    .music-link.hot { background:var(--pink); border-color:var(--pink); color:var(--black); }
+    .music-link.hot:hover { background:#ff62c4; border-color:#ff62c4; }
     .music-link svg { width:15px; height:15px; fill:currentColor; flex-shrink:0; }
 
-    /* ── KONTAKT ── */
+    /* KONTAKT */
     #kontakt { padding-bottom:110px; }
-    .kontakt-grid { display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+    .k-grid { display:grid; grid-template-columns:1fr 1fr; gap:44px; }
     .k-block h3 {
       font-weight:600; font-size:10px;
       letter-spacing:.28em; text-transform:uppercase;
       color:var(--pink); margin-bottom:10px;
     }
     .k-block a {
-      font-weight:200; font-size:16px; opacity:.75;
-      display:block; line-height:1.9;
+      font-weight:200; font-size:16px; opacity:.72;
+      display:block; line-height:1.9; transition:opacity .2s,color .2s;
     }
     .k-block a:hover { opacity:1; color:var(--pink); }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
       border-top:1px solid rgba(232,228,221,.07);
       padding:26px 44px;
       display:flex; align-items:center; justify-content:space-between;
       flex-wrap:wrap; gap:10px;
-      font-size:11px; font-weight:200; opacity:.38;
+      font-size:11px; font-weight:200; opacity:.35;
     }
     footer a:hover { opacity:1; color:var(--pink); }
 
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* ── MOBILE ── */
+    /* MOBILE */
     @media (max-width:680px) {
       body { cursor:auto; }
-      #cur { display:none; }
+      #molotov { display:none; }
       .hero-nav { padding:18px 22px; }
       .hero-nav .logo img { height:32px; }
       .hero-nav .socials { gap:14px; font-size:11px; }
       .hero-tagline { left:22px; }
-      .section-wrap { padding:60px 22px; }
-      .kontakt-grid { grid-template-columns:1fr; }
+      .wrap { padding:60px 22px; }
+      .k-grid { grid-template-columns:1fr; }
       footer { padding:22px; flex-direction:column; gap:6px; }
       .nl-form input { width:160px; }
       .ig-grid { grid-template-columns:repeat(2,1fr); }
@@ -420,34 +399,42 @@
 </head>
 <body>
 
-<!-- CURSOR -->
-<div id="cur">
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="13" cy="4"   rx="2.5" ry="3.5" fill="#ff9900" opacity=".95"/>
-    <ellipse cx="13" cy="3.5" rx="1.4" ry="2.2" fill="#ffe066"/>
-    <rect x="12.3" y="6.5" width="1.4" height="3"  rx=".7"  fill="#888"/>
-    <rect x="10.5" y="9"   width="5"   height="4"  rx="1.5" fill="#c0d8a0"/>
-    <rect x="9.5"  y="9"   width="1.5" height="3"  rx=".6"  fill="#e05020" transform="rotate(-10 10 10)"/>
-    <rect x="8"    y="12.5" width="10" height="14" rx="4"   fill="#b8d890"/>
-    <rect x="9.5"  y="16"  width="7"   height="9"  rx="2.5" fill="#80b840" opacity=".7"/>
-    <rect x="9.5"  y="13.5" width="2.5" height="5" rx="1.2" fill="rgba(255,255,255,0.28)"/>
-    <rect x="8.5"  y="25.5" width="9"  height="2"  rx="1"   fill="#90c060"/>
+<!-- MOLOTOV CURSOR -->
+<div id="molotov">
+  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Flamme -->
+    <ellipse cx="14" cy="4.5" rx="3" ry="4" fill="#ff9900"/>
+    <ellipse cx="14" cy="4"   rx="1.6" ry="2.5" fill="#ffe066"/>
+    <!-- Docht -->
+    <rect x="13.2" y="7.5" width="1.6" height="3.5" rx=".8" fill="#777"/>
+    <!-- Hals -->
+    <rect x="11" y="10.5" width="6" height="5" rx="2" fill="#b8d488"/>
+    <!-- Lappen -->
+    <rect x="9.5" y="10.5" width="2" height="3.5" rx=".8" fill="#cc4010" transform="rotate(-12 10 11)"/>
+    <!-- Bauch -->
+    <rect x="8.5" y="14.5" width="12" height="16" rx="5" fill="#a8cc78"/>
+    <!-- Fluid -->
+    <rect x="10.5" y="18.5" width="8" height="10" rx="3" fill="#78aa44" opacity=".75"/>
+    <!-- Highlight -->
+    <rect x="10.5" y="15.5" width="3" height="6" rx="1.5" fill="rgba(255,255,255,.30)"/>
+    <!-- Boden -->
+    <rect x="9.5" y="29.5" width="11" height="2.5" rx="1.2" fill="#90c060"/>
   </svg>
 </div>
 
 <!-- HERO -->
 <div id="hero">
-  <div class="tilt-container hero-wrap" id="heroContainer">
-    <div class="tilt-inner" id="heroTilt">
-      <img class="tilt-img" src="foto.jpg" alt="stein walter frank meier" id="heroImg" />
+  <div class="tilt-card" id="heroCard">
+    <div class="tilt-inner" id="heroInner">
+      <img class="tilt-photo" id="heroPhoto" src="foto.jpg" alt="stein walter frank meier" />
     </div>
-    <div class="gloss-layer"></div>
+    <div class="gloss"></div>
     <div class="hero-grad"></div>
     <div class="hero-grain"></div>
   </div>
 
   <nav class="hero-nav">
-    <div class="spacer"></div>
+    <div></div>
     <div class="logo">
       <img src="logo.png" alt="Stein Walter Frank Meier" />
     </div>
@@ -461,10 +448,10 @@
   <div class="hero-center">
     <span class="nl-label">Newsletter</span>
     <form class="nl-form" id="nlForm">
-      <input type="email" placeholder="deine@email.de" id="nlInput" autocomplete="off" />
+      <input type="email" placeholder="deine@email.de" id="nlEmail" autocomplete="off" />
       <button type="submit">Subscribe</button>
     </form>
-    <span class="nl-success" id="nlMsg">✓ Angemeldet — danke!</span>
+    <span class="nl-ok" id="nlOk">✓ Angemeldet — danke!</span>
   </div>
 
   <p class="hero-tagline">Punk<br>aus Hannover</p>
@@ -478,7 +465,7 @@
 <!-- TICKER -->
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker">
-    <div class="ticker-inner">
+    <div class="ticker-row">
       <span>stein walter frank meier</span><span>·</span>
       <span>punk aus hannover</span><span>·</span>
       <span>stein walter frank meier</span><span>·</span>
@@ -486,7 +473,7 @@
       <span>stein walter frank meier</span><span>·</span>
       <span>punk aus hannover</span><span>·</span>
     </div>
-    <div class="ticker-inner" aria-hidden="true">
+    <div class="ticker-row" aria-hidden="true">
       <span>stein walter frank meier</span><span>·</span>
       <span>punk aus hannover</span><span>·</span>
       <span>stein walter frank meier</span><span>·</span>
@@ -498,18 +485,16 @@
 </div>
 
 <!-- VIDEO -->
-<div class="section-wrap" id="video">
-  <div class="section-label reveal">Live Video</div>
+<div class="wrap" id="video">
+  <div class="sec-label">Live Video</div>
   <a href="https://www.youtube.com/watch?v=s6VEn4XC09k"
      target="_blank" rel="noopener"
-     class="video-card tilt-container reveal"
-     id="videoContainer">
-    <div class="tilt-inner" id="videoTilt">
-      <img class="tilt-img" src="notwehr-bg.png" alt="Notwehr – Live Video" id="videoImg"
-           style="object-position:center center;" />
+     class="video-card tilt-card" id="videoCard">
+    <div class="tilt-inner" id="videoInner">
+      <img class="tilt-photo" id="videoPhoto" src="notwehr-bg.png" alt="Notwehr" style="object-position:center center;" />
     </div>
-    <div class="gloss-layer"></div>
-    <div class="video-overlay"></div>
+    <div class="gloss"></div>
+    <div class="video-veil"></div>
     <div class="video-play">
       <div class="play-btn">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -522,69 +507,60 @@
 <div class="divider" style="margin-top:88px;"></div>
 
 <!-- BIO -->
-<div class="section-wrap" id="bio">
-  <div class="section-label reveal">Über uns</div>
+<div class="wrap" id="bio">
+  <div class="sec-label">Über uns</div>
   <div class="bio-text">
-    <p class="reveal">
-      Gegründet 2025 in Hannover, direkt nach dem politischen Bruch, den viele als Fall der
-      <em>Brandmauer</em> bezeichnen, spielt <strong>Stein Walter Frank Meier</strong> linken
-      Punkrock — laut und klar gegen den Rechtsruck und jene Mitte, die ihn ermöglicht.
-    </p>
-    <p class="reveal">
-      Unsere Frontperson ist trans und queer und setzt genau diese Sicht in Musik und
-      Auftreten an die Front. Die Band steht geschlossen hinter einer feministischen und
-      solidarischen Haltung, ohne daraus ein Etikett zu machen.
-    </p>
-    <p class="reveal">
-      Als Band stellen wir uns offen gegen die sogenannte <em>radikale Mitte</em>, deren
-      scheinbare Unbeteiligtheit den Faschisten gerade den Weg freiräumt. Unsere Musik hält
-      dieser Haltung den Spiegel vor — scharf, direkt und ohne den Anspruch, es irgendwem
-      bequem zu machen.
-    </p>
+    <p>Gegründet 2025 in Hannover, direkt nach dem politischen Bruch, den viele als Fall der
+    <em>Brandmauer</em> bezeichnen, spielt <strong>Stein Walter Frank Meier</strong> linken
+    Punkrock — laut und klar gegen den Rechtsruck und jene Mitte, die ihn ermöglicht.</p>
+    <p>Unsere Frontperson ist trans und queer und setzt genau diese Sicht in Musik und
+    Auftreten an die Front. Die Band steht geschlossen hinter einer feministischen und
+    solidarischen Haltung, ohne daraus ein Etikett zu machen.</p>
+    <p>Als Band stellen wir uns offen gegen die sogenannte <em>radikale Mitte</em>, deren
+    scheinbare Unbeteiligtheit den Faschisten gerade den Weg freiräumt. Unsere Musik hält
+    dieser Haltung den Spiegel vor — scharf, direkt und ohne den Anspruch, es irgendwem
+    bequem zu machen.</p>
   </div>
 </div>
 
 <div class="divider"></div>
 
 <!-- INSTAGRAM -->
-<div class="section-wrap" id="instagram">
-  <div class="section-label reveal">Instagram</div>
+<div class="wrap" id="instagram">
+  <div class="sec-label">Instagram</div>
   <!--
-    BEHOLD.SO (kostenlos):
+    INSTAGRAM FEED EINRICHTEN (kostenlos):
     1. https://behold.so → Account erstellen
     2. @steinwalterfrankmeiermusik verbinden
-    3. Feed-ID kopieren und diese zwei Zeilen aktivieren:
+    3. Feed-ID kopieren, dann diese zwei Zeilen aktivieren:
        <script src="https://w.behold.so/widget.js" type="module"><\/script>
-       <behold-widget feed-id="DEINE_FEED_ID"></behold-widget>
-    4. Den ig-fallback Block unten löschen
+       <behold-widget feed-id="DEINE_ID"></behold-widget>
+    4. Den ig-grid Block unten löschen
   -->
   <div class="ig-grid">
-    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Instagram<br>öffnen →</a>
-    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">@steinwalter<br>frankmeier</a>
-    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Fotos &amp;<br>Videos</a>
-    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Jetzt<br>folgen →</a>
-    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Live<br>Shows</a>
-    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Hannover<br>Punk</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-box">Instagram<br>öffnen →</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-box">@steinwalter<br>frankmeier</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-box">Fotos &amp;<br>Videos</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-box">Jetzt<br>folgen →</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-box">Live<br>Shows</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-box">Hannover<br>Punk</a>
   </div>
 </div>
 
 <div class="divider"></div>
 
 <!-- MUSIK -->
-<div class="section-wrap" id="musik">
-  <div class="section-label reveal">Musik</div>
+<div class="wrap" id="musik">
+  <div class="sec-label">Musik</div>
   <div class="music-links">
-    <a class="music-link featured reveal" href="https://steinwalterfrankmeier.bandcamp.com" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
-      Bandcamp
+    <a class="music-link hot" href="https://steinwalterfrankmeier.bandcamp.com" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>Bandcamp
     </a>
-    <a class="music-link reveal" href="https://www.youtube.com/watch?v=s6VEn4XC09k" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-      YouTube
+    <a class="music-link" href="https://www.youtube.com/watch?v=s6VEn4XC09k" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>YouTube
     </a>
-    <a class="music-link reveal" href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-      Instagram
+    <a class="music-link" href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>Instagram
     </a>
   </div>
 </div>
@@ -592,14 +568,14 @@
 <div class="divider"></div>
 
 <!-- KONTAKT -->
-<div class="section-wrap" id="kontakt">
-  <div class="section-label reveal">Kontakt</div>
-  <div class="kontakt-grid">
-    <div class="k-block reveal">
+<div class="wrap" id="kontakt">
+  <div class="sec-label">Kontakt</div>
+  <div class="k-grid">
+    <div class="k-block">
       <h3>Allgemein &amp; Booking</h3>
-      <a href="/cdn-cgi/l/email-protection#275453424e4950464b534255674a464e4b45485f09485540"><span class="__cf_email__" data-cfemail="ccbfb8a9a5a2bbada0b8a9be8ca1ada5a0aea3b4e2a3beab">[email&#160;protected]</span></a>
+      <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a>
     </div>
-    <div class="k-block reveal">
+    <div class="k-block">
       <h3>Instagram</h3>
       <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">@steinwalterfrankmeiermusik</a>
     </div>
@@ -614,124 +590,157 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ════════════════════════════════════════
-   CURSOR
-════════════════════════════════════════ */
-const cur = document.getElementById('cur');
-let mx = window.innerWidth / 2;
-let my = window.innerHeight / 2;
-let cx = mx, cy = my;
-let throwing = false;
+<script>
+/* ════════════════════════════════════════════
+   CURSOR — komplett neu, so simpel wie möglich
+════════════════════════════════════════════ */
+var mol   = document.getElementById('molotov');
+var mouseX = 0, mouseY = 0;
+var curX   = 0, curY   = 0;
+var isThrown = false;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-}, { passive: true });
+// Verfolgt Maus
+window.addEventListener('mousemove', function(e) {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
 
-(function loop() {
-  if (!throwing) {
-    cx += (mx - cx) * 0.15;
-    cy += (my - cy) * 0.15;
-    cur.style.left = (cx - 10) + 'px';
-    cur.style.top  = (cy - 30) + 'px';
-    cur.style.transform = 'rotate(-35deg)';
+// Animations-Loop
+function animCursor() {
+  if (!isThrown) {
+    curX += (mouseX - curX) * 0.16;
+    curY += (mouseY - curY) * 0.16;
+    // Flaschenboden = Mausspitze: -12px links, -32px oben
+    mol.style.transform = 'translate(' + (curX - 12) + 'px, ' + (curY - 32) + 'px) rotate(-40deg)';
   }
-  requestAnimationFrame(loop);
-})();
+  requestAnimationFrame(animCursor);
+}
+animCursor();
 
-document.addEventListener('click', e => {
-  if (throwing) return;
-  throwing = true;
+// Klick = Wurf + Ring + Feuer
+window.addEventListener('click', function(e) {
+  if (isThrown) return;
+  isThrown = true;
 
-  // Pink ring
-  const ring = document.createElement('div');
+  // Pink Ring
+  var ring = document.createElement('div');
   ring.className = 'click-ring';
   ring.style.left = e.clientX + 'px';
   ring.style.top  = e.clientY + 'px';
   document.body.appendChild(ring);
-  setTimeout(() => ring.remove(), 600);
+  setTimeout(function() { ring.parentNode && ring.parentNode.removeChild(ring); }, 550);
 
-  // Throw
-  cur.classList.add('thrown');
+  // Wurf-Animation via CSS keyframes auf dem Element
+  var startX = curX - 12;
+  var startY = curY - 32;
+  mol.style.transition = 'none';
+  mol.style.transform  = 'translate(' + startX + 'px,' + startY + 'px) rotate(-40deg)';
 
-  // Fire burst
-  setTimeout(() => {
-    const burst = document.createElement('div');
-    burst.className = 'burst';
-    burst.textContent = '🔥';
-    burst.style.left = (e.clientX + 100) + 'px';
-    burst.style.top  = (e.clientY - 20)  + 'px';
-    document.body.appendChild(burst);
-    setTimeout(() => burst.remove(), 700);
-  }, 400);
+  // Keyframes per JS — simpelste Methode
+  var frames = [
+    { x: startX,        y: startY,        r: -40,  s: 1,    o: 1   },
+    { x: startX + 80,   y: startY - 120,  r: -100, s: 1.15, o: 1   },
+    { x: startX + 160,  y: startY - 60,   r: -170, s: 0.9,  o: 0.7 },
+    { x: startX + 220,  y: startY + 40,   r: -230, s: 0.5,  o: 0   }
+  ];
+  var duration = 560;
+  var start = null;
 
-  // Reset
-  setTimeout(() => {
-    cur.classList.remove('thrown');
-    cur.style.transform = 'rotate(-35deg)';
-    throwing = false;
-  }, 620);
+  function animThrow(ts) {
+    if (!start) start = ts;
+    var p = Math.min((ts - start) / duration, 1);
+    var i = Math.min(Math.floor(p * (frames.length - 1)), frames.length - 2);
+    var lp = (p * (frames.length - 1)) - i;
+    var a = frames[i], b = frames[i + 1];
+    var x = a.x + (b.x - a.x) * lp;
+    var y = a.y + (b.y - a.y) * lp;
+    var r = a.r + (b.r - a.r) * lp;
+    var s = a.s + (b.s - a.s) * lp;
+    var o = a.o + (b.o - a.o) * lp;
+    mol.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + r + 'deg) scale(' + s + ')';
+    mol.style.opacity   = o;
+    if (p < 1) {
+      requestAnimationFrame(animThrow);
+    } else {
+      // Feuer
+      var fire = document.createElement('div');
+      fire.className = 'fire-burst';
+      fire.textContent = '🔥';
+      fire.style.left = (e.clientX + 100) + 'px';
+      fire.style.top  = (e.clientY - 10)  + 'px';
+      document.body.appendChild(fire);
+      setTimeout(function() { fire.parentNode && fire.parentNode.removeChild(fire); }, 700);
+
+      // Reset
+      mol.style.opacity   = '1';
+      mol.style.transform = 'translate(' + (mouseX - 12) + 'px,' + (mouseY - 32) + 'px) rotate(-40deg)';
+      curX = mouseX; curY = mouseY;
+      isThrown = false;
+    }
+  }
+  requestAnimationFrame(animThrow);
 });
 
-/* ════════════════════════════════════════
+/* ════════════════════════════════════════════
    TILT
-════════════════════════════════════════ */
-function initTilt(containerId, tiltId, imgId, maxTilt, maxPar) {
-  const container = document.getElementById(containerId);
-  const tiltEl    = document.getElementById(tiltId);
-  const imgEl     = document.getElementById(imgId);
-  if (!container || !tiltEl || !imgEl) return;
+════════════════════════════════════════════ */
+function makeTilt(cardId, innerId, photoId, tiltAmt, parAmt) {
+  var card  = document.getElementById(cardId);
+  var inner = document.getElementById(innerId);
+  var photo = document.getElementById(photoId);
+  if (!card || !inner || !photo) return;
 
-  let tTX=0, tTY=0, tPX=0, tPY=0;
-  let cTX=0, cTY=0, cPX=0, cPY=0;
-  const L = 0.065;
+  var tx=0, ty=0, px=0, py=0;
+  var cx=0, cy=0, cpx=0, cpy=0;
 
-  container.addEventListener('mousemove', e => {
-    const r  = container.getBoundingClientRect();
-    const nx = (e.clientX - r.left) / r.width  - 0.5;
-    const ny = (e.clientY - r.top)  / r.height - 0.5;
-    tTX = ny * -maxTilt;  tTY = nx * maxTilt;
-    tPX = nx * -maxPar;   tPY = ny * -maxPar;
+  card.addEventListener('mousemove', function(e) {
+    var r  = card.getBoundingClientRect();
+    var nx = (e.clientX - r.left) / r.width  - 0.5;
+    var ny = (e.clientY - r.top)  / r.height - 0.5;
+    tx  = ny * -tiltAmt;
+    ty  = nx *  tiltAmt;
+    px  = nx * -parAmt;
+    py  = ny * -parAmt;
   });
-  container.addEventListener('mouseleave', () => { tTX=tTY=tPX=tPY=0; });
+  card.addEventListener('mouseleave', function() {
+    tx = ty = px = py = 0;
+  });
 
-  const lerp = (a,b,t) => a + (b-a) * t;
-  (function anim() {
-    cTX=lerp(cTX,tTX,L); cTY=lerp(cTY,tTY,L);
-    cPX=lerp(cPX,tPX,L); cPY=lerp(cPY,tPY,L);
-    tiltEl.style.transform = `rotateX(${cTX}deg) rotateY(${cTY}deg)`;
-    imgEl.style.transform  = `translate(${cPX}px, ${cPY}px) scale(1.04)`;
-    requestAnimationFrame(anim);
-  })();
+  function loop() {
+    cx  += (tx  - cx)  * 0.07;
+    cy  += (ty  - cy)  * 0.07;
+    cpx += (px  - cpx) * 0.07;
+    cpy += (py  - cpy) * 0.07;
+    inner.style.transform = 'rotateX(' + cx + 'deg) rotateY(' + cy + 'deg)';
+    photo.style.transform = 'translate(' + cpx + 'px,' + cpy + 'px) scale(1.04)';
+    requestAnimationFrame(loop);
+  }
+  loop();
 }
 
-initTilt('heroContainer',  'heroTilt',  'heroImg',  9, 18);
-initTilt('videoContainer', 'videoTilt', 'videoImg', 6, 12);
+makeTilt('heroCard',  'heroInner',  'heroPhoto',  9, 18);
+makeTilt('videoCard', 'videoInner', 'videoPhoto', 6, 12);
 
-
-
-/* ════════════════════════════════════════
+/* ════════════════════════════════════════════
    NEWSLETTER — Formspree
-   ─────────────────────────────────────
-   1. Geh auf https://formspree.io
-   2. Kostenlosen Account erstellen
-   3. "New Form" → Form-ID kopieren
-   4. Hier eintragen, z.B. 'xpwzgkba'
-   Dann: Einträge im Dashboard sehen +
-   E-Mail-Benachrichtigung bei jeder Anmeldung!
-════════════════════════════════════════ */
-const FORMSPREE_ID = 'mpqolygp'; // ← Formspree Form-ID hier eintragen
-
-document.getElementById('nlForm').addEventListener('submit', async function(e) {
+   Form-ID: mpqolygp
+════════════════════════════════════════════ */
+document.getElementById('nlForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const input = document.getElementById('nlInput');
-  const msg   = document.getElementById('nlMsg');
-  const email = input.value.trim();
+  var email = document.getElementById('nlEmail').value.trim();
+  var ok    = document.getElementById('nlOk');
   if (!email.includes('@')) return;
 
-  if (FORMSPREE_ID) {
-    try {
-      await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'applic
+  fetch('https://formspree.io/f/mpqolygp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ email: email })
+  }).catch(function(){});
+
+  document.getElementById('nlEmail').value = '';
+  ok.classList.add('show');
+  setTimeout(function() { ok.classList.remove('show'); }, 4000);
+});
+</script>
+</body>
+</html>
