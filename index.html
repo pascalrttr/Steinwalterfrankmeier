@@ -4,110 +4,104 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>stein walter frank meier</title>
-
   <!--
   ═══════════════════════════════════════════════════════════════
-   ORDNERSTRUKTUR neben dieser index.html:
+   ORDNERSTRUKTUR:
      index.html
-     foto.jpg          ← euer Bandfoto (umbenennen!)
-     notwehr-bg.png    ← Notwehr_Video_Background...png
+     foto.jpg          ← euer Bandfoto
+     notwehr-bg.png    ← Video-Thumbnail
+     logo.png          ← Band-Logo (transparent)
      fonts/
        (alle EuropaGroteskSH .otf Dateien)
+
+   NEWSLETTER (Formspree):
+   1. Geh auf https://formspree.io und registriere dich kostenlos
+   2. Klick "New Form" → Name vergeben → Submit
+   3. Kopiere die Form-ID (z.B. "xpwzgkba")
+   4. Trag sie unten bei FORMSPREE_ID ein
+   Dann landen alle Anmeldungen in deinem Formspree-Dashboard
+   und du bekommst eine E-Mail-Benachrichtigung!
   ═══════════════════════════════════════════════════════════════
   -->
-
   <style>
-    /* ── FONTS ───────────────────────────────────────────────── */
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLig.otf') format('opentype'); font-weight:100; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLig.otf') format('opentype'); font-weight:100; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLigIta.otf') format('opentype'); font-weight:100; font-style:italic; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Lig.otf') format('opentype'); font-weight:200; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Lig.otf') format('opentype'); font-weight:200; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-LigIta.otf') format('opentype'); font-weight:200; font-style:italic; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Reg.otf') format('opentype'); font-weight:400; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Reg.otf') format('opentype'); font-weight:400; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Ita.otf') format('opentype'); font-weight:400; font-style:italic; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Med.otf') format('opentype'); font-weight:500; font-style:normal; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-MedIta.otf') format('opentype'); font-weight:500; font-style:italic; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-DemBol.otf') format('opentype'); font-weight:600; font-style:normal; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-DemBolIta.otf') format('opentype'); font-weight:600; font-style:italic; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Bol.otf') format('opentype'); font-weight:700; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Med.otf') format('opentype'); font-weight:500; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-DemBol.otf') format('opentype'); font-weight:600; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Bol.otf') format('opentype'); font-weight:700; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-BolIta.otf') format('opentype'); font-weight:700; font-style:italic; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-LigCon.otf') format('opentype'); font-weight:200; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-MedCon.otf') format('opentype'); font-weight:500; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-BolCon.otf') format('opentype'); font-weight:700; }
 
-    /* ── TOKENS ──────────────────────────────────────────────── */
     :root {
       --pink:  #fe40b9;
       --black: #080808;
       --off:   #e8e4dd;
-      --f:     'EG', sans-serif;
-      --fc:    'EG-Con', sans-serif;
     }
 
-    /* ── RESET ───────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; }
+
     body {
       background: var(--black);
       color: var(--off);
-      font-family: var(--f);
+      font-family: 'EG', sans-serif;
       font-weight: 200;
-      letter-spacing: 0;
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
       cursor: none;
     }
-    a { color: inherit; text-decoration: none; }
-    ::selection { background: var(--pink); color: var(--black); }
+    a { color:inherit; text-decoration:none; }
+    ::selection { background:var(--pink); color:var(--black); }
 
-    /* ════════════════════════════════════════════════════════
-       MOLOTOV CURSOR
-    ════════════════════════════════════════════════════════ */
+    /* ── CURSOR ── */
     #cur {
       position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      will-change: left, top;
+      left: -100px;
+      top:  -100px;
       width: 32px;
       height: 32px;
+      pointer-events: none;
+      z-index: 99999;
       transform: translate(-10px, -30px) rotate(-35deg);
-      transition: transform .15s ease;
     }
     #cur.thrown {
       animation: throw-anim .55s ease-out forwards;
     }
     @keyframes throw-anim {
-      0%   { transform: translate(-10px,-30px) rotate(-35deg) scale(1);    opacity:1; }
-      35%  { transform: translate(55px,-130px) rotate(-90deg) scale(1.15); opacity:1; }
-      65%  { transform: translate(130px,-60px) rotate(-150deg) scale(1.0); opacity:.8; }
-      85%  { transform: translate(175px,30px)  rotate(-200deg) scale(.8);  opacity:.5; }
-      100% { transform: translate(200px,70px)  rotate(-240deg) scale(.4);  opacity:0; }
+      0%   { transform:translate(-10px,-30px)  rotate(-35deg)  scale(1);    opacity:1; }
+      35%  { transform:translate(55px,-130px)  rotate(-90deg)  scale(1.15); opacity:1; }
+      65%  { transform:translate(130px,-60px)  rotate(-150deg) scale(1.0);  opacity:.8; }
+      85%  { transform:translate(175px,30px)   rotate(-200deg) scale(.8);   opacity:.5; }
+      100% { transform:translate(200px,70px)   rotate(-240deg) scale(.4);   opacity:0; }
     }
-
-    /* Pink click-ring */
     .click-ring {
       position: fixed;
       pointer-events: none;
-      z-index: 9998;
+      z-index: 99998;
       border-radius: 50%;
       border: 2px solid var(--pink);
       transform: translate(-50%,-50%);
       animation: ring-pop .5s ease-out forwards;
     }
     @keyframes ring-pop {
-      0%   { width:10px; height:10px; opacity:1; }
-      100% { width:64px; height:64px; opacity:0; }
+      0%   { width:10px;  height:10px;  opacity:1; }
+      100% { width:64px;  height:64px;  opacity:0; }
     }
-
-    /* Feuer-Burst */
     .burst {
       position: fixed;
       pointer-events: none;
-      z-index: 9998;
+      z-index: 99998;
       font-size: 40px;
+      line-height: 1;
       transform: translate(-50%,-50%);
       animation: burst-anim .65s ease-out forwards;
-      line-height: 1;
     }
     @keyframes burst-anim {
       0%   { opacity:1; transform:translate(-50%,-50%) scale(.4); }
@@ -115,32 +109,32 @@
       100% { opacity:0; transform:translate(-50%,-50%) scale(2);   }
     }
 
-    /* ════════════════════════════════════════════════════════
-       TILT + GLOSS — shared
-    ════════════════════════════════════════════════════════ */
+    /* ── TILT + GLOSS ── */
     .tilt-container {
       position: relative;
       overflow: hidden;
       perspective: 900px;
     }
     .tilt-inner {
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       transform-style: preserve-3d;
       will-change: transform;
     }
     .tilt-img {
       position: absolute;
       inset: -8%;
-      width: 116%; height: 116%;
+      width: 116%;
+      height: 116%;
       object-fit: cover;
       object-position: center 25%;
       display: block;
       will-change: transform;
     }
-
-    /* Gloss sweep on hover */
     .gloss-layer {
-      position: absolute; inset: 0; z-index: 2;
+      position: absolute;
+      inset: 0;
+      z-index: 2;
       pointer-events: none;
       overflow: hidden;
     }
@@ -152,9 +146,9 @@
       background: linear-gradient(
         105deg,
         transparent 30%,
-        rgba(255,255,255,0.07) 45%,
-        rgba(255,255,255,0.20) 50%,
-        rgba(255,255,255,0.07) 55%,
+        rgba(255,255,255,.07) 45%,
+        rgba(255,255,255,.20) 50%,
+        rgba(255,255,255,.07) 55%,
         transparent 70%
       );
       transform: skewX(-15deg);
@@ -165,25 +159,28 @@
       animation: gloss-sweep .75s cubic-bezier(.4,0,.2,1) forwards;
     }
     @keyframes gloss-sweep {
-      from { left: -80%; }
-      to   { left: 160%; }
+      from { left:-80%; }
+      to   { left:160%; }
     }
 
-    /* ════════════════════════════════════════════════════════
-       HERO
-    ════════════════════════════════════════════════════════ */
-    #hero { width:100vw; height:100dvh; }
-    .hero-wrap { width:100%; height:100%; }
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      width: 100vw;
+      height: 100dvh;
+    }
+    .hero-wrap {
+      width: 100%;
+      height: 100%;
+    }
     .hero-grad {
-      position: absolute; inset: 0; z-index: 3;
+      position: absolute; inset:0; z-index:3;
       background:
-        linear-gradient(to bottom,
-          rgba(8,8,8,.52) 0%, rgba(8,8,8,0) 28%,
-          rgba(8,8,8,0) 50%, rgba(8,8,8,.96) 100%),
-        linear-gradient(to right, rgba(8,8,8,.25) 0%, rgba(8,8,8,0) 38%);
+        linear-gradient(to bottom, rgba(8,8,8,.52) 0%, rgba(8,8,8,0) 28%, rgba(8,8,8,0) 50%, rgba(8,8,8,.96) 100%),
+        linear-gradient(to right,  rgba(8,8,8,.25) 0%, rgba(8,8,8,0) 38%);
     }
     .hero-grain {
-      position: absolute; inset: 0; z-index: 4; pointer-events: none;
+      position: absolute; inset:0; z-index:4; pointer-events:none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.065'/%3E%3C/svg%3E");
       background-size: 250px;
     }
@@ -196,30 +193,29 @@
       align-items: center;
       padding: 28px 44px;
     }
-    .hero-nav .logo {
-      grid-column: 2;
-      background: none;
-    }
+    .hero-nav .spacer { /* leer, linke Spalte */ }
     .hero-nav .logo img {
       height: clamp(40px, 5.5vw, 70px);
       width: auto;
       display: block;
     }
     .hero-nav .socials {
-      grid-column: 3;
-      display:flex; gap:28px; justify-content: flex-end;
-      font-weight:200; font-size:13px; letter-spacing:0; text-transform:uppercase;
+      display:flex; gap:28px; justify-content:flex-end;
+      font-weight:200; font-size:13px;
+      letter-spacing:0; text-transform:uppercase;
     }
-    .hero-nav .socials a { opacity:.7; transition:opacity .2s,color .2s; }
+    .hero-nav .socials a { opacity:.7; transition:opacity .2s, color .2s; }
     .hero-nav .socials a:hover { opacity:1; color:var(--pink); }
 
-    /* Newsletter – zentriert */
+    /* Newsletter zentriert im Hero */
     .hero-center {
-      position: absolute; top:50%; left:50%;
-      transform: translate(-50%,-50%);
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 10;
-      display:flex; flex-direction:column; align-items:center; gap:12px;
-      text-align:center;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px;
+      text-align: center;
     }
     .nl-label {
       font-weight:600; font-size:11px;
@@ -233,31 +229,30 @@
     }
     .nl-form input {
       background:transparent; border:none; outline:none;
-      font-family:var(--f); font-size:13px; font-weight:200;
-      letter-spacing:0; color:var(--off); padding:12px 18px; width:220px;
+      font-family:'EG', sans-serif; font-size:13px; font-weight:200;
+      color:var(--off); padding:12px 18px; width:220px;
     }
     .nl-form input::placeholder { opacity:.38; }
     .nl-form button {
       background:var(--pink); border:none; color:var(--black);
-      font-family:var(--f); font-weight:600;
+      font-family:'EG', sans-serif; font-weight:600;
       font-size:11px; letter-spacing:.18em; text-transform:uppercase;
       padding:12px 22px; cursor:none; transition:background .2s;
     }
     .nl-form button:hover { background:#ff62c4; }
     .nl-success {
       font-size:11px; letter-spacing:.15em; text-transform:uppercase;
-      color:var(--pink); font-weight:600; opacity:0; transition:opacity .4s; height:16px;
+      color:var(--pink); font-weight:600;
+      opacity:0; transition:opacity .4s; min-height:16px;
     }
     .nl-success.show { opacity:1; }
 
-    /* Tagline */
     .hero-tagline {
       position:absolute; bottom:42px; left:44px; z-index:10;
       font-weight:200; font-size:12px;
-      letter-spacing:.22em; text-transform:uppercase; opacity:.5; line-height:2;
+      letter-spacing:.22em; text-transform:uppercase;
+      opacity:.5; line-height:2;
     }
-
-    /* Scroll hint */
     .scroll-hint {
       position:absolute; bottom:44px; left:50%;
       transform:translateX(-50%); z-index:10;
@@ -271,9 +266,7 @@
       50%      { transform:translateX(-50%) translateY(7px); }
     }
 
-    /* ════════════════════════════════════════════════════════
-       TICKER
-    ════════════════════════════════════════════════════════ */
+    /* ── TICKER ── */
     .ticker-wrap {
       overflow:hidden;
       border-top:1px solid rgba(254,64,185,.14);
@@ -283,35 +276,32 @@
     .ticker { display:flex; white-space:nowrap; animation:tick 22s linear infinite; }
     .ticker-inner { display:flex; }
     .ticker span {
-      font-family:var(--f); font-weight:600;
+      font-family:'EG', sans-serif; font-weight:600;
       font-size:10px; letter-spacing:.3em; text-transform:uppercase;
       color:var(--pink); opacity:.6; padding:0 34px;
     }
     @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* ════════════════════════════════════════════════════════
-       SECTION BASICS
-    ════════════════════════════════════════════════════════ */
-    .section-wrap { max-width:960px; margin:0 auto; padding:88px 44px; }
+    /* ── SECTIONS ── */
+    .section-wrap {
+      max-width:960px; margin:0 auto; padding:88px 44px;
+    }
     .section-label {
       font-size:10px; letter-spacing:.32em; text-transform:uppercase;
       color:var(--pink); font-weight:600; margin-bottom:26px;
       display:flex; align-items:center; gap:14px;
     }
     .section-label::after {
-      content:''; display:block; width:34px; height:1px;
+      content:''; width:34px; height:1px;
       background:var(--pink); opacity:.45;
     }
     .divider {
       max-width:960px; margin:0 auto; height:1px;
-      background:linear-gradient(to right,transparent,rgba(232,228,221,.1),transparent);
+      background:linear-gradient(to right, transparent, rgba(232,228,221,.1), transparent);
     }
 
-    /* ════════════════════════════════════════════════════════
-       VIDEO SECTION
-    ════════════════════════════════════════════════════════ */
+    /* ── VIDEO ── */
     #video { padding-bottom:0; }
-
     .video-card {
       position:relative; width:100%; aspect-ratio:16/9; display:block;
     }
@@ -321,49 +311,32 @@
       background:rgba(8,8,8,.22); transition:background .3s;
     }
     .video-card:hover .video-overlay { background:rgba(8,8,8,.08); }
-
-    /* ── Custom SVG Play Button ── */
     .video-play {
       position:absolute; inset:0; z-index:5;
       display:flex; flex-direction:column;
       align-items:center; justify-content:center; gap:14px;
     }
     .play-btn {
-      width: clamp(60px,8vw,100px);
-      height: clamp(60px,8vw,100px);
-      border-radius: 50%;
-      border: 2px solid rgba(232,228,221,.9);
-      display: flex; align-items:center; justify-content:center;
-      background: rgba(8,8,8,.45);
-      backdrop-filter: blur(6px);
-      transition: transform .25s ease, background .25s ease, border-color .25s ease;
-      flex-shrink: 0;
+      width:clamp(60px,8vw,100px); height:clamp(60px,8vw,100px);
+      border-radius:50%;
+      border:2px solid rgba(232,228,221,.9);
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(8,8,8,.45);
+      backdrop-filter:blur(6px);
+      transition:transform .25s, background .25s, border-color .25s;
+      flex-shrink:0;
     }
-    .play-btn svg {
-      width: 35%; height: 35%;
-      fill: var(--off);
-      margin-left: 8%;  /* optisch zentrieren */
-      transition: fill .25s ease;
-    }
-    .video-card:hover .play-btn {
-      transform: scale(1.1);
-      background: rgba(254,64,185,.25);
-      border-color: var(--pink);
-    }
-    .video-card:hover .play-btn svg { fill: var(--pink); }
-
+    .play-btn svg { width:35%; height:35%; fill:var(--off); margin-left:8%; transition:fill .25s; }
+    .video-card:hover .play-btn { transform:scale(1.1); background:rgba(254,64,185,.25); border-color:var(--pink); }
+    .video-card:hover .play-btn svg { fill:var(--pink); }
     .play-label {
-      font-family: var(--f); font-weight:600;
-      font-size: clamp(9px,1vw,11px);
+      font-weight:600; font-size:clamp(9px,1vw,11px);
       letter-spacing:.3em; text-transform:uppercase;
-      color: var(--off); opacity:.6;
-      transition: opacity .25s, color .25s;
+      color:var(--off); opacity:.6; transition:opacity .25s, color .25s;
     }
     .video-card:hover .play-label { opacity:1; color:var(--pink); }
 
-    /* ════════════════════════════════════════════════════════
-       BIO
-    ════════════════════════════════════════════════════════ */
+    /* ── BIO ── */
     #bio .bio-text {
       font-weight:200; font-size:clamp(15px,1.75vw,20px);
       line-height:1.85; max-width:680px; opacity:.88;
@@ -372,9 +345,7 @@
     #bio .bio-text strong { font-weight:600; }
     #bio .bio-text em { font-style:italic; color:var(--pink); }
 
-    /* ════════════════════════════════════════════════════════
-       INSTAGRAM
-    ════════════════════════════════════════════════════════ */
+    /* ── INSTAGRAM ── */
     #instagram { padding-bottom:0; }
     .ig-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
     .ig-placeholder {
@@ -386,71 +357,68 @@
     }
     .ig-placeholder:hover { opacity:.7; background:rgba(254,64,185,.06); }
 
-    /* ════════════════════════════════════════════════════════
-       MUSIK
-    ════════════════════════════════════════════════════════ */
+    /* ── MUSIK ── */
     #musik { padding-top:0; }
     .music-links { display:flex; flex-wrap:wrap; gap:14px; margin-top:6px; }
     .music-link {
       display:inline-flex; align-items:center; gap:10px;
       border:1px solid rgba(232,228,221,.18);
       padding:13px 26px;
-      font-family:var(--f); font-weight:600;
-      font-size:12px; letter-spacing:.18em; text-transform:uppercase;
-      transition:border-color .2s,color .2s,background .2s;
+      font-weight:600; font-size:12px;
+      letter-spacing:.18em; text-transform:uppercase;
+      transition:border-color .2s, color .2s, background .2s;
     }
     .music-link:hover { border-color:var(--pink); color:var(--pink); }
     .music-link.featured { background:var(--pink); border-color:var(--pink); color:var(--black); }
     .music-link.featured:hover { background:#ff62c4; border-color:#ff62c4; }
     .music-link svg { width:15px; height:15px; fill:currentColor; flex-shrink:0; }
 
-    /* ════════════════════════════════════════════════════════
-       KONTAKT
-    ════════════════════════════════════════════════════════ */
+    /* ── KONTAKT ── */
     #kontakt { padding-bottom:110px; }
     .kontakt-grid { display:grid; grid-template-columns:1fr 1fr; gap:44px; }
     .k-block h3 {
-      font-family:var(--f); font-weight:600;
-      font-size:10px; letter-spacing:.28em; text-transform:uppercase;
+      font-weight:600; font-size:10px;
+      letter-spacing:.28em; text-transform:uppercase;
       color:var(--pink); margin-bottom:10px;
     }
     .k-block a {
-      font-weight:200; font-size:16px; letter-spacing:0;
-      opacity:.75; display:block; line-height:1.9;
+      font-weight:200; font-size:16px; opacity:.75;
+      display:block; line-height:1.9;
     }
     .k-block a:hover { opacity:1; color:var(--pink); }
 
-    /* ════════════════════════════════════════════════════════
-       FOOTER
-    ════════════════════════════════════════════════════════ */
+    /* ── FOOTER ── */
     footer {
       border-top:1px solid rgba(232,228,221,.07);
       padding:26px 44px;
       display:flex; align-items:center; justify-content:space-between;
       flex-wrap:wrap; gap:10px;
-      font-size:11px; letter-spacing:0; font-weight:200; opacity:.38;
+      font-size:11px; font-weight:200; opacity:.38;
     }
     footer a:hover { opacity:1; color:var(--pink); }
 
-    /* ════════════════════════════════════════════════════════
-       REVEAL
-    ════════════════════════════════════════════════════════ */
-    .reveal { opacity:0; transform:translateY(22px); transition:opacity .75s ease,transform .75s ease; }
-    .reveal.visible { opacity:1; transform:none; }
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
 
-    /* ════════════════════════════════════════════════════════
-       MOBILE
-    ════════════════════════════════════════════════════════ */
+    /* ── MOBILE ── */
     @media (max-width:680px) {
       body { cursor:auto; }
-      #cur, .click-ring { display:none; }
+      #cur { display:none; }
       .hero-nav { padding:18px 22px; }
       .hero-nav .logo img { height:32px; }
       .hero-nav .socials { gap:14px; font-size:11px; }
-      .section-wrap { padding:60px 22px; }
       .hero-tagline { left:22px; }
+      .section-wrap { padding:60px 22px; }
       .kontakt-grid { grid-template-columns:1fr; }
-      footer { padding:22px; flex-direction:column; align-items:flex-start; gap:6px; }
+      footer { padding:22px; flex-direction:column; gap:6px; }
       .nl-form input { width:160px; }
       .ig-grid { grid-template-columns:repeat(2,1fr); }
     }
@@ -458,24 +426,22 @@
 </head>
 <body>
 
-<!-- ══ MOLOTOV CURSOR ══════════════════════════════════════════ -->
+<!-- CURSOR -->
 <div id="cur">
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="13" cy="4" rx="2.5" ry="3.5" fill="#ff9900" opacity="0.95"/>
+    <ellipse cx="13" cy="4"   rx="2.5" ry="3.5" fill="#ff9900" opacity=".95"/>
     <ellipse cx="13" cy="3.5" rx="1.4" ry="2.2" fill="#ffe066"/>
-    <rect x="12.3" y="6.5" width="1.4" height="3" rx=".7" fill="#888"/>
-    <rect x="10.5" y="9" width="5" height="4" rx="1.5" fill="#c0d8a0"/>
-    <rect x="9.5" y="9" width="1.5" height="3" rx=".6" fill="#e05020" transform="rotate(-10 10 10)"/>
-    <rect x="8" y="12.5" width="10" height="14" rx="4" fill="#b8d890"/>
-    <rect x="9.5" y="16" width="7" height="9" rx="2.5" fill="#80b840" opacity=".7"/>
-    <rect x="9.5" y="13.5" width="2.5" height="5" rx="1.2" fill="rgba(255,255,255,0.28)"/>
-    <rect x="8.5" y="25.5" width="9" height="2" rx="1" fill="#90c060"/>
+    <rect x="12.3" y="6.5" width="1.4" height="3"  rx=".7"  fill="#888"/>
+    <rect x="10.5" y="9"   width="5"   height="4"  rx="1.5" fill="#c0d8a0"/>
+    <rect x="9.5"  y="9"   width="1.5" height="3"  rx=".6"  fill="#e05020" transform="rotate(-10 10 10)"/>
+    <rect x="8"    y="12.5" width="10" height="14" rx="4"   fill="#b8d890"/>
+    <rect x="9.5"  y="16"  width="7"   height="9"  rx="2.5" fill="#80b840" opacity=".7"/>
+    <rect x="9.5"  y="13.5" width="2.5" height="5" rx="1.2" fill="rgba(255,255,255,0.28)"/>
+    <rect x="8.5"  y="25.5" width="9"  height="2"  rx="1"   fill="#90c060"/>
   </svg>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     HERO
-══════════════════════════════════════════════════════════════ -->
+<!-- HERO -->
 <div id="hero">
   <div class="tilt-container hero-wrap" id="heroContainer">
     <div class="tilt-inner" id="heroTilt">
@@ -487,8 +453,10 @@
   </div>
 
   <nav class="hero-nav">
-    <div></div>
-    <div class="logo"><img src="logo.png" alt="Stein Walter Frank Meier" /></div>
+    <div class="spacer"></div>
+    <div class="logo">
+      <img src="logo.png" alt="Stein Walter Frank Meier" />
+    </div>
     <div class="socials">
       <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.youtube.com/@DEIN_KANAL" target="_blank" rel="noopener">YouTube</a>
@@ -498,11 +466,11 @@
 
   <div class="hero-center">
     <span class="nl-label">Newsletter</span>
-    <form class="nl-form" onsubmit="handleNL(event)">
+    <form class="nl-form" id="nlForm">
       <input type="email" placeholder="deine@email.de" id="nlInput" autocomplete="off" />
       <button type="submit">Subscribe</button>
     </form>
-    <span class="nl-success" id="nlMsg">✓ E-Mail-App wird geöffnet …</span>
+    <span class="nl-success" id="nlMsg">✓ Angemeldet — danke!</span>
   </div>
 
   <p class="hero-tagline">Punk<br>aus Hannover</p>
@@ -535,9 +503,7 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     VIDEO
-══════════════════════════════════════════════════════════════ -->
+<!-- VIDEO -->
 <div class="section-wrap" id="video">
   <div class="section-label reveal">Live Video</div>
   <a href="https://www.youtube.com/watch?v=s6VEn4XC09k"
@@ -550,7 +516,6 @@
     </div>
     <div class="gloss-layer"></div>
     <div class="video-overlay"></div>
-    <!-- Custom Play Button -->
     <div class="video-play">
       <div class="play-btn">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -562,9 +527,7 @@
 
 <div class="divider" style="margin-top:88px;"></div>
 
-<!-- ══════════════════════════════════════════════════════════
-     BIO
-══════════════════════════════════════════════════════════════ -->
+<!-- BIO -->
 <div class="section-wrap" id="bio">
   <div class="section-label reveal">Über uns</div>
   <div class="bio-text">
@@ -589,24 +552,19 @@
 
 <div class="divider"></div>
 
-<!-- ══════════════════════════════════════════════════════════
-     INSTAGRAM
-     Anleitung: behold.so kostenlos registrieren,
-     Instagram verbinden, dann Kommentar unten folgen.
-══════════════════════════════════════════════════════════════ -->
+<!-- INSTAGRAM -->
 <div class="section-wrap" id="instagram">
   <div class="section-label reveal">Instagram</div>
   <!--
-    BEHOLD.SO EINRICHTEN (kostenlos):
+    BEHOLD.SO (kostenlos):
     1. https://behold.so → Account erstellen
     2. @steinwalterfrankmeiermusik verbinden
-    3. Feed erstellen → Feed-ID kopieren
-    4. Diese zwei Zeilen aktivieren (Kommentarzeichen // entfernen):
+    3. Feed-ID kopieren und diese zwei Zeilen aktivieren:
        <script src="https://w.behold.so/widget.js" type="module"><\/script>
        <behold-widget feed-id="DEINE_FEED_ID"></behold-widget>
-    5. Den ig-fallback-Block darunter löschen
+    4. Den ig-fallback Block unten löschen
   -->
-  <div class="ig-grid" id="ig-fallback">
+  <div class="ig-grid">
     <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Instagram<br>öffnen →</a>
     <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">@steinwalter<br>frankmeier</a>
     <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Fotos &amp;<br>Videos</a>
@@ -618,24 +576,19 @@
 
 <div class="divider"></div>
 
-<!-- ══════════════════════════════════════════════════════════
-     MUSIK
-══════════════════════════════════════════════════════════════ -->
+<!-- MUSIK -->
 <div class="section-wrap" id="musik">
   <div class="section-label reveal">Musik</div>
   <div class="music-links">
-    <a class="music-link featured reveal"
-       href="https://steinwalterfrankmeier.bandcamp.com" target="_blank" rel="noopener">
+    <a class="music-link featured reveal" href="https://steinwalterfrankmeier.bandcamp.com" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
       Bandcamp
     </a>
-    <a class="music-link reveal"
-       href="https://www.youtube.com/watch?v=s6VEn4XC09k" target="_blank" rel="noopener">
+    <a class="music-link reveal" href="https://www.youtube.com/watch?v=s6VEn4XC09k" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
       YouTube
     </a>
-    <a class="music-link reveal"
-       href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">
+    <a class="music-link reveal" href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
       Instagram
     </a>
@@ -644,20 +597,17 @@
 
 <div class="divider"></div>
 
-<!-- ══════════════════════════════════════════════════════════
-     KONTAKT
-══════════════════════════════════════════════════════════════ -->
+<!-- KONTAKT -->
 <div class="section-wrap" id="kontakt">
   <div class="section-label reveal">Kontakt</div>
   <div class="kontakt-grid">
     <div class="k-block reveal">
       <h3>Allgemein &amp; Booking</h3>
-      <a href="/cdn-cgi/l/email-protection#d5a6a1b0bcbba2b4b9a1b0a795b8b4bcb9b7baadfbbaa7b2"><span class="__cf_email__" data-cfemail="20535445494e57414c544552604d41494c424f580e4f5247">[email&#160;protected]</span></a>
+      <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a>
     </div>
     <div class="k-block reveal">
       <h3>Instagram</h3>
-      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/"
-         target="_blank" rel="noopener">@steinwalterfrankmeiermusik</a>
+      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">@steinwalterfrankmeiermusik</a>
     </div>
   </div>
 </div>
@@ -670,42 +620,47 @@
   </div>
 </footer>
 
-<!-- ══════════════════════════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════════════════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-
-/* ── MOLOTOV CURSOR ──────────────────────────────────────── */
+<script>
+/* ════════════════════════════════════════
+   CURSOR
+════════════════════════════════════════ */
 const cur = document.getElementById('cur');
-let mx = -200, my = -200, cx = -200, cy = -200;
+let mx = window.innerWidth / 2;
+let my = window.innerHeight / 2;
+let cx = mx, cy = my;
 let throwing = false;
 
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+});
 
-(function moveCur() {
+(function loop() {
   if (!throwing) {
     cx += (mx - cx) * 0.18;
     cy += (my - cy) * 0.18;
     cur.style.left = cx + 'px';
     cur.style.top  = cy + 'px';
   }
-  requestAnimationFrame(moveCur);
+  requestAnimationFrame(loop);
 })();
 
 document.addEventListener('click', e => {
   if (throwing) return;
   throwing = true;
 
-  // Pink ring
+  // Pink ring at click point
   const ring = document.createElement('div');
   ring.className = 'click-ring';
   ring.style.left = e.clientX + 'px';
   ring.style.top  = e.clientY + 'px';
   document.body.appendChild(ring);
-  setTimeout(() => ring.remove(), 550);
+  setTimeout(() => ring.remove(), 600);
 
-  // Wurf
+  // Throw animation
   cur.classList.add('thrown');
+
+  // Fire burst after throw lands
   setTimeout(() => {
     const burst = document.createElement('div');
     burst.className = 'burst';
@@ -716,71 +671,100 @@ document.addEventListener('click', e => {
     setTimeout(() => burst.remove(), 700);
   }, 380);
 
+  // Reset cursor
   setTimeout(() => {
     cur.classList.remove('thrown');
     throwing = false;
     cx = mx; cy = my;
     cur.style.left = cx + 'px';
     cur.style.top  = cy + 'px';
-  }, 560);
+  }, 580);
 });
 
-/* ── TILT ────────────────────────────────────────────────── */
-function initTilt(container, tiltEl, imgEl, maxTilt, maxPar) {
-  let tTX=0,tTY=0,tPX=0,tPY=0;
-  let cTX=0,cTY=0,cPX=0,cPY=0;
+/* ════════════════════════════════════════
+   TILT
+════════════════════════════════════════ */
+function initTilt(containerId, tiltId, imgId, maxTilt, maxPar) {
+  const container = document.getElementById(containerId);
+  const tiltEl    = document.getElementById(tiltId);
+  const imgEl     = document.getElementById(imgId);
+  if (!container || !tiltEl || !imgEl) return;
+
+  let tTX=0, tTY=0, tPX=0, tPY=0;
+  let cTX=0, cTY=0, cPX=0, cPY=0;
   const L = 0.065;
+
   container.addEventListener('mousemove', e => {
-    const r = container.getBoundingClientRect();
+    const r  = container.getBoundingClientRect();
     const nx = (e.clientX - r.left) / r.width  - 0.5;
     const ny = (e.clientY - r.top)  / r.height - 0.5;
-    tTX = ny * -maxTilt; tTY = nx * maxTilt;
-    tPX = nx * -maxPar;  tPY = ny * -maxPar;
+    tTX = ny * -maxTilt;  tTY = nx * maxTilt;
+    tPX = nx * -maxPar;   tPY = ny * -maxPar;
   });
   container.addEventListener('mouseleave', () => { tTX=tTY=tPX=tPY=0; });
-  const lerp = (a,b,t) => a+(b-a)*t;
+
+  const lerp = (a,b,t) => a + (b-a) * t;
   (function anim() {
     cTX=lerp(cTX,tTX,L); cTY=lerp(cTY,tTY,L);
     cPX=lerp(cPX,tPX,L); cPY=lerp(cPY,tPY,L);
     tiltEl.style.transform = `rotateX(${cTX}deg) rotateY(${cTY}deg)`;
-    imgEl.style.transform  = `translate(${cPX}px,${cPY}px) scale(1.04)`;
+    imgEl.style.transform  = `translate(${cPX}px, ${cPY}px) scale(1.04)`;
     requestAnimationFrame(anim);
   })();
 }
 
-initTilt(
-  document.getElementById('heroContainer'),
-  document.getElementById('heroTilt'),
-  document.getElementById('heroImg'),
-  9, 18
-);
-initTilt(
-  document.getElementById('videoContainer'),
-  document.getElementById('videoTilt'),
-  document.getElementById('videoImg'),
-  6, 12
-);
+initTilt('heroContainer',  'heroTilt',  'heroImg',  9, 18);
+initTilt('videoContainer', 'videoTilt', 'videoImg', 6, 12);
 
-/* ── SCROLL REVEAL ───────────────────────────────────────── */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 90);
-      obs.unobserve(e.target);
+/* ════════════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════════════ */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 90);
+      revealObs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
-/* ── NEWSLETTER → öffnet E-Mail-App ─────────────────────── */
-function handleNL(e) {
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ════════════════════════════════════════
+   NEWSLETTER — Formspree
+   ─────────────────────────────────────
+   1. Geh auf https://formspree.io
+   2. Kostenlosen Account erstellen
+   3. "New Form" → Form-ID kopieren
+   4. Hier eintragen, z.B. 'xpwzgkba'
+   Dann: Einträge im Dashboard sehen +
+   E-Mail-Benachrichtigung bei jeder Anmeldung!
+════════════════════════════════════════ */
+const FORMSPREE_ID = ''; // ← Formspree Form-ID hier eintragen
+
+document.getElementById('nlForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const input = document.getElementById('nlInput');
   const msg   = document.getElementById('nlMsg');
   const email = input.value.trim();
   if (!email.includes('@')) return;
 
-  // Öffnet das E-Mail-Programm mit vorausgefüllter Mail an euch
-  window.location.href =
-    'mailto:steinwalter@mailbox.org'
-    + '?subject=Newsletter%20
+  if (FORMSPREE_ID) {
+    try {
+      await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
+    } catch(err) { /* silent fail */ }
+  }
+
+  input.value = '';
+  msg.classList.add('show');
+  setTimeout(() => msg.classList.remove('show'), 4000);
+});
+</script>
+</body>
+</html>
