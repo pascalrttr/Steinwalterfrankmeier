@@ -63,23 +63,28 @@
     /* ── CURSOR ── */
     #cur {
       position: fixed;
-      left: -100px;
-      top:  -100px;
+      left: 0;
+      top: 0;
       width: 32px;
       height: 32px;
       pointer-events: none;
       z-index: 99999;
-      transform: translate(-10px, -30px) rotate(-35deg);
+      /* offset: Flaschenboden = Mauszeiger-Spitze */
+      margin-left: -10px;
+      margin-top: -30px;
+      transform: rotate(-35deg);
+      will-change: transform;
+      display: block;
     }
     #cur.thrown {
       animation: throw-anim .55s ease-out forwards;
     }
     @keyframes throw-anim {
-      0%   { transform:translate(-10px,-30px)  rotate(-35deg)  scale(1);    opacity:1; }
-      35%  { transform:translate(55px,-130px)  rotate(-90deg)  scale(1.15); opacity:1; }
-      65%  { transform:translate(130px,-60px)  rotate(-150deg) scale(1.0);  opacity:.8; }
-      85%  { transform:translate(175px,30px)   rotate(-200deg) scale(.8);   opacity:.5; }
-      100% { transform:translate(200px,70px)   rotate(-240deg) scale(.4);   opacity:0; }
+      0%   { opacity:1;  scale:1;    rotate: -35deg;  translate: 0px 0px; }
+      35%  { opacity:1;  scale:1.15; rotate: -90deg;  translate: 65px -100px; }
+      65%  { opacity:.8; scale:1.0;  rotate: -150deg; translate: 140px -40px; }
+      85%  { opacity:.5; scale:.8;   rotate: -200deg; translate: 185px 50px; }
+      100% { opacity:0;  scale:.4;   rotate: -240deg; translate: 210px 90px; }
     }
     .click-ring {
       position: fixed;
@@ -625,26 +630,33 @@ let my = window.innerHeight / 2;
 let cx = mx, cy = my;
 let throwing = false;
 
+// Position the cursor immediately on first mousemove
 document.addEventListener('mousemove', e => {
   mx = e.clientX;
   my = e.clientY;
-});
+}, { passive: true });
 
-(function loop() {
+// Smooth follow loop — always running
+function cursorLoop() {
   if (!throwing) {
     cx += (mx - cx) * 0.18;
     cy += (my - cy) * 0.18;
-    cur.style.left = cx + 'px';
-    cur.style.top  = cy + 'px';
+    cur.style.transform = 'translate(' + cx + 'px, ' + cy + 'px) rotate(-35deg)';
   }
-  requestAnimationFrame(loop);
-})();
+  requestAnimationFrame(cursorLoop);
+}
+// Use transform instead of left/top for better perf & no stale CSS conflict
+cur.style.left = '0';
+cur.style.top  = '0';
+cur.style.marginLeft = '0';
+cur.style.marginTop  = '0';
+cursorLoop();
 
 document.addEventListener('click', e => {
   if (throwing) return;
   throwing = true;
 
-  // Pink ring at click point
+  // Pink ring
   const ring = document.createElement('div');
   ring.className = 'click-ring';
   ring.style.left = e.clientX + 'px';
@@ -652,10 +664,11 @@ document.addEventListener('click', e => {
   document.body.appendChild(ring);
   setTimeout(() => ring.remove(), 600);
 
-  // Throw animation
+  // Override transform for throw animation start position
+  cur.style.transform = 'translate(' + cx + 'px, ' + cy + 'px) rotate(-35deg)';
   cur.classList.add('thrown');
 
-  // Fire burst after throw lands
+  // Fire burst
   setTimeout(() => {
     const burst = document.createElement('div');
     burst.className = 'burst';
@@ -666,13 +679,13 @@ document.addEventListener('click', e => {
     setTimeout(() => burst.remove(), 700);
   }, 380);
 
-  // Reset cursor
+  // Reset
   setTimeout(() => {
     cur.classList.remove('thrown');
-    throwing = false;
+    // Snap cursor back to current mouse pos silently
     cx = mx; cy = my;
-    cur.style.left = cx + 'px';
-    cur.style.top  = cy + 'px';
+    cur.style.transform = 'translate(' + cx + 'px, ' + cy + 'px) rotate(-35deg)';
+    throwing = false;
   }, 580);
 });
 
