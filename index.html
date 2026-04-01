@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>stein walter frank meier</title>
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+   SCHRIFTART-SETUP
+   Lege alle .otf-Dateien in einen Unterordner namens "fonts/"
+   direkt neben dieser index.html-Datei.
+
+   Ordnerstruktur:
+     steinwalter.de/
+       index.html          ← diese Datei
+       foto.jpg            ← dein Bandfoto (umbenennen!)
+       fonts/
+         EuropaGroteskSH-Reg.otf
+         EuropaGroteskSH-Bol.otf
+         … (alle anderen .otf)
+  ═══════════════════════════════════════════════════════════════
+  -->
+
+  <style>
+    /* ── FONTS ───────────────────────────────────────────────── */
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLig.otf') format('opentype'); font-weight:100; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLigIta.otf') format('opentype'); font-weight:100; font-style:italic; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Lig.otf') format('opentype'); font-weight:200; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-LigIta.otf') format('opentype'); font-weight:200; font-style:italic; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Reg.otf') format('opentype'); font-weight:400; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Ita.otf') format('opentype'); font-weight:400; font-style:italic; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Med.otf') format('opentype'); font-weight:500; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-MedIta.otf') format('opentype'); font-weight:500; font-style:italic; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-DemBol.otf') format('opentype'); font-weight:600; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-DemBolIta.otf') format('opentype'); font-weight:600; font-style:italic; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Bol.otf') format('opentype'); font-weight:700; font-style:normal; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-BolIta.otf') format('opentype'); font-weight:700; font-style:italic; }
+    @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-LigCon.otf') format('opentype'); font-weight:200; }
+    @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-LigConIta.otf') format('opentype'); font-weight:200; font-style:italic; }
+    @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-ConIta.otf') format('opentype'); font-weight:400; font-style:italic; }
+    @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-MedCon.otf') format('opentype'); font-weight:500; }
+    @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-BolCon.otf') format('opentype'); font-weight:700; }
+    @font-face { font-family:'EG-Ex'; src:url('fonts/EuropaGroteskSH-Ex.otf') format('opentype'); font-weight:400; }
+    @font-face { font-family:'EG-Ex'; src:url('fonts/EuropaGroteskSH-LigEx.otf') format('opentype'); font-weight:200; }
+    @font-face { font-family:'EG-Ex'; src:url('fonts/EuropaGroteskSH-MedEx.otf') format('opentype'); font-weight:500; }
+    @font-face { font-family:'EG-Ex'; src:url('fonts/EuropaGroteskSH-BolEx.otf') format('opentype'); font-weight:700; }
+
+    /* ── TOKENS ──────────────────────────────────────────────── */
+    :root {
+      --pink:  #fe40b9;
+      --black: #080808;
+      --off:   #e8e4dd;
+      --f:     'EG', sans-serif;
+      --fc:    'EG-Con', sans-serif;
+      --fe:    'EG-Ex', sans-serif;
+    }
+
+    /* ── RESET ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body {
+      background: var(--black);
+      color: var(--off);
+      font-family: var(--f);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--pink); color: var(--black); }
+
+    /* ── CURSOR ──────────────────────────────────────────────── */
+    #cur {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--pink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width .18s ease, height .18s ease;
+      mix-blend-mode: difference;
+      will-change: left, top;
+    }
+    #cur.big { width: 38px; height: 38px; }
+
+    /* ═══ HERO ═══════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      width: 100vw;
+      height: 100dvh;
+      overflow: hidden;
+      perspective: 900px;
+    }
+
+    /* Tilt wrapper */
+    .tilt-wrap {
+      position: absolute; inset: 0;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    /* Photo – slightly oversized so parallax doesn't show edges */
+    .hero-img {
+      position: absolute;
+      inset: -5%;
+      width: 110%; height: 110%;
+      object-fit: cover;
+      object-position: center 25%;
+      display: block;
+      filter: contrast(1.06) saturate(1.08);
+      will-change: transform;
+    }
+
+    /* Gradient overlay */
+    .hero-grad {
+      position: absolute; inset: 0; z-index: 2;
+      background:
+        linear-gradient(to bottom,
+          rgba(8,8,8,.5)  0%,
+          rgba(8,8,8,0)  28%,
+          rgba(8,8,8,0)  52%,
+          rgba(8,8,8,.95) 100%),
+        linear-gradient(to right,
+          rgba(8,8,8,.3)  0%,
+          rgba(8,8,8,0)  35%);
+    }
+
+    /* Film grain */
+    .hero-grain {
+      position: absolute; inset: 0; z-index: 3;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+      background-size: 250px;
+    }
+
+    /* Top nav */
+    .hero-nav {
+      position: absolute; top:0; left:0; right:0; z-index:10;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 30px 44px;
+    }
+    .hero-nav .band-name {
+      font-family: var(--fc);
+      font-weight: 700;
+      font-size: clamp(15px, 2vw, 24px);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .hero-nav .socials {
+      display:flex; gap:24px;
+      font-weight:500; font-size:11px;
+      letter-spacing:.2em; text-transform:uppercase;
+    }
+    .hero-nav .socials a { opacity:.7; transition:opacity .2s,color .2s; }
+    .hero-nav .socials a:hover { opacity:1; color:var(--pink); }
+
+    /* Bottom bar */
+    .hero-bottom {
+      position: absolute; bottom:0; left:0; right:0; z-index:10;
+      padding: 0 44px 42px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:20px;
+    }
+    .hero-tagline {
+      font-family: var(--fe);
+      font-weight: 200;
+      font-size: clamp(11px, 1vw, 14px);
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      opacity: .55;
+      line-height: 2;
+    }
+
+    /* Newsletter */
+    .nl-block { display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
+    .nl-label {
+      font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+      font-weight:600; opacity:.5;
+    }
+    .nl-form {
+      display:flex;
+      border: 1px solid rgba(232,228,221,.25);
+      background: rgba(8,8,8,.55);
+      backdrop-filter: blur(10px);
+    }
+    .nl-form input {
+      background:transparent; border:none; outline:none;
+      font-family:var(--f); font-size:12px; font-weight:400;
+      color:var(--off); padding:11px 16px; width:210px;
+      letter-spacing:.04em;
+    }
+    .nl-form input::placeholder { opacity:.38; }
+    .nl-form button {
+      background: var(--pink); border:none;
+      color:var(--black);
+      font-family:var(--fc); font-weight:700;
+      font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+      padding:11px 20px; cursor:none;
+      transition:background .2s;
+    }
+    .nl-form button:hover { background:#ff62c4; }
+    .nl-success {
+      font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--pink); font-weight:600;
+      opacity:0; transition:opacity .4s;
+    }
+    .nl-success.show { opacity:1; }
+
+    /* Scroll arrow */
+    .scroll-hint {
+      position:absolute; bottom:46px; left:50%;
+      transform:translateX(-50%); z-index:10;
+      display:flex; flex-direction:column; align-items:center; gap:5px;
+      opacity:.3; animation:bob 2.6s ease-in-out infinite;
+    }
+    .scroll-hint span { font-size:9px; letter-spacing:.32em; text-transform:uppercase; font-weight:500; }
+    .scroll-hint svg { width:16px; height:16px; fill:var(--off); }
+    @keyframes bob {
+      0%,100% { transform:translateX(-50%) translateY(0); }
+      50%      { transform:translateX(-50%) translateY(7px); }
+    }
+
+    /* ═══ TICKER ══════════════════════════════════════════════ */
+    .ticker-wrap {
+      overflow:hidden;
+      border-top:   1px solid rgba(254,64,185,.15);
+      border-bottom:1px solid rgba(254,64,185,.15);
+      background: rgba(254,64,185,.03);
+      padding: 9px 0;
+    }
+    .ticker {
+      display:flex; white-space:nowrap;
+      animation: tick 20s linear infinite;
+    }
+    .ticker-inner { display:flex; }
+    .ticker span {
+      font-family:var(--fc); font-weight:700;
+      font-size:10px; letter-spacing:.35em; text-transform:uppercase;
+      color:var(--pink); opacity:.65; padding:0 36px;
+    }
+    @keyframes tick {
+      from { transform:translateX(0); }
+      to   { transform:translateX(-50%); }
+    }
+
+    /* ═══ SECTIONS ════════════════════════════════════════════ */
+    section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 88px 44px;
+    }
+    .section-label {
+      font-size:10px; letter-spacing:.38em; text-transform:uppercase;
+      color:var(--pink); font-weight:700;
+      margin-bottom:30px;
+      display:flex; align-items:center; gap:14px;
+    }
+    .section-label::after {
+      content:''; display:block;
+      width:36px; height:1px;
+      background:var(--pink); opacity:.45;
+    }
+    .divider {
+      width:100%; height:1px;
+      background:linear-gradient(to right, transparent, rgba(232,228,221,.1), transparent);
+    }
+
+    /* BIO */
+    #bio .bio-text {
+      font-weight:400;
+      font-size: clamp(16px, 1.9vw, 22px);
+      line-height: 1.8;
+      max-width: 660px;
+      opacity: .88;
+    }
+    #bio .bio-text em { font-style:italic; color:var(--pink); font-weight:500; }
+
+    /* MUSIC */
+    #musik { padding-top:0; }
+    .music-links { display:flex; flex-wrap:wrap; gap:14px; margin-top:6px; }
+    .music-link {
+      display:inline-flex; align-items:center; gap:10px;
+      border: 1px solid rgba(232,228,221,.2);
+      padding: 13px 26px;
+      font-family:var(--fc); font-weight:700;
+      font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .music-link:hover { border-color:var(--pink); color:var(--pink); }
+    .music-link.featured {
+      background:var(--pink); border-color:var(--pink); color:var(--black);
+    }
+    .music-link.featured:hover { background:#ff62c4; border-color:#ff62c4; color:var(--black); }
+    .music-link svg { width:15px; height:15px; fill:currentColor; flex-shrink:0; }
+
+    /* KONTAKT */
+    #kontakt { padding-bottom:110px; }
+    .kontakt-grid { display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+    .k-block h3 {
+      font-family:var(--fc); font-weight:700;
+      font-size:10px; letter-spacing:.32em; text-transform:uppercase;
+      color:var(--pink); margin-bottom:10px;
+    }
+    .k-block a { font-size:16px; opacity:.75; display:block; line-height:1.9; }
+    .k-block a:hover { opacity:1; color:var(--pink); }
+
+    /* FOOTER */
+    footer {
+      border-top:1px solid rgba(232,228,221,.07);
+      padding:26px 44px;
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:10px;
+      font-size:11px; letter-spacing:.14em; opacity:.38;
+    }
+    footer a:hover { opacity:1; color:var(--pink); }
+
+    /* REVEAL */
+    .reveal {
+      opacity:0; transform:translateY(22px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* MOBILE */
+    @media (max-width:680px) {
+      body { cursor:auto; }
+      #cur { display:none; }
+      .hero-nav { padding:18px 22px; }
+      .hero-bottom { padding:0 22px 26px; flex-direction:column; align-items:flex-start; }
+      .nl-block { align-items:flex-start; }
+      section { padding:60px 22px; }
+      .kontakt-grid { grid-template-columns:1fr; }
+      footer { padding:22px; flex-direction:column; align-items:flex-start; gap:6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+
+<!-- ══════════════════════════
+     HERO
+══════════════════════════════ -->
+<div id="hero">
+  <div class="tilt-wrap" id="tiltWrap">
+    <!-- Benenne dein Foto zu "foto.jpg" um und leg es neben diese Datei -->
+    <img class="hero-img" src="foto.jpg" alt="stein walter frank meier" id="heroImg" />
+    <div class="hero-grad"></div>
+    <div class="hero-grain"></div>
+  </div>
+
+  <nav class="hero-nav">
+    <div class="band-name">stein walter frank meier</div>
+    <div class="socials">
+      <!-- ↓ URLs hier eintragen ↓ -->
+      <a href="https://www.instagram.com/DEIN_PROFIL" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@DEIN_KANAL" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://DEINNAME.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+    </div>
+  </nav>
+
+  <div class="hero-bottom">
+    <p class="hero-tagline">Punk<br>aus Hannover</p>
+    <div class="nl-block">
+      <span class="nl-label">Newsletter</span>
+      <form class="nl-form" onsubmit="handleNL(event)">
+        <input type="email" placeholder="deine@email.de" id="nlInput" autocomplete="off" />
+        <button type="submit">Subscribe</button>
+      </form>
+      <span class="nl-success" id="nlMsg">✓ Danke — wir melden uns!</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24"><path d="M12 16l-6-6h12z"/></svg>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <!-- Doppelt für nahtlose Schleife -->
+    <div class="ticker-inner">
+      <span>stein walter frank meier</span><span>·</span>
+      <span>punk aus hannover</span><span>·</span>
+      <span>stein walter frank meier</span><span>·</span>
+      <span>punk aus hannover</span><span>·</span>
+      <span>stein walter frank meier</span><span>·</span>
+      <span>punk aus hannover</span><span>·</span>
+    </div>
+    <div class="ticker-inner" aria-hidden="true">
+      <span>stein walter frank meier</span><span>·</span>
+      <span>punk aus hannover</span><span>·</span>
+      <span>stein walter frank meier</span><span>·</span>
+      <span>punk aus hannover</span><span>·</span>
+      <span>stein walter frank meier</span><span>·</span>
+      <span>punk aus hannover</span><span>·</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     BIO
+══════════════════════════════ -->
+<section id="bio">
+  <div class="section-label reveal">Über uns</div>
+  <p class="bio-text reveal">
+    <!--
+      EUREN BIO-TEXT HIER EINTRAGEN.
+      <em>…</em> macht Text pink/kursiv.
+    -->
+    Vier Menschen. Eine Band. Kein Netz.<br>
+    <em>stein walter frank meier</em> kommen aus Hannover
+    und machen Musik, die wehtut — und gleichzeitig befreit.
+    Laut, direkt, ehrlich.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════
+     MUSIK
+══════════════════════════════ -->
+<section id="musik">
+  <div class="section-label reveal">Musik</div>
+  <div class="music-links">
+    <a class="music-link featured reveal"
+       href="https://DEINNAME.bandcamp.com"
+       target="_blank" rel="noopener">
+      <!-- Bandcamp Icon -->
+      <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+      Bandcamp
+    </a>
+    <a class="music-link reveal"
+       href="https://www.youtube.com/@DEIN_KANAL"
+       target="_blank" rel="noopener">
+      <!-- YouTube Icon -->
+      <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+      YouTube
+    </a>
+    <a class="music-link reveal"
+       href="https://www.instagram.com/DEIN_PROFIL"
+       target="_blank" rel="noopener">
+      <!-- Instagram Icon -->
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      Instagram
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════
+     KONTAKT
+══════════════════════════════ -->
+<section id="kontakt">
+  <div class="section-label reveal">Kontakt</div>
+  <div class="kontakt-grid">
+    <div class="k-block reveal">
+      <h3>Allgemein</h3>
+      <!-- ↓ Email eintragen ↓ -->
+      <a href="mailto:info@steinwalter.de">info@steinwalter.de</a>
+    </div>
+    <div class="k-block reveal">
+      <h3>Booking</h3>
+      <!-- ↓ Booking-Email eintragen ↓ -->
+      <a href="mailto:booking@steinwalter.de">booking@steinwalter.de</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 stein walter frank meier</span>
+  <div style="display:flex;gap:22px;">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+  </div>
+</footer>
+
+<!-- ══════════════════════════
+     JAVASCRIPT
+══════════════════════════════ -->
+<script>
+/* ── CURSOR ──────────────────────────────────────────────── */
+const cur = document.getElementById('cur');
+let mx = -100, my = -100;
+let cx = -100, cy = -100;
+
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+(function moveCur() {
+  cx += (mx - cx) * 0.18;
+  cy += (my - cy) * 0.18;
+  cur.style.left = cx + 'px';
+  cur.style.top  = cy + 'px';
+  requestAnimationFrame(moveCur);
+})();
+
+document.querySelectorAll('a, button, input').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('big'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+});
+
+/* ── 3D TILT ─────────────────────────────────────────────── */
+const hero     = document.getElementById('hero');
+const tiltWrap = document.getElementById('tiltWrap');
+const heroImg  = document.getElementById('heroImg');
+
+let tTargX = 0, tTargY = 0;
+let tCurrX = 0, tCurrY = 0;
+let pTargX = 0, pTargY = 0;
+let pCurrX = 0, pCurrY = 0;
+
+const TILT_AMOUNT = 9;
+const PAR_AMOUNT  = 16;
+const LERP_T      = 0.06;
+
+hero.addEventListener('mousemove', e => {
+  const r  = hero.getBoundingClientRect();
+  const nx = (e.clientX - r.left)  / r.width  - 0.5;
+  const ny = (e.clientY - r.top)   / r.height - 0.5;
+  tTargX = ny * -TILT_AMOUNT;
+  tTargY = nx *  TILT_AMOUNT;
+  pTargX = nx * -PAR_AMOUNT;
+  pTargY = ny * -PAR_AMOUNT;
+});
+
+hero.addEventListener('mouseleave', () => {
+  tTargX = tTargY = pTargX = pTargY = 0;
+});
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+(function animTilt() {
+  tCurrX = lerp(tCurrX, tTargX, LERP_T);
+  tCurrY = lerp(tCurrY, tTargY, LERP_T);
+  pCurrX = lerp(pCurrX, pTargX, LERP_T);
+  pCurrY = lerp(pCurrY, pTargY, LERP_T);
+
+  tiltWrap.style.transform = `rotateX(${tCurrX}deg) rotateY(${tCurrY}deg)`;
+  heroImg.style.transform  = `translate(${pCurrX}px, ${pCurrY}px) scale(1.04)`;
+
+  requestAnimationFrame(animTilt);
+})();
+
+/* ── SCROLL REVEAL ───────────────────────────────────────── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 90);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ── NEWSLETTER ──────────────────────────────────────────── */
+function handleNL(e) {
+  e.preventDefault();
+  const input = document.getElementById('nlInput');
+  const msg   = document.getElementById('nlMsg');
+  if (!input.value.includes('@')) return;
+  /*
+    Hier kann man z.B. einen Mailchimp- oder Brevo-API-Call
+    einbauen. Vorerst zeigt es nur die Bestätigungsmeldung.
+  */
+  input.value = '';
+  msg.classList.add('show');
+  setTimeout(() => msg.classList.remove('show'), 4000);
+}
+</script>
+</body>
+</html>
