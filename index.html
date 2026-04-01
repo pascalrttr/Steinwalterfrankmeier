@@ -10,82 +10,58 @@
     foto.jpg
     notwehr-bg.png
     logo.png
+    epk.pdf
     fonts/ (alle EuropaGroteskSH .otf Dateien)
   -->
   <style>
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLig.otf') format('opentype'); font-weight:100; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Lig.otf') format('opentype'); font-weight:200; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-LigIta.otf') format('opentype'); font-weight:200; font-style:italic; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Reg.otf') format('opentype'); font-weight:400; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Ita.otf') format('opentype'); font-weight:400; font-style:italic; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Med.otf') format('opentype'); font-weight:500; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-DemBol.otf') format('opentype'); font-weight:600; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Bol.otf') format('opentype'); font-weight:700; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Ita.otf') format('opentype'); font-weight:400; font-style:italic; }
-    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-LigIta.otf') format('opentype'); font-weight:200; font-style:italic; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-BolIta.otf') format('opentype'); font-weight:700; font-style:italic; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-LigCon.otf') format('opentype'); font-weight:200; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-MedCon.otf') format('opentype'); font-weight:500; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-BolCon.otf') format('opentype'); font-weight:700; }
 
-    :root {
-      --pink:  #fe40b9;
-      --black: #080808;
-      --off:   #e8e4dd;
-    }
+    :root { --pink:#fe40b9; --black:#080808; --off:#e8e4dd; }
 
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; }
     body {
-      background: var(--black);
-      color: var(--off);
-      font-family: 'EG', sans-serif;
-      font-weight: 200;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-      cursor: none;
+      background:var(--black); color:var(--off);
+      font-family:'EG',sans-serif; font-weight:200;
+      font-size:16px; line-height:1.6;
+      overflow-x:hidden; cursor:none;
     }
     a { color:inherit; text-decoration:none; }
     ::selection { background:var(--pink); color:var(--black); }
 
-    /* ══════════════════════════════════
-       CURSOR — simpel & zuverlässig
-    ══════════════════════════════════ */
+    /* ── CURSOR ── */
     #molotov {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 36px;
-      height: 36px;
-      pointer-events: none;
-      z-index: 999999;
-      transform-origin: center center;
-      /* startet ausserhalb des Bildschirms */
-      transform: translate(-200px, -200px) rotate(-40deg);
+      position:fixed; top:0; left:0;
+      width:36px; height:36px;
+      pointer-events:none; z-index:999999;
+      transform:translate(-200px,-200px) rotate(-40deg);
     }
-
     .click-ring {
-      position: fixed;
-      pointer-events: none;
-      z-index: 999998;
-      border-radius: 50%;
-      border: 2px solid var(--pink);
-      width: 0; height: 0;
-      transform: translate(-50%, -50%);
-      animation: ring-expand .5s ease-out forwards;
+      position:fixed; pointer-events:none; z-index:999998;
+      border-radius:50%; border:2px solid var(--pink);
+      width:0; height:0; transform:translate(-50%,-50%);
+      animation:ring-expand .5s ease-out forwards;
     }
     @keyframes ring-expand {
       0%   { width:8px;  height:8px;  opacity:1; }
       100% { width:60px; height:60px; opacity:0; }
     }
-
     .fire-burst {
-      position: fixed;
-      pointer-events: none;
-      z-index: 999998;
-      font-size: 36px;
-      line-height: 1;
-      transform: translate(-50%, -50%);
-      animation: fire-pop .6s ease-out forwards;
+      position:fixed; pointer-events:none; z-index:999998;
+      font-size:36px; line-height:1;
+      transform:translate(-50%,-50%);
+      animation:fire-pop .6s ease-out forwards;
     }
     @keyframes fire-pop {
       0%   { opacity:1; transform:translate(-50%,-50%) scale(.3); }
@@ -93,116 +69,78 @@
       100% { opacity:0; transform:translate(-50%,-50%) scale(1.8); }
     }
 
-    /* ══════════════════════════════════
-       TILT CARD
-    ══════════════════════════════════ */
+    /* ── TILT CARD ── */
     .tilt-card {
-      position: relative;
-      overflow: hidden;
-      perspective: 900px;
+      position:relative; overflow:hidden; perspective:900px;
     }
     .tilt-inner {
-      position: absolute;
-      inset: 0;
-      transform-style: preserve-3d;
+      position:absolute; inset:0; transform-style:preserve-3d;
     }
     .tilt-photo {
-      position: absolute;
-      inset: -8%;
-      width: 116%;
-      height: 116%;
-      object-fit: cover;
-      object-position: center 25%;
-      display: block;
+      position:absolute; inset:-8%;
+      width:116%; height:116%;
+      object-fit:cover; object-position:center 25%; display:block;
     }
-
-    /* Gloss sweep on hover */
     .gloss {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      overflow: hidden;
+      position:absolute; inset:0; z-index:2;
+      pointer-events:none; overflow:hidden;
     }
     .gloss::after {
-      content: '';
-      position: absolute;
-      top: -50%; left: -80%;
-      width: 55%; height: 200%;
-      background: linear-gradient(105deg,
+      content:'';
+      position:absolute; top:-50%; left:-80%;
+      width:55%; height:200%;
+      background:linear-gradient(105deg,
         transparent 30%,
         rgba(255,255,255,.06) 44%,
         rgba(255,255,255,.18) 50%,
         rgba(255,255,255,.06) 56%,
         transparent 70%
       );
-      transform: skewX(-15deg);
-      opacity: 0;
+      transform:skewX(-15deg); opacity:0;
     }
     .tilt-card:hover .gloss::after {
-      opacity: 1;
-      animation: gloss-go .8s cubic-bezier(.4,0,.2,1) forwards;
+      opacity:1; animation:gloss-go .8s cubic-bezier(.4,0,.2,1) forwards;
     }
-    @keyframes gloss-go {
-      from { left:-80%; }
-      to   { left:160%; }
-    }
+    @keyframes gloss-go { from{left:-80%} to{left:160%} }
 
-    /* ══════════════════════════════════
-       HERO
-    ══════════════════════════════════ */
-    #hero {
-      position: relative;
-      width: 100vw;
-      height: 100dvh;
-    }
-    #hero .tilt-card {
-      width: 100%;
-      height: 100%;
-    }
-    #hero .tilt-photo {
-      object-position: center 25%;
-    }
+    /* ── HERO ── */
+    #hero { position:relative; width:100vw; height:100dvh; }
+    #hero .tilt-card { width:100%; height:100%; }
     .hero-grad {
       position:absolute; inset:0; z-index:3;
       background:
         linear-gradient(to bottom, rgba(8,8,8,.5) 0%, rgba(8,8,8,0) 28%, rgba(8,8,8,0) 50%, rgba(8,8,8,.95) 100%),
-        linear-gradient(to right,  rgba(8,8,8,.25) 0%, rgba(8,8,8,0) 38%);
+        linear-gradient(to right, rgba(8,8,8,.25) 0%, rgba(8,8,8,0) 38%);
     }
     .hero-grain {
       position:absolute; inset:0; z-index:4; pointer-events:none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
-      background-size: 250px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+      background-size:250px;
     }
 
     /* Nav */
     .hero-nav {
-      position: absolute; top:0; left:0; right:0; z-index:10;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 28px 44px;
+      position:absolute; top:0; left:0; right:0; z-index:10;
+      display:grid; grid-template-columns:1fr auto 1fr;
+      align-items:center; padding:28px 44px;
     }
     .hero-nav .logo img {
-      height: clamp(40px, 5.5vw, 70px);
-      width: auto;
-      display: block;
+      height:clamp(40px,5.5vw,70px); width:auto; display:block;
     }
     .hero-nav .socials {
-      grid-column: 3;
-      display:flex; gap:24px; justify-content:flex-end;
+      grid-column:3; display:flex; gap:24px; justify-content:flex-end;
       font-weight:200; font-size:13px; text-transform:uppercase;
     }
-    .hero-nav .socials a { opacity:.65; transition:opacity .2s, color .2s; }
+    .hero-nav .socials a { opacity:.65; transition:opacity .2s,color .2s; }
     .hero-nav .socials a:hover { opacity:1; color:var(--pink); }
 
-    /* Newsletter */
+    /* Newsletter — 2cm tiefer als Mitte */
     .hero-center {
-      position: absolute; top:50%; left:50%;
-      transform: translate(-50%, calc(-50% + 75px));
-      z-index: 10;
-      display: flex; flex-direction:column; align-items:center; gap:12px;
-      text-align: center;
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%, calc(-50% + 75px));
+      z-index:10;
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      text-align:center;
     }
     .nl-label {
       font-weight:600; font-size:11px;
@@ -211,8 +149,7 @@
     .nl-form {
       display:flex;
       border:1px solid rgba(232,228,221,.28);
-      background:rgba(8,8,8,.6);
-      backdrop-filter:blur(14px);
+      background:rgba(8,8,8,.6); backdrop-filter:blur(14px);
     }
     .nl-form input {
       background:transparent; border:none; outline:none;
@@ -252,9 +189,7 @@
       50%      { transform:translateX(-50%) translateY(7px); }
     }
 
-    /* ══════════════════════════════════
-       TICKER
-    ══════════════════════════════════ */
+    /* ── TICKER ── */
     .ticker-wrap {
       overflow:hidden;
       border-top:1px solid rgba(254,64,185,.14);
@@ -270,9 +205,7 @@
     }
     @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* ══════════════════════════════════
-       SECTIONS
-    ══════════════════════════════════ */
+    /* ── SECTIONS ── */
     .wrap { max-width:960px; margin:0 auto; padding:88px 44px; }
     .sec-label {
       font-size:10px; letter-spacing:.32em; text-transform:uppercase;
@@ -282,14 +215,12 @@
     .sec-label::after { content:''; width:34px; height:1px; background:var(--pink); opacity:.45; }
     .divider {
       max-width:960px; margin:0 auto; height:1px;
-      background:linear-gradient(to right, transparent, rgba(232,228,221,.1), transparent);
+      background:linear-gradient(to right,transparent,rgba(232,228,221,.1),transparent);
     }
 
-    /* VIDEO */
+    /* ── VIDEO ── */
     #video { padding-bottom:0; }
-    .video-card {
-      position:relative; width:100%; aspect-ratio:16/9; display:block;
-    }
+    .video-card { position:relative; width:100%; aspect-ratio:16/9; display:block; }
     .video-card .tilt-photo { object-position:center center; }
     .video-veil {
       position:absolute; inset:0; z-index:3;
@@ -303,12 +234,10 @@
     }
     .play-btn {
       width:clamp(60px,8vw,100px); height:clamp(60px,8vw,100px);
-      border-radius:50%;
-      border:2px solid rgba(232,228,221,.85);
+      border-radius:50%; border:2px solid rgba(232,228,221,.85);
       display:flex; align-items:center; justify-content:center;
-      background:rgba(8,8,8,.45);
-      backdrop-filter:blur(6px);
-      transition:transform .25s, background .25s, border-color .25s;
+      background:rgba(8,8,8,.45); backdrop-filter:blur(6px);
+      transition:transform .25s,background .25s,border-color .25s;
     }
     .play-btn svg { width:36%; height:36%; fill:var(--off); margin-left:8%; transition:fill .25s; }
     .video-card:hover .play-btn { transform:scale(1.1); background:rgba(254,64,185,.25); border-color:var(--pink); }
@@ -316,20 +245,17 @@
     .play-label {
       font-weight:600; font-size:clamp(9px,1vw,11px);
       letter-spacing:.3em; text-transform:uppercase;
-      color:var(--off); opacity:.55; transition:opacity .25s, color .25s;
+      color:var(--off); opacity:.55; transition:opacity .25s,color .25s;
     }
     .video-card:hover .play-label { opacity:1; color:var(--pink); }
 
-    /* BIO */
-    .bio-text {
-      font-weight:200; font-size:clamp(15px,1.75vw,20px);
-      line-height:1.85; max-width:680px; opacity:.88;
-    }
+    /* ── BIO ── */
+    .bio-text { font-weight:200; font-size:clamp(15px,1.75vw,20px); line-height:1.85; max-width:680px; opacity:.88; }
     .bio-text p + p { margin-top:1.4em; }
     .bio-text strong { font-weight:600; }
     .bio-text em { font-style:italic; color:var(--pink); }
 
-    /* INSTAGRAM */
+    /* ── INSTAGRAM ── */
     #instagram { padding-bottom:0; }
     .ig-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
     .ig-box {
@@ -337,77 +263,54 @@
       display:flex; align-items:center; justify-content:center;
       font-size:11px; letter-spacing:.18em; text-transform:uppercase;
       opacity:.28; font-weight:200; text-align:center; line-height:1.9;
-      transition:opacity .2s, background .2s;
+      transition:opacity .2s,background .2s;
     }
     .ig-box:hover { opacity:.65; background:rgba(254,64,185,.06); }
 
-    /* MUSIK */
+    /* ── MUSIK ── */
     #musik { padding-top:0; }
     .music-links { display:flex; flex-wrap:wrap; gap:14px; }
     .music-link {
       display:inline-flex; align-items:center; gap:10px;
-      border:1px solid rgba(232,228,221,.18);
-      padding:13px 26px;
-      font-weight:600; font-size:12px;
-      letter-spacing:.18em; text-transform:uppercase;
-      transition:border-color .2s, color .2s, background .2s;
+      border:1px solid rgba(232,228,221,.18); padding:13px 26px;
+      font-weight:600; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+      transition:border-color .2s,color .2s,background .2s;
     }
     .music-link:hover { border-color:var(--pink); color:var(--pink); }
     .music-link.hot { background:var(--pink); border-color:var(--pink); color:var(--black); }
     .music-link.hot:hover { background:#ff62c4; border-color:#ff62c4; }
     .music-link svg { width:15px; height:15px; fill:currentColor; flex-shrink:0; }
 
-    /* KONTAKT */
+    /* EPK */
+    .epk-link {
+      display:inline-flex; align-items:center; gap:10px; margin-top:28px;
+      font-weight:200; font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--off); opacity:.45;
+      border-bottom:1px solid rgba(232,228,221,.2); padding-bottom:2px;
+      transition:opacity .2s,color .2s,border-color .2s;
+    }
+    .epk-link svg { width:16px; height:16px; flex-shrink:0; }
+    .epk-link:hover { opacity:1; color:var(--pink); border-color:var(--pink); }
+
+    /* ── KONTAKT ── */
     #kontakt { padding-bottom:110px; }
     .k-grid { display:grid; grid-template-columns:1fr 1fr; gap:44px; }
     .k-block h3 {
-      font-weight:600; font-size:10px;
-      letter-spacing:.28em; text-transform:uppercase;
+      font-weight:600; font-size:10px; letter-spacing:.28em; text-transform:uppercase;
       color:var(--pink); margin-bottom:10px;
     }
-    .k-block a {
-      font-weight:200; font-size:16px; opacity:.72;
-      display:block; line-height:1.9; transition:opacity .2s,color .2s;
-    }
+    .k-block a { font-weight:200; font-size:16px; opacity:.72; display:block; line-height:1.9; transition:opacity .2s,color .2s; }
     .k-block a:hover { opacity:1; color:var(--pink); }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
-      border-top:1px solid rgba(232,228,221,.07);
-      padding:26px 44px;
+      border-top:1px solid rgba(232,228,221,.07); padding:26px 44px;
       display:flex; align-items:center; justify-content:space-between;
-      flex-wrap:wrap; gap:10px;
-      font-size:11px; font-weight:200; opacity:.35;
+      flex-wrap:wrap; gap:10px; font-size:11px; font-weight:200; opacity:.35;
     }
     footer a:hover { opacity:1; color:var(--pink); }
 
-    /* EPK DOWNLOAD */
-    .epk-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 28px;
-      font-weight: 200;
-      font-size: 13px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--off);
-      opacity: .45;
-      border-bottom: 1px solid rgba(232,228,221,.2);
-      padding-bottom: 2px;
-      transition: opacity .2s, color .2s, border-color .2s;
-    }
-    .epk-link svg {
-      width: 16px; height: 16px;
-      flex-shrink: 0;
-    }
-    .epk-link:hover {
-      opacity: 1;
-      color: var(--pink);
-      border-color: var(--pink);
-    }
-
-    /* MOBILE */
+    /* ── MOBILE ── */
     @media (max-width:680px) {
       body { cursor:auto; }
       #molotov { display:none; }
@@ -425,26 +328,18 @@
 </head>
 <body>
 
-<!-- MOLOTOV CURSOR -->
+<!-- CURSOR -->
 <div id="molotov">
   <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Flamme -->
-    <ellipse cx="14" cy="4.5" rx="3" ry="4" fill="#ff9900"/>
+    <ellipse cx="14" cy="4.5" rx="3"   ry="4"   fill="#ff9900"/>
     <ellipse cx="14" cy="4"   rx="1.6" ry="2.5" fill="#ffe066"/>
-    <!-- Docht -->
-    <rect x="13.2" y="7.5" width="1.6" height="3.5" rx=".8" fill="#777"/>
-    <!-- Hals -->
-    <rect x="11" y="10.5" width="6" height="5" rx="2" fill="#b8d488"/>
-    <!-- Lappen -->
-    <rect x="9.5" y="10.5" width="2" height="3.5" rx=".8" fill="#cc4010" transform="rotate(-12 10 11)"/>
-    <!-- Bauch -->
-    <rect x="8.5" y="14.5" width="12" height="16" rx="5" fill="#a8cc78"/>
-    <!-- Fluid -->
-    <rect x="10.5" y="18.5" width="8" height="10" rx="3" fill="#78aa44" opacity=".75"/>
-    <!-- Highlight -->
-    <rect x="10.5" y="15.5" width="3" height="6" rx="1.5" fill="rgba(255,255,255,.30)"/>
-    <!-- Boden -->
-    <rect x="9.5" y="29.5" width="11" height="2.5" rx="1.2" fill="#90c060"/>
+    <rect x="13.2" y="7.5"  width="1.6" height="3.5" rx=".8"  fill="#777"/>
+    <rect x="11"   y="10.5" width="6"   height="5"   rx="2"   fill="#b8d488"/>
+    <rect x="9.5"  y="10.5" width="2"   height="3.5" rx=".8"  fill="#cc4010" transform="rotate(-12 10 11)"/>
+    <rect x="8.5"  y="14.5" width="12"  height="16"  rx="5"   fill="#a8cc78"/>
+    <rect x="10.5" y="18.5" width="8"   height="10"  rx="3"   fill="#78aa44" opacity=".75"/>
+    <rect x="10.5" y="15.5" width="3"   height="6"   rx="1.5" fill="rgba(255,255,255,.30)"/>
+    <rect x="9.5"  y="29.5" width="11"  height="2.5" rx="1.2" fill="#90c060"/>
   </svg>
 </div>
 
@@ -461,9 +356,7 @@
 
   <nav class="hero-nav">
     <div></div>
-    <div class="logo">
-      <img src="logo.png" alt="Stein Walter Frank Meier" />
-    </div>
+    <div class="logo"><img src="logo.png" alt="Stein Walter Frank Meier" /></div>
     <div class="socials">
       <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.youtube.com/watch?v=s6VEn4XC09k" target="_blank" rel="noopener">YouTube</a>
@@ -477,7 +370,7 @@
       <input type="email" placeholder="deine@email.de" id="nlEmail" autocomplete="off" />
       <button type="submit">Subscribe</button>
     </form>
-    <span class="nl-ok" id="nlOk">✓ Angemeldet — danke!</span>
+    <span class="nl-ok" id="nlOk">Angemeldet — danke!</span>
   </div>
 
   <p class="hero-tagline">Punk<br>aus Hannover</p>
@@ -513,11 +406,11 @@
 <!-- VIDEO -->
 <div class="wrap" id="video">
   <div class="sec-label">Live Video</div>
-  <a href="https://www.youtube.com/watch?v=s6VEn4XC09k"
-     target="_blank" rel="noopener"
+  <a href="https://www.youtube.com/watch?v=s6VEn4XC09k" target="_blank" rel="noopener"
      class="video-card tilt-card" id="videoCard">
     <div class="tilt-inner" id="videoInner">
-      <img class="tilt-photo" id="videoPhoto" src="notwehr-bg.png" alt="Notwehr" style="object-position:center center;" />
+      <img class="tilt-photo" id="videoPhoto" src="notwehr-bg.png" alt="Notwehr"
+           style="object-position:center center;" />
     </div>
     <div class="gloss"></div>
     <div class="video-veil"></div>
@@ -555,13 +448,13 @@
 <div class="wrap" id="instagram">
   <div class="sec-label">Instagram</div>
   <!--
-    INSTAGRAM FEED EINRICHTEN (kostenlos):
-    1. https://behold.so → Account erstellen
+    FEED EINRICHTEN (kostenlos):
+    1. https://behold.so registrieren
     2. @steinwalterfrankmeiermusik verbinden
-    3. Feed-ID kopieren, dann diese zwei Zeilen aktivieren:
+    3. Feed-ID kopieren, dann aktivieren:
        <script src="https://w.behold.so/widget.js" type="module"><\/script>
        <behold-widget feed-id="DEINE_ID"></behold-widget>
-    4. Den ig-grid Block unten löschen
+    4. ig-grid Block unten löschen
   -->
   <div class="ig-grid">
     <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-box">Instagram<br>öffnen →</a>
@@ -589,12 +482,7 @@
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>Instagram
     </a>
   </div>
-
-  <!-- EPK DOWNLOAD -->
-  <!--
-    Lege eure EPK-Datei als "epk.pdf" neben die index.html.
-    Der Button funktioniert dann automatisch.
-  -->
+  <!-- EPK Download — lege epk.pdf neben die index.html -->
   <a class="epk-link" href="epk.pdf" download="Stein-Walter-Frank-Meier-EPK.pdf">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -613,7 +501,7 @@
   <div class="k-grid">
     <div class="k-block">
       <h3>Allgemein &amp; Booking</h3>
-      <a href="/cdn-cgi/l/email-protection#1a696e7f73746d7b766e7f685a777b73767875623475687d"><span class="__cf_email__" data-cfemail="770403121e1900161b031205371a161e1b15180f59180510">[email&#160;protected]</span></a>
+      <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a>
     </div>
     <div class="k-block">
       <h3>Instagram</h3>
@@ -630,90 +518,68 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ════════════════════════════════════════════
-   CURSOR — komplett neu, so simpel wie möglich
-════════════════════════════════════════════ */
-var mol   = document.getElementById('molotov');
-var mouseX = 0, mouseY = 0;
-var curX   = 0, curY   = 0;
-var isThrown = false;
+<script>
+/* ── CURSOR ── */
+var mol = document.getElementById('molotov');
+var mouseX = 0, mouseY = 0, curX = 0, curY = 0, isThrown = false;
 
-// Verfolgt Maus
 window.addEventListener('mousemove', function(e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
 });
 
-// Animations-Loop
-function animCursor() {
+(function loop() {
   if (!isThrown) {
     curX += (mouseX - curX) * 0.16;
     curY += (mouseY - curY) * 0.16;
-    // Flaschenboden = Mausspitze: -12px links, -32px oben
-    mol.style.transform = 'translate(' + (curX - 12) + 'px, ' + (curY - 32) + 'px) rotate(-40deg)';
+    mol.style.transform = 'translate(' + (curX - 12) + 'px,' + (curY - 32) + 'px) rotate(-40deg)';
   }
-  requestAnimationFrame(animCursor);
-}
-animCursor();
+  requestAnimationFrame(loop);
+})();
 
-// Klick = Wurf + Ring + Feuer
 window.addEventListener('click', function(e) {
   if (isThrown) return;
   isThrown = true;
 
-  // Pink Ring
   var ring = document.createElement('div');
   ring.className = 'click-ring';
   ring.style.left = e.clientX + 'px';
   ring.style.top  = e.clientY + 'px';
   document.body.appendChild(ring);
-  setTimeout(function() { ring.parentNode && ring.parentNode.removeChild(ring); }, 550);
+  setTimeout(function() { if (ring.parentNode) ring.parentNode.removeChild(ring); }, 600);
 
-  // Wurf-Animation via CSS keyframes auf dem Element
-  var startX = curX - 12;
-  var startY = curY - 32;
-  mol.style.transition = 'none';
-  mol.style.transform  = 'translate(' + startX + 'px,' + startY + 'px) rotate(-40deg)';
-
-  // Keyframes per JS — simpelste Methode
+  var startX = curX - 12, startY = curY - 32;
   var frames = [
-    { x: startX,        y: startY,        r: -40,  s: 1,    o: 1   },
-    { x: startX + 80,   y: startY - 120,  r: -100, s: 1.15, o: 1   },
-    { x: startX + 160,  y: startY - 60,   r: -170, s: 0.9,  o: 0.7 },
-    { x: startX + 220,  y: startY + 40,   r: -230, s: 0.5,  o: 0   }
+    {x:startX,       y:startY,       r:-40,  s:1,    o:1  },
+    {x:startX+80,    y:startY-120,   r:-100, s:1.15, o:1  },
+    {x:startX+160,   y:startY-60,    r:-170, s:0.9,  o:0.7},
+    {x:startX+220,   y:startY+40,    r:-230, s:0.5,  o:0  }
   ];
-  var duration = 560;
-  var start = null;
+  var duration = 560, start = null;
 
   function animThrow(ts) {
     if (!start) start = ts;
     var p = Math.min((ts - start) / duration, 1);
     var i = Math.min(Math.floor(p * (frames.length - 1)), frames.length - 2);
     var lp = (p * (frames.length - 1)) - i;
-    var a = frames[i], b = frames[i + 1];
-    var x = a.x + (b.x - a.x) * lp;
-    var y = a.y + (b.y - a.y) * lp;
-    var r = a.r + (b.r - a.r) * lp;
-    var s = a.s + (b.s - a.s) * lp;
-    var o = a.o + (b.o - a.o) * lp;
-    mol.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + r + 'deg) scale(' + s + ')';
-    mol.style.opacity   = o;
+    var a = frames[i], b = frames[i+1];
+    mol.style.transform =
+      'translate(' + (a.x + (b.x-a.x)*lp) + 'px,' +
+                     (a.y + (b.y-a.y)*lp) + 'px)' +
+      ' rotate(' + (a.r + (b.r-a.r)*lp) + 'deg)' +
+      ' scale('  + (a.s + (b.s-a.s)*lp) + ')';
+    mol.style.opacity = a.o + (b.o-a.o)*lp;
     if (p < 1) {
       requestAnimationFrame(animThrow);
     } else {
-      // Feuer
       var fire = document.createElement('div');
       fire.className = 'fire-burst';
       fire.textContent = '🔥';
       fire.style.left = (e.clientX + 100) + 'px';
       fire.style.top  = (e.clientY - 10)  + 'px';
       document.body.appendChild(fire);
-      setTimeout(function() { fire.parentNode && fire.parentNode.removeChild(fire); }, 700);
-
-      // Reset
-      mol.style.opacity   = '1';
-      mol.style.transform = 'translate(' + (mouseX - 12) + 'px,' + (mouseY - 32) + 'px) rotate(-40deg)';
+      setTimeout(function() { if (fire.parentNode) fire.parentNode.removeChild(fire); }, 700);
+      mol.style.opacity = '1';
       curX = mouseX; curY = mouseY;
       isThrown = false;
     }
@@ -721,56 +587,49 @@ window.addEventListener('click', function(e) {
   requestAnimationFrame(animThrow);
 });
 
-/* ════════════════════════════════════════════
-   TILT
-════════════════════════════════════════════ */
+/* ── TILT ── */
 function makeTilt(cardId, innerId, photoId, tiltAmt, parAmt) {
   var card  = document.getElementById(cardId);
   var inner = document.getElementById(innerId);
   var photo = document.getElementById(photoId);
   if (!card || !inner || !photo) return;
-
-  var tx=0, ty=0, px=0, py=0;
-  var cx=0, cy=0, cpx=0, cpy=0;
-
+  var tx=0,ty=0,px=0,py=0,cx=0,cy=0,cpx=0,cpy=0;
   card.addEventListener('mousemove', function(e) {
     var r  = card.getBoundingClientRect();
     var nx = (e.clientX - r.left) / r.width  - 0.5;
     var ny = (e.clientY - r.top)  / r.height - 0.5;
-    tx  = ny * -tiltAmt;
-    ty  = nx *  tiltAmt;
-    px  = nx * -parAmt;
-    py  = ny * -parAmt;
+    tx = ny*-tiltAmt; ty = nx*tiltAmt;
+    px = nx*-parAmt;  py = ny*-parAmt;
   });
-  card.addEventListener('mouseleave', function() {
-    tx = ty = px = py = 0;
-  });
-
-  function loop() {
+  card.addEventListener('mouseleave', function() { tx=ty=px=py=0; });
+  (function loop() {
     cx  += (tx  - cx)  * 0.07;
     cy  += (ty  - cy)  * 0.07;
     cpx += (px  - cpx) * 0.07;
     cpy += (py  - cpy) * 0.07;
-    inner.style.transform = 'rotateX(' + cx + 'deg) rotateY(' + cy + 'deg)';
-    photo.style.transform = 'translate(' + cpx + 'px,' + cpy + 'px) scale(1.04)';
+    inner.style.transform = 'rotateX('+cx+'deg) rotateY('+cy+'deg)';
+    photo.style.transform = 'translate('+cpx+'px,'+cpy+'px) scale(1.04)';
     requestAnimationFrame(loop);
-  }
-  loop();
+  })();
 }
-
 makeTilt('heroCard',  'heroInner',  'heroPhoto',  9, 18);
 makeTilt('videoCard', 'videoInner', 'videoPhoto', 6, 12);
 
-/* ════════════════════════════════════════════
-   NEWSLETTER — Formspree
-   Form-ID: mpqolygp
-════════════════════════════════════════════ */
+/* ── NEWSLETTER ── */
 document.getElementById('nlForm').addEventListener('submit', function(e) {
   e.preventDefault();
   var email = document.getElementById('nlEmail').value.trim();
   var ok    = document.getElementById('nlOk');
   if (!email.includes('@')) return;
-
   fetch('https://formspree.io/f/mpqolygp', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email})
+  }).catch(function(){});
+  document.getElementById('nlEmail').value = '';
+  ok.classList.add('show');
+  setTimeout(function() { ok.classList.remove('show'); }, 4000);
+});
+</script>
+</body>
+</html>
