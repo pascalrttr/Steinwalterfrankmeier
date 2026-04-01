@@ -603,7 +603,7 @@
   <div class="kontakt-grid">
     <div class="k-block reveal">
       <h3>Allgemein &amp; Booking</h3>
-      <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a>
+      <a href="/cdn-cgi/l/email-protection#275453424e4950464b534255674a464e4b45485f09485540"><span class="__cf_email__" data-cfemail="ccbfb8a9a5a2bbada0b8a9be8ca1ada5a0aea3b4e2a3beab">[email&#160;protected]</span></a>
     </div>
     <div class="k-block reveal">
       <h3>Instagram</h3>
@@ -620,7 +620,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ════════════════════════════════════════
    CURSOR
 ════════════════════════════════════════ */
@@ -742,7 +742,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
    Dann: Einträge im Dashboard sehen +
    E-Mail-Benachrichtigung bei jeder Anmeldung!
 ════════════════════════════════════════ */
-const FORMSPREE_ID = ''; // ← Formspree Form-ID hier eintragen
+const FORMSPREE_ID = 'mpqolygp'; // ← Formspree Form-ID hier eintragen
 
 document.getElementById('nlForm').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -755,16 +755,4 @@ document.getElementById('nlForm').addEventListener('submit', async function(e) {
     try {
       await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email: email })
-      });
-    } catch(err) { /* silent fail */ }
-  }
-
-  input.value = '';
-  msg.classList.add('show');
-  setTimeout(() => msg.classList.remove('show'), 4000);
-});
-</script>
-</body>
-</html>
+        headers: { 'Content-Type': 'application/json', 'Accept': 'applic
