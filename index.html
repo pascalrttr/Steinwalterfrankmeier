@@ -9,31 +9,22 @@
   ═══════════════════════════════════════════════════════════════
    ORDNERSTRUKTUR neben dieser index.html:
      index.html
-     foto.jpg                        ← euer Bandfoto
-     notwehr-bg.png                  ← Notwehr_Video_Background_-_SWFM__V1_.png umbenennen
-     notwehr-play.png                ← Notwehr_Video_Button_-_SWFM__V1_.png umbenennen
+     foto.jpg                   ← euer Bandfoto (umbenennen!)
+     notwehr-bg.png             ← Notwehr_Video_Background...png
+     notwehr-play.png           ← Notwehr_Video_Button...png
      fonts/
-       EuropaGroteskSH-Reg.otf
-       EuropaGroteskSH-Lig.otf
-       EuropaGroteskSH-LigIta.otf
-       EuropaGroteskSH-XLig.otf
-       EuropaGroteskSH-XLigIta.otf
-       EuropaGroteskSH-Med.otf
-       EuropaGroteskSH-DemBol.otf
-       EuropaGroteskSH-DemBolIta.otf
-       EuropaGroteskSH-Bol.otf
-       EuropaGroteskSH-BolIta.otf
-       EuropaGroteskSH-Ita.otf
-       EuropaGroteskSH-MedIta.otf
-       EuropaGroteskSH-LigCon.otf
-       EuropaGroteskSH-LigConIta.otf
-       EuropaGroteskSH-ConIta.otf
-       EuropaGroteskSH-MedCon.otf
-       EuropaGroteskSH-BolCon.otf
-       EuropaGroteskSH-Ex.otf
-       EuropaGroteskSH-LigEx.otf
-       EuropaGroteskSH-MedEx.otf
-       EuropaGroteskSH-BolEx.otf
+       (alle EuropaGroteskSH .otf Dateien)
+
+   NEWSLETTER:
+   Erstellt einen kostenlosen Account auf https://mailchimp.com
+   (oder https://brevo.com), dann tragt die Action-URL eures
+   Formulars in die Variable MAILCHIMP_URL unten im <script> ein.
+   Solange leer → zeigt nur die Bestätigungsmeldung.
+
+   INSTAGRAM FEED:
+   Erstellt einen kostenlosen Account auf https://behold.so
+   (verbindet euren Instagram-Account dort), dann tragt
+   euren Behold Feed-ID in BEHOLD_FEED_ID unten ein.
   ═══════════════════════════════════════════════════════════════
   -->
 
@@ -52,14 +43,8 @@
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Bol.otf') format('opentype'); font-weight:700; font-style:normal; }
     @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-BolIta.otf') format('opentype'); font-weight:700; font-style:italic; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-LigCon.otf') format('opentype'); font-weight:200; }
-    @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-LigConIta.otf') format('opentype'); font-weight:200; font-style:italic; }
-    @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-ConIta.otf') format('opentype'); font-weight:400; font-style:italic; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-MedCon.otf') format('opentype'); font-weight:500; }
     @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-BolCon.otf') format('opentype'); font-weight:700; }
-    @font-face { font-family:'EG-Ex'; src:url('fonts/EuropaGroteskSH-Ex.otf') format('opentype'); font-weight:400; }
-    @font-face { font-family:'EG-Ex'; src:url('fonts/EuropaGroteskSH-LigEx.otf') format('opentype'); font-weight:200; }
-    @font-face { font-family:'EG-Ex'; src:url('fonts/EuropaGroteskSH-MedEx.otf') format('opentype'); font-weight:500; }
-    @font-face { font-family:'EG-Ex'; src:url('fonts/EuropaGroteskSH-BolEx.otf') format('opentype'); font-weight:700; }
 
     /* ── TOKENS ──────────────────────────────────────────────── */
     :root {
@@ -68,7 +53,6 @@
       --off:   #e8e4dd;
       --f:     'EG', sans-serif;
       --fc:    'EG-Con', sans-serif;
-      --fe:    'EG-Ex', sans-serif;
     }
 
     /* ── RESET ───────────────────────────────────────────────── */
@@ -78,8 +62,8 @@
       background: var(--black);
       color: var(--off);
       font-family: var(--f);
-      font-weight: 200;          /* Light als Standard */
-      letter-spacing: 0;         /* VA = 0 */
+      font-weight: 200;
+      letter-spacing: 0;
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
@@ -89,90 +73,137 @@
     ::selection { background: var(--pink); color: var(--black); }
 
     /* ════════════════════════════════════════════════════════
-       MOLOTOV CURSOR
+       MOLOTOV CURSOR — echter SVG, kein Emoji
     ════════════════════════════════════════════════════════ */
     #cur {
       position: fixed;
       pointer-events: none;
       z-index: 9999;
       will-change: left, top;
-      /* offset so bottle-bottom is at pointer tip */
-      transform: translate(-8px, -40px);
+      width: 32px;
+      height: 32px;
+      /* Flaschenboden = Mauszeiger-Spitze */
+      transform: translate(-10px, -30px) rotate(-35deg);
       transition: transform .15s ease;
-      font-size: 28px;
-      line-height: 1;
-      user-select: none;
     }
     #cur.thrown {
-      animation: throw .55s ease-out forwards;
+      animation: throw-anim .55s ease-out forwards;
     }
-    @keyframes throw {
-      0%   { transform: translate(-8px,-40px) rotate(0deg) scale(1); opacity:1; }
-      40%  { transform: translate(60px,-120px) rotate(-45deg) scale(1.2); opacity:1; }
-      60%  { transform: translate(120px,-80px) rotate(-70deg) scale(1.1); opacity:.8; }
-      80%  { transform: translate(160px,20px) rotate(-90deg) scale(.9); opacity:.5; }
-      100% { transform: translate(180px,60px) rotate(-110deg) scale(.5); opacity:0; }
+    @keyframes throw-anim {
+      0%   { transform: translate(-10px,-30px) rotate(-35deg) scale(1);   opacity:1; }
+      35%  { transform: translate(55px,-130px) rotate(-90deg) scale(1.15); opacity:1; }
+      65%  { transform: translate(130px,-60px) rotate(-150deg) scale(1.0); opacity:.8; }
+      85%  { transform: translate(175px,30px)  rotate(-200deg) scale(.8);  opacity:.5; }
+      100% { transform: translate(200px,70px)  rotate(-240deg) scale(.4);  opacity:0; }
     }
 
-    /* fire burst on throw-land */
+    /* Click-Indikator-Ring */
+    .click-ring {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      width: 0; height: 0;
+      border-radius: 50%;
+      border: 2px solid var(--pink);
+      transform: translate(-50%,-50%) scale(0);
+      animation: ring-pop .5s ease-out forwards;
+    }
+    @keyframes ring-pop {
+      0%   { width:10px; height:10px; opacity:1; transform:translate(-50%,-50%) scale(1); }
+      100% { width:60px; height:60px; opacity:0; transform:translate(-50%,-50%) scale(1); }
+    }
+
+    /* Feuer-Burst */
     .burst {
       position: fixed;
       pointer-events: none;
       z-index: 9998;
-      font-size: 44px;
+      font-size: 40px;
       transform: translate(-50%,-50%);
-      animation: burst .6s ease-out forwards;
+      animation: burst-anim .65s ease-out forwards;
+      line-height: 1;
     }
-    @keyframes burst {
-      0%   { opacity:1; transform: translate(-50%,-50%) scale(.5); }
-      50%  { opacity:1; transform: translate(-50%,-50%) scale(1.6); }
-      100% { opacity:0; transform: translate(-50%,-50%) scale(2.2); }
+    @keyframes burst-anim {
+      0%   { opacity:1; transform:translate(-50%,-50%) scale(.4); }
+      45%  { opacity:1; transform:translate(-50%,-50%) scale(1.5); }
+      100% { opacity:0; transform:translate(-50%,-50%) scale(2);   }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       TILT-CARD — shared styles
+    ════════════════════════════════════════════════════════ */
+    .tilt-container {
+      position: relative;
+      overflow: hidden;     /* ← verhindert sichtbare Ränder */
+      perspective: 900px;
+    }
+    .tilt-inner {
+      position: absolute; inset: 0;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .tilt-img {
+      position: absolute;
+      /* Extra Zoom damit beim Kippen keine Ränder auftauchen */
+      inset: -8%;
+      width: 116%; height: 116%;
+      object-fit: cover;
+      object-position: center 25%;
+      display: block;
+      will-change: transform;
+    }
+
+    /* ── GLOSS — flüssiger Sweep-Effekt ──────────────────────── */
+    /*
+       Funktioniert als animiertes Pseudo-Element das beim
+       Hover von links nach rechts schwebt — genau wie dasguenther.de
+    */
+    .gloss-layer {
+      position: absolute; inset: 0; z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .gloss-layer::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -80%;
+      width: 60%; height: 200%;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255,255,255,0.08) 45%,
+        rgba(255,255,255,0.22) 50%,
+        rgba(255,255,255,0.08) 55%,
+        transparent 70%
+      );
+      transform: skewX(-15deg);
+      /* Ausgangszustand: links außerhalb */
+      transition: none;
+      opacity: 0;
+    }
+    .tilt-container:hover .gloss-layer::after {
+      opacity: 1;
+      /* Sweep von links nach rechts */
+      animation: gloss-sweep .75s cubic-bezier(.4,0,.2,1) forwards;
+    }
+    @keyframes gloss-sweep {
+      from { left: -80%; }
+      to   { left: 160%; }
     }
 
     /* ════════════════════════════════════════════════════════
        HERO
     ════════════════════════════════════════════════════════ */
     #hero {
-      position: relative;
       width: 100vw;
       height: 100dvh;
-      overflow: hidden;
-      perspective: 900px;
     }
-
-    .tilt-wrap {
-      position: absolute; inset: 0;
-      transform-style: preserve-3d;
-      will-change: transform;
+    .hero-wrap {
+      width: 100%; height: 100%;
     }
-
-    .hero-img {
-      position: absolute;
-      inset: -5%;
-      width: 110%; height: 110%;
-      object-fit: cover;
+    /* Override tilt-img position for hero */
+    #hero .tilt-img {
       object-position: center 25%;
-      display: block;
-      filter: contrast(1.06) saturate(1.08);
-      will-change: transform;
-    }
-
-    /* ── GLOSS EFFECT ────────────────────────────────────────── */
-    .hero-gloss {
-      position: absolute; inset: 0; z-index: 2;
-      pointer-events: none;
-      background: linear-gradient(
-        115deg,
-        rgba(255,255,255,0)     0%,
-        rgba(255,255,255,0)    38%,
-        rgba(255,255,255,0.13) 45%,
-        rgba(255,255,255,0.22) 50%,
-        rgba(255,255,255,0.13) 55%,
-        rgba(255,255,255,0)    62%,
-        rgba(255,255,255,0)   100%
-      );
-      /* The gloss band moves with mouse via JS */
-      transition: background-position .12s linear;
     }
 
     /* Gradient overlay */
@@ -180,15 +211,14 @@
       position: absolute; inset: 0; z-index: 3;
       background:
         linear-gradient(to bottom,
-          rgba(8,8,8,.5)  0%,
-          rgba(8,8,8,0)  28%,
-          rgba(8,8,8,0)  50%,
-          rgba(8,8,8,.95) 100%),
+          rgba(8,8,8,.52) 0%,
+          rgba(8,8,8,0)   28%,
+          rgba(8,8,8,0)   50%,
+          rgba(8,8,8,.96) 100%),
         linear-gradient(to right,
           rgba(8,8,8,.25) 0%,
-          rgba(8,8,8,0)  35%);
+          rgba(8,8,8,0)   38%);
     }
-
     /* Film grain */
     .hero-grain {
       position: absolute; inset: 0; z-index: 4;
@@ -206,82 +236,66 @@
     .hero-nav .band-name {
       font-family: var(--fc);
       font-weight: 600;
-      font-size: clamp(15px, 2vw, 24px);
+      font-size: clamp(14px, 1.8vw, 22px);
       letter-spacing: 0;
       text-transform: uppercase;
     }
     .hero-nav .socials {
       display:flex; gap:28px;
-      font-weight: 200;
-      font-size: 13px;
-      letter-spacing: 0;
-      text-transform: uppercase;
+      font-weight: 200; font-size: 13px;
+      letter-spacing: 0; text-transform: uppercase;
     }
     .hero-nav .socials a { opacity:.7; transition:opacity .2s, color .2s; }
     .hero-nav .socials a:hover { opacity:1; color:var(--pink); }
 
-    /* ── NEWSLETTER – zentriert in der Hero ──────────────────── */
+    /* Newsletter – mittig im Hero */
     .hero-center {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px;
       text-align: center;
     }
     .nl-label {
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      opacity: .55;
+      font-weight: 600; font-size: 11px;
+      letter-spacing: .25em; text-transform: uppercase; opacity: .5;
     }
     .nl-form {
       display:flex;
       border: 1px solid rgba(232,228,221,.28);
-      background: rgba(8,8,8,.55);
-      backdrop-filter: blur(12px);
+      background: rgba(8,8,8,.6);
+      backdrop-filter: blur(14px);
     }
     .nl-form input {
       background:transparent; border:none; outline:none;
       font-family:var(--f); font-size:13px; font-weight:200;
-      letter-spacing:0;
-      color:var(--off); padding:12px 18px; width:220px;
+      letter-spacing:0; color:var(--off); padding:12px 18px; width:220px;
     }
     .nl-form input::placeholder { opacity:.38; }
     .nl-form button {
-      background: var(--pink); border:none;
-      color:var(--black);
+      background: var(--pink); border:none; color:var(--black);
       font-family:var(--f); font-weight:600;
       font-size:11px; letter-spacing:.18em; text-transform:uppercase;
-      padding:12px 22px; cursor:none;
-      transition:background .2s;
+      padding:12px 22px; cursor:none; transition:background .2s;
     }
     .nl-form button:hover { background:#ff62c4; }
     .nl-success {
       font-size:11px; letter-spacing:.15em; text-transform:uppercase;
-      color:var(--pink); font-weight:600;
-      opacity:0; transition:opacity .4s; height:16px;
+      color:var(--pink); font-weight:600; opacity:0; transition:opacity .4s; height:16px;
     }
     .nl-success.show { opacity:1; }
 
-    /* Hero tagline bottom-left */
+    /* Tagline unten links */
     .hero-tagline {
-      position: absolute;
-      bottom: 42px; left: 44px;
-      z-index: 10;
-      font-weight: 200;
-      font-size: 12px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      opacity: .5;
-      line-height: 2;
+      position: absolute; bottom:42px; left:44px; z-index:10;
+      font-weight: 200; font-size: 12px;
+      letter-spacing: .22em; text-transform: uppercase;
+      opacity: .5; line-height: 2;
     }
 
-    /* Scroll arrow */
+    /* Scroll hint */
     .scroll-hint {
       position:absolute; bottom:44px; left:50%;
       transform:translateX(-50%); z-index:10;
@@ -305,10 +319,7 @@
       background: rgba(254,64,185,.03);
       padding: 9px 0;
     }
-    .ticker {
-      display:flex; white-space:nowrap;
-      animation: tick 22s linear infinite;
-    }
+    .ticker { display:flex; white-space:nowrap; animation: tick 22s linear infinite; }
     .ticker-inner { display:flex; }
     .ticker span {
       font-family:var(--f); font-weight:600;
@@ -321,125 +332,99 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       VIDEO SECTION  (erste Section nach Hero)
+       SECTION BASICS
     ════════════════════════════════════════════════════════ */
-    #video {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 88px 44px 0;
-    }
-    .section-label {
-      font-size: 10px; letter-spacing:.32em; text-transform:uppercase;
-      color:var(--pink); font-weight:600;
-      margin-bottom: 26px;
-      display:flex; align-items:center; gap:14px;
-    }
-    .section-label::after {
-      content:''; display:block;
-      width:34px; height:1px;
-      background:var(--pink); opacity:.45;
-    }
-
-    /* Video thumbnail card with tilt + gloss */
-    .video-card {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      cursor: none;
-      perspective: 800px;
-    }
-    .video-tilt {
-      position: absolute; inset: 0;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-    .video-thumb {
-      position: absolute;
-      inset: -4%;
-      width: 108%; height: 108%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      will-change: transform;
-    }
-    /* gloss on video card */
-    .video-gloss {
-      position: absolute; inset: 0; z-index: 2;
-      pointer-events: none;
-      background: linear-gradient(
-        115deg,
-        rgba(255,255,255,0)     0%,
-        rgba(255,255,255,0)    36%,
-        rgba(255,255,255,0.11) 44%,
-        rgba(255,255,255,0.20) 50%,
-        rgba(255,255,255,0.11) 56%,
-        rgba(255,255,255,0)    64%,
-        rgba(255,255,255,0)   100%
-      );
-    }
-    .video-grad {
-      position: absolute; inset: 0; z-index: 3;
-      background: rgba(8,8,8,.25);
-    }
-    .video-grain {
-      position: absolute; inset: 0; z-index: 4;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
-      background-size: 250px;
-    }
-    /* Play button overlay */
-    .video-play {
-      position: absolute;
-      inset: 0; z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .video-play img {
-      width: clamp(80px, 12vw, 160px);
-      opacity: .92;
-      transition: transform .2s ease, opacity .2s ease;
-      filter: drop-shadow(0 4px 24px rgba(0,0,0,.7));
-    }
-    .video-card:hover .video-play img {
-      transform: scale(1.08);
-      opacity: 1;
-    }
-
-    /* ════════════════════════════════════════════════════════
-       COMMON SECTION STYLES
-    ════════════════════════════════════════════════════════ */
-    section {
+    .section-wrap {
       max-width: 960px;
       margin: 0 auto;
       padding: 88px 44px;
     }
+    .section-label {
+      font-size: 10px; letter-spacing:.32em; text-transform:uppercase;
+      color:var(--pink); font-weight:600; margin-bottom:26px;
+      display:flex; align-items:center; gap:14px;
+    }
+    .section-label::after {
+      content:''; display:block; width:34px; height:1px;
+      background:var(--pink); opacity:.45;
+    }
     .divider {
-      width:100%; height:1px;
+      max-width: 960px; margin: 0 auto;
+      height:1px;
       background:linear-gradient(to right, transparent, rgba(232,228,221,.1), transparent);
     }
 
-    /* ── BIO ─────────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       VIDEO SECTION
+    ════════════════════════════════════════════════════════ */
+    #video { padding-bottom: 0; }
+    .video-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: block;
+    }
+    .video-card .tilt-img {
+      object-position: center center;
+    }
+    /* Play-Button */
+    .video-play {
+      position: absolute; inset:0; z-index:5;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .video-play img {
+      width: clamp(70px, 10vw, 140px);
+      opacity: .9;
+      transition: transform .25s ease, opacity .25s ease;
+      filter: drop-shadow(0 4px 28px rgba(0,0,0,.8));
+    }
+    .video-card:hover .video-play img {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    /* Overlay für Video */
+    .video-overlay {
+      position: absolute; inset:0; z-index:3;
+      background: rgba(8,8,8,.18);
+      transition: background .3s;
+    }
+    .video-card:hover .video-overlay { background: rgba(8,8,8,.08); }
+
+    /* ════════════════════════════════════════════════════════
+       BIO
+    ════════════════════════════════════════════════════════ */
     #bio .bio-text {
       font-weight: 200;
       font-size: clamp(15px, 1.75vw, 20px);
-      line-height: 1.85;
-      max-width: 680px;
-      opacity: .88;
-      letter-spacing: 0;
+      line-height: 1.85; max-width: 680px; opacity: .88;
     }
     #bio .bio-text p + p { margin-top: 1.4em; }
-    #bio .bio-text strong {
-      font-weight: 600;
-      color: var(--off);
+    #bio .bio-text strong { font-weight: 600; }
+    #bio .bio-text em { font-style: italic; color: var(--pink); }
+
+    /* ════════════════════════════════════════════════════════
+       INSTAGRAM GRID
+    ════════════════════════════════════════════════════════ */
+    #instagram { padding-bottom: 0; }
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
     }
-    #bio .bio-text em {
-      font-style: italic;
-      color: var(--pink);
+    /* Behold.so embed container */
+    #behold-feed { width:100%; }
+    /* Fallback-Platzhalter solange kein Feed konfiguriert */
+    .ig-placeholder {
+      aspect-ratio: 1;
+      background: rgba(232,228,221,.05);
+      display: flex; align-items:center; justify-content:center;
+      font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+      opacity:.3; font-weight:200;
     }
 
-    /* ── MUSIK ───────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       MUSIK
+    ════════════════════════════════════════════════════════ */
     #musik { padding-top: 0; }
     .music-links { display:flex; flex-wrap:wrap; gap:14px; margin-top:6px; }
     .music-link {
@@ -457,7 +442,9 @@
     .music-link.featured:hover { background:#ff62c4; border-color:#ff62c4; }
     .music-link svg { width:15px; height:15px; fill:currentColor; flex-shrink:0; }
 
-    /* ── KONTAKT ─────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       KONTAKT
+    ════════════════════════════════════════════════════════ */
     #kontakt { padding-bottom: 110px; }
     .kontakt-grid { display:grid; grid-template-columns:1fr 1fr; gap:44px; }
     .k-block h3 {
@@ -466,61 +453,88 @@
       color:var(--pink); margin-bottom:10px;
     }
     .k-block a {
-      font-weight: 200; font-size:16px;
-      letter-spacing: 0;
+      font-weight:200; font-size:16px; letter-spacing:0;
       opacity:.75; display:block; line-height:1.9;
     }
     .k-block a:hover { opacity:1; color:var(--pink); }
 
-    /* ── FOOTER ──────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════ */
     footer {
       border-top:1px solid rgba(232,228,221,.07);
       padding:26px 44px;
       display:flex; align-items:center; justify-content:space-between;
       flex-wrap:wrap; gap:10px;
-      font-size:11px; letter-spacing:0;
-      font-weight:200; opacity:.38;
+      font-size:11px; letter-spacing:0; font-weight:200; opacity:.38;
     }
     footer a:hover { opacity:1; color:var(--pink); }
 
-    /* ── REVEAL ──────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       REVEAL
+    ════════════════════════════════════════════════════════ */
     .reveal {
       opacity:0; transform:translateY(22px);
       transition: opacity .75s ease, transform .75s ease;
     }
     .reveal.visible { opacity:1; transform:none; }
 
-    /* ── MOBILE ──────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       MOBILE
+    ════════════════════════════════════════════════════════ */
     @media (max-width:680px) {
       body { cursor:auto; }
-      #cur { display:none; }
+      #cur, .click-ring { display:none; }
       .hero-nav { padding:18px 22px; }
-      .hero-nav .band-name { font-size:14px; }
-      .hero-nav .socials { gap:16px; font-size:11px; }
-      section, #video { padding:60px 22px; }
+      .hero-nav .band-name { font-size:13px; }
+      .hero-nav .socials { gap:14px; font-size:11px; }
+      .section-wrap { padding:60px 22px; }
+      .hero-tagline { left:22px; }
       .kontakt-grid { grid-template-columns:1fr; }
       footer { padding:22px; flex-direction:column; align-items:flex-start; gap:6px; }
       .nl-form input { width:160px; }
+      .ig-grid { grid-template-columns: repeat(2,1fr); }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ MOLOTOV CURSOR ══════════════════════════════════════════ -->
-<div id="cur">🍾</div>
+<!-- ══ MOLOTOV CURSOR (echter SVG) ════════════════════════════ -->
+<div id="cur">
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Flamme oben -->
+    <ellipse cx="13" cy="4" rx="2.5" ry="3.5" fill="#ff9900" opacity="0.95"/>
+    <ellipse cx="13" cy="3.5" rx="1.4" ry="2.2" fill="#ffe066"/>
+    <!-- Docht -->
+    <rect x="12.3" y="6.5" width="1.4" height="3" rx=".7" fill="#888"/>
+    <!-- Flaschenhals -->
+    <rect x="10.5" y="9" width="5" height="4" rx="1.5" fill="#c0d8a0"/>
+    <!-- Lappen -->
+    <rect x="9.5" y="9" width="1.5" height="3" rx=".6" fill="#e05020" transform="rotate(-10 10 10)"/>
+    <!-- Flaschenbauch -->
+    <rect x="8" y="12.5" width="10" height="14" rx="4" fill="#b8d890"/>
+    <!-- Flüssigkeit innen -->
+    <rect x="9.5" y="16" width="7" height="9" rx="2.5" fill="#80b840" opacity=".7"/>
+    <!-- Highlight -->
+    <rect x="9.5" y="13.5" width="2.5" height="5" rx="1.2" fill="rgba(255,255,255,0.28)"/>
+    <!-- Boden -->
+    <rect x="8.5" y="25.5" width="9" height="2" rx="1" fill="#90c060"/>
+  </svg>
+</div>
 
 <!-- ══════════════════════════════════════════════════════════
      HERO
 ══════════════════════════════════════════════════════════════ -->
 <div id="hero">
-  <div class="tilt-wrap" id="heroTilt">
-    <img class="hero-img" src="foto.jpg" alt="stein walter frank meier" id="heroImg" />
-    <div class="hero-gloss" id="heroGloss"></div>
+  <div class="tilt-container hero-wrap" id="heroContainer">
+    <div class="tilt-inner" id="heroTilt">
+      <img class="tilt-img" src="foto.jpg" alt="stein walter frank meier" id="heroImg" />
+    </div>
+    <div class="gloss-layer"></div>
     <div class="hero-grad"></div>
     <div class="hero-grain"></div>
   </div>
 
-  <!-- Nav -->
   <nav class="hero-nav">
     <div class="band-name">stein walter frank meier</div>
     <div class="socials">
@@ -530,7 +544,7 @@
     </div>
   </nav>
 
-  <!-- Newsletter – zentriert -->
+  <!-- Newsletter zentriert -->
   <div class="hero-center">
     <span class="nl-label">Newsletter</span>
     <form class="nl-form" onsubmit="handleNL(event)">
@@ -571,43 +585,38 @@
 </div>
 
 <!-- ══════════════════════════════════════════════════════════
-     VIDEO  (als erstes nach Hero)
+     VIDEO
 ══════════════════════════════════════════════════════════════ -->
-<div id="video">
+<div class="section-wrap" id="video">
   <div class="section-label reveal">Live Video</div>
-
-  <!--
-    Klick öffnet das YouTube-Video.
-    Thumbnail: notwehr-bg.png  |  Play-Button: notwehr-play.png
-  -->
   <a href="https://www.youtube.com/watch?v=s6VEn4XC09k"
      target="_blank" rel="noopener"
-     class="video-card reveal"
-     id="videoCard">
-    <div class="video-tilt" id="videoTilt">
-      <img class="video-thumb" src="notwehr-bg.png" alt="Notwehr – Live Video" id="videoThumb" />
-      <div class="video-gloss" id="videoGloss"></div>
-      <div class="video-grad"></div>
-      <div class="video-grain"></div>
+     class="video-card tilt-container reveal"
+     id="videoContainer">
+    <div class="tilt-inner" id="videoTilt">
+      <img class="tilt-img" src="notwehr-bg.png" alt="Notwehr – Live Video" id="videoImg"
+           style="object-position:center center;" />
     </div>
+    <div class="gloss-layer"></div>
+    <div class="video-overlay"></div>
     <div class="video-play">
       <img src="notwehr-play.png" alt="Play" />
     </div>
   </a>
 </div>
 
-<div class="divider" style="max-width:960px;margin:88px auto 0;"></div>
+<div class="divider" style="margin-top:88px;"></div>
 
 <!-- ══════════════════════════════════════════════════════════
      BIO
 ══════════════════════════════════════════════════════════════ -->
-<section id="bio">
+<div class="section-wrap" id="bio">
   <div class="section-label reveal">Über uns</div>
   <div class="bio-text">
     <p class="reveal">
       Gegründet 2025 in Hannover, direkt nach dem politischen Bruch, den viele als Fall der
       <em>Brandmauer</em> bezeichnen, spielt <strong>Stein Walter Frank Meier</strong> linken
-      Punkrock, laut und klar gegen den Rechtsruck und jene Mitte, die ihn ermöglicht.
+      Punkrock — laut und klar gegen den Rechtsruck und jene Mitte, die ihn ermöglicht.
     </p>
     <p class="reveal">
       Unsere Frontperson ist trans und queer und setzt genau diese Sicht in Musik und
@@ -617,47 +626,90 @@
     <p class="reveal">
       Als Band stellen wir uns offen gegen die sogenannte <em>radikale Mitte</em>, deren
       scheinbare Unbeteiligtheit den Faschisten gerade den Weg freiräumt. Unsere Musik hält
-      dieser Haltung den Spiegel vor, scharf, direkt und ohne den Anspruch, es irgendwem
+      dieser Haltung den Spiegel vor — scharf, direkt und ohne den Anspruch, es irgendwem
       bequem zu machen.
     </p>
   </div>
-</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     INSTAGRAM FEED
+     Anleitung: https://behold.so kostenlos registrieren,
+     Instagram verbinden, Feed-ID kopieren und unten eintragen.
+══════════════════════════════════════════════════════════════ -->
+<div class="section-wrap" id="instagram">
+  <div class="section-label reveal">Instagram</div>
+
+  <!--
+    OPTION A (empfohlen, kostenlos):
+    1. Geh auf https://behold.so und registriere dich
+    2. Verbinde @steinwalterfrankmeiermusik
+    3. Erstelle einen Feed, kopiere deine Feed-ID
+    4. Ersetze "DEINE_FEED_ID" unten mit der ID
+    5. Entferne den "ig-fallback"-Block darunter
+  -->
+  <div id="behold-placeholder">
+    <!-- Platzhalter-Grid bis Behold konfiguriert ist -->
+    <div class="ig-grid" id="ig-fallback">
+      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
+         class="ig-placeholder">Instagram<br>öffnen →</a>
+      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
+         class="ig-placeholder">@steinwalter<br>frankmeier</a>
+      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
+         class="ig-placeholder">Fotos &amp;<br>Videos</a>
+      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
+         class="ig-placeholder">Jetzt<br>folgen →</a>
+      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
+         class="ig-placeholder">Live<br>Shows</a>
+      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
+         class="ig-placeholder">Hannover<br>Punk</a>
+    </div>
+  </div>
+
+  <!--
+    OPTION B: Wenn ihr Behold eingerichtet habt, kommentiert
+    den Block oben aus und aktiviert diese zwei Zeilen:
+
+    <script src="https://w.behold.so/widget.js" type="module"></script>
+    <behold-widget feed-id="DEINE_FEED_ID"></behold-widget>
+  -->
+
+</div>
 
 <div class="divider"></div>
 
 <!-- ══════════════════════════════════════════════════════════
      MUSIK
 ══════════════════════════════════════════════════════════════ -->
-<section id="musik">
+<div class="section-wrap" id="musik">
   <div class="section-label reveal">Musik</div>
   <div class="music-links">
     <a class="music-link featured reveal"
-       href="https://DEINNAME.bandcamp.com"
-       target="_blank" rel="noopener">
+       href="https://DEINNAME.bandcamp.com" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
       Bandcamp
     </a>
     <a class="music-link reveal"
-       href="https://www.youtube.com/watch?v=s6VEn4XC09k"
-       target="_blank" rel="noopener">
+       href="https://www.youtube.com/watch?v=s6VEn4XC09k" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
       YouTube
     </a>
     <a class="music-link reveal"
-       href="https://www.instagram.com/steinwalterfrankmeiermusik/"
-       target="_blank" rel="noopener">
+       href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
       Instagram
     </a>
   </div>
-</section>
+</div>
 
 <div class="divider"></div>
 
 <!-- ══════════════════════════════════════════════════════════
      KONTAKT
 ══════════════════════════════════════════════════════════════ -->
-<section id="kontakt">
+<div class="section-wrap" id="kontakt">
   <div class="section-label reveal">Kontakt</div>
   <div class="kontakt-grid">
     <div class="k-block reveal">
@@ -670,9 +722,8 @@
          target="_blank" rel="noopener">@steinwalterfrankmeiermusik</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
 <footer>
   <span>© 2025 stein walter frank meier</span>
   <div style="display:flex;gap:22px;">
@@ -685,6 +736,7 @@
      JAVASCRIPT
 ══════════════════════════════════════════════════════════════ -->
 <script>
+
 /* ════════════════════════════════════════════════
    MOLOTOV CURSOR
 ════════════════════════════════════════════════ */
@@ -695,6 +747,7 @@ let throwing = false;
 
 document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
+// Smooth cursor follow
 (function moveCur() {
   if (!throwing) {
     cx += (mx - cx) * 0.18;
@@ -705,21 +758,32 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
   requestAnimationFrame(moveCur);
 })();
 
+// Klick = werfen + Ring + Feuer
 document.addEventListener('click', e => {
   if (throwing) return;
   throwing = true;
+
+  // Pink click-ring
+  const ring = document.createElement('div');
+  ring.className = 'click-ring';
+  ring.style.left = e.clientX + 'px';
+  ring.style.top  = e.clientY + 'px';
+  document.body.appendChild(ring);
+  setTimeout(() => ring.remove(), 550);
+
+  // Wurf-Animation
   cur.classList.add('thrown');
+  setTimeout(() => {
+    // Feuer-Burst
+    const burst = document.createElement('div');
+    burst.className = 'burst';
+    burst.textContent = '🔥';
+    burst.style.left = (e.clientX + 160) + 'px';
+    burst.style.top  = (e.clientY + 50)  + 'px';
+    document.body.appendChild(burst);
+    setTimeout(() => burst.remove(), 700);
+  }, 380);
 
-  // Fire burst at click target
-  const burst = document.createElement('div');
-  burst.className = 'burst';
-  burst.textContent = '🔥';
-  burst.style.left = e.clientX + 'px';
-  burst.style.top  = e.clientY + 'px';
-  document.body.appendChild(burst);
-  setTimeout(() => burst.remove(), 700);
-
-  // Reset cursor
   setTimeout(() => {
     cur.classList.remove('thrown');
     throwing = false;
@@ -729,75 +793,47 @@ document.addEventListener('click', e => {
   }, 560);
 });
 
-// Big cursor on interactive elements
-document.querySelectorAll('a, button, input').forEach(el => {
-  el.addEventListener('mouseenter', () => cur.style.fontSize = '38px');
-  el.addEventListener('mouseleave', () => cur.style.fontSize = '28px');
-});
-
 /* ════════════════════════════════════════════════
-   TILT + GLOSS helper
+   TILT — gemeinsame Funktion
 ════════════════════════════════════════════════ */
-function initTiltGloss(container, tiltEl, imgEl, glossEl, maxTilt, maxPar) {
-  let tTX=0,tTY=0,tPX=0,tPY=0;
-  let cTX=0,cTY=0,cPX=0,cPY=0;
+function initTilt(container, tiltEl, imgEl, maxTilt, maxPar) {
+  let tTX=0, tTY=0, tPX=0, tPY=0;
+  let cTX=0, cTY=0, cPX=0, cPY=0;
   const L = 0.065;
 
   container.addEventListener('mousemove', e => {
-    const r = container.getBoundingClientRect();
-    const nx = (e.clientX - r.left)  / r.width  - 0.5;
-    const ny = (e.clientY - r.top)   / r.height - 0.5;
+    const r  = container.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width  - 0.5;
+    const ny = (e.clientY - r.top)  / r.height - 0.5;
     tTX = ny * -maxTilt;
     tTY = nx *  maxTilt;
     tPX = nx * -maxPar;
     tPY = ny * -maxPar;
-
-    // Gloss: shift the highlight based on mouse position
-    const gx = 38 + nx * 24; // % offset for the gloss band
-    if (glossEl) {
-      glossEl.style.background = `linear-gradient(
-        115deg,
-        rgba(255,255,255,0)      0%,
-        rgba(255,255,255,0)      ${gx - 12}%,
-        rgba(255,255,255,0.10)   ${gx - 5}%,
-        rgba(255,255,255,0.20)   ${gx}%,
-        rgba(255,255,255,0.10)   ${gx + 5}%,
-        rgba(255,255,255,0)      ${gx + 12}%,
-        rgba(255,255,255,0)      100%
-      )`;
-    }
   });
-
   container.addEventListener('mouseleave', () => {
-    tTX=tTY=tPX=tPY=0;
-    if (glossEl) glossEl.style.background = '';
+    tTX = tTY = tPX = tPY = 0;
   });
 
-  function lerp(a,b,t){return a+(b-a)*t;}
+  function lerp(a,b,t){ return a+(b-a)*t; }
   (function anim() {
-    cTX=lerp(cTX,tTX,L); cTY=lerp(cTY,tTY,L);
-    cPX=lerp(cPX,tPX,L); cPY=lerp(cPY,tPY,L);
+    cTX = lerp(cTX,tTX,L); cTY = lerp(cTY,tTY,L);
+    cPX = lerp(cPX,tPX,L); cPY = lerp(cPY,tPY,L);
     tiltEl.style.transform = `rotateX(${cTX}deg) rotateY(${cTY}deg)`;
     imgEl.style.transform  = `translate(${cPX}px,${cPY}px) scale(1.04)`;
     requestAnimationFrame(anim);
   })();
 }
 
-// Hero tilt
-initTiltGloss(
-  document.getElementById('hero'),
+initTilt(
+  document.getElementById('heroContainer'),
   document.getElementById('heroTilt'),
   document.getElementById('heroImg'),
-  document.getElementById('heroGloss'),
-  9, 16
+  9, 18
 );
-
-// Video card tilt
-initTiltGloss(
-  document.getElementById('videoCard'),
+initTilt(
+  document.getElementById('videoContainer'),
   document.getElementById('videoTilt'),
-  document.getElementById('videoThumb'),
-  document.getElementById('videoGloss'),
+  document.getElementById('videoImg'),
   6, 12
 );
 
@@ -816,12 +852,32 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 /* ════════════════════════════════════════════════
    NEWSLETTER
+   ─────────────────────────────────────────────
+   Mailchimp (kostenlos bis 500 Kontakte):
+   1. mailchimp.com → Audience → Signup forms
+      → Embedded forms → kopiere die action-URL
+   2. Trage sie in MAILCHIMP_URL ein
+   ─────────────────────────────────────────────
+   Brevo (kostenlos bis 300 Mails/Tag):
+   1. brevo.com → Contacts → Forms → neues Formular
+   2. Kopiere die action-URL → in MAILCHIMP_URL eintragen
 ════════════════════════════════════════════════ */
+const MAILCHIMP_URL = ''; // ← URL hier eintragen, z.B. 'https://xxx.list-manage.com/subscribe/post?...'
+
 function handleNL(e) {
   e.preventDefault();
   const input = document.getElementById('nlInput');
   const msg   = document.getElementById('nlMsg');
-  if (!input.value.includes('@')) return;
+  const email = input.value.trim();
+  if (!email.includes('@')) return;
+
+  if (MAILCHIMP_URL) {
+    // Echter API-Call zu Mailchimp / Brevo
+    const data = new FormData();
+    data.append('EMAIL', email);
+    fetch(MAILCHIMP_URL, { method:'POST', body:data, mode:'no-cors' });
+  }
+
   input.value = '';
   msg.classList.add('show');
   setTimeout(() => msg.classList.remove('show'), 4000);
