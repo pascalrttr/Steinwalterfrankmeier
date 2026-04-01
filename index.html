@@ -9,22 +9,10 @@
   ═══════════════════════════════════════════════════════════════
    ORDNERSTRUKTUR neben dieser index.html:
      index.html
-     foto.jpg                   ← euer Bandfoto (umbenennen!)
-     notwehr-bg.png             ← Notwehr_Video_Background...png
-     notwehr-play.png           ← Notwehr_Video_Button...png
+     foto.jpg          ← euer Bandfoto (umbenennen!)
+     notwehr-bg.png    ← Notwehr_Video_Background...png
      fonts/
        (alle EuropaGroteskSH .otf Dateien)
-
-   NEWSLETTER:
-   Erstellt einen kostenlosen Account auf https://mailchimp.com
-   (oder https://brevo.com), dann tragt die Action-URL eures
-   Formulars in die Variable MAILCHIMP_URL unten im <script> ein.
-   Solange leer → zeigt nur die Bestätigungsmeldung.
-
-   INSTAGRAM FEED:
-   Erstellt einen kostenlosen Account auf https://behold.so
-   (verbindet euren Instagram-Account dort), dann tragt
-   euren Behold Feed-ID in BEHOLD_FEED_ID unten ein.
   ═══════════════════════════════════════════════════════════════
   -->
 
@@ -73,7 +61,7 @@
     ::selection { background: var(--pink); color: var(--black); }
 
     /* ════════════════════════════════════════════════════════
-       MOLOTOV CURSOR — echter SVG, kein Emoji
+       MOLOTOV CURSOR
     ════════════════════════════════════════════════════════ */
     #cur {
       position: fixed;
@@ -82,7 +70,6 @@
       will-change: left, top;
       width: 32px;
       height: 32px;
-      /* Flaschenboden = Mauszeiger-Spitze */
       transform: translate(-10px, -30px) rotate(-35deg);
       transition: transform .15s ease;
     }
@@ -90,27 +77,26 @@
       animation: throw-anim .55s ease-out forwards;
     }
     @keyframes throw-anim {
-      0%   { transform: translate(-10px,-30px) rotate(-35deg) scale(1);   opacity:1; }
+      0%   { transform: translate(-10px,-30px) rotate(-35deg) scale(1);    opacity:1; }
       35%  { transform: translate(55px,-130px) rotate(-90deg) scale(1.15); opacity:1; }
       65%  { transform: translate(130px,-60px) rotate(-150deg) scale(1.0); opacity:.8; }
       85%  { transform: translate(175px,30px)  rotate(-200deg) scale(.8);  opacity:.5; }
       100% { transform: translate(200px,70px)  rotate(-240deg) scale(.4);  opacity:0; }
     }
 
-    /* Click-Indikator-Ring */
+    /* Pink click-ring */
     .click-ring {
       position: fixed;
       pointer-events: none;
       z-index: 9998;
-      width: 0; height: 0;
       border-radius: 50%;
       border: 2px solid var(--pink);
-      transform: translate(-50%,-50%) scale(0);
+      transform: translate(-50%,-50%);
       animation: ring-pop .5s ease-out forwards;
     }
     @keyframes ring-pop {
-      0%   { width:10px; height:10px; opacity:1; transform:translate(-50%,-50%) scale(1); }
-      100% { width:60px; height:60px; opacity:0; transform:translate(-50%,-50%) scale(1); }
+      0%   { width:10px; height:10px; opacity:1; }
+      100% { width:64px; height:64px; opacity:0; }
     }
 
     /* Feuer-Burst */
@@ -130,11 +116,11 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       TILT-CARD — shared styles
+       TILT + GLOSS — shared
     ════════════════════════════════════════════════════════ */
     .tilt-container {
       position: relative;
-      overflow: hidden;     /* ← verhindert sichtbare Ränder */
+      overflow: hidden;
       perspective: 900px;
     }
     .tilt-inner {
@@ -144,7 +130,6 @@
     }
     .tilt-img {
       position: absolute;
-      /* Extra Zoom damit beim Kippen keine Ränder auftauchen */
       inset: -8%;
       width: 116%; height: 116%;
       object-fit: cover;
@@ -153,11 +138,7 @@
       will-change: transform;
     }
 
-    /* ── GLOSS — flüssiger Sweep-Effekt ──────────────────────── */
-    /*
-       Funktioniert als animiertes Pseudo-Element das beim
-       Hover von links nach rechts schwebt — genau wie dasguenther.de
-    */
+    /* Gloss sweep on hover */
     .gloss-layer {
       position: absolute; inset: 0; z-index: 2;
       pointer-events: none;
@@ -171,19 +152,16 @@
       background: linear-gradient(
         105deg,
         transparent 30%,
-        rgba(255,255,255,0.08) 45%,
-        rgba(255,255,255,0.22) 50%,
-        rgba(255,255,255,0.08) 55%,
+        rgba(255,255,255,0.07) 45%,
+        rgba(255,255,255,0.20) 50%,
+        rgba(255,255,255,0.07) 55%,
         transparent 70%
       );
       transform: skewX(-15deg);
-      /* Ausgangszustand: links außerhalb */
-      transition: none;
       opacity: 0;
     }
     .tilt-container:hover .gloss-layer::after {
       opacity: 1;
-      /* Sweep von links nach rechts */
       animation: gloss-sweep .75s cubic-bezier(.4,0,.2,1) forwards;
     }
     @keyframes gloss-sweep {
@@ -194,73 +172,51 @@
     /* ════════════════════════════════════════════════════════
        HERO
     ════════════════════════════════════════════════════════ */
-    #hero {
-      width: 100vw;
-      height: 100dvh;
-    }
-    .hero-wrap {
-      width: 100%; height: 100%;
-    }
-    /* Override tilt-img position for hero */
-    #hero .tilt-img {
-      object-position: center 25%;
-    }
-
-    /* Gradient overlay */
+    #hero { width:100vw; height:100dvh; }
+    .hero-wrap { width:100%; height:100%; }
     .hero-grad {
       position: absolute; inset: 0; z-index: 3;
       background:
         linear-gradient(to bottom,
-          rgba(8,8,8,.52) 0%,
-          rgba(8,8,8,0)   28%,
-          rgba(8,8,8,0)   50%,
-          rgba(8,8,8,.96) 100%),
-        linear-gradient(to right,
-          rgba(8,8,8,.25) 0%,
-          rgba(8,8,8,0)   38%);
+          rgba(8,8,8,.52) 0%, rgba(8,8,8,0) 28%,
+          rgba(8,8,8,0) 50%, rgba(8,8,8,.96) 100%),
+        linear-gradient(to right, rgba(8,8,8,.25) 0%, rgba(8,8,8,0) 38%);
     }
-    /* Film grain */
     .hero-grain {
-      position: absolute; inset: 0; z-index: 4;
-      pointer-events: none;
+      position: absolute; inset: 0; z-index: 4; pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.065'/%3E%3C/svg%3E");
       background-size: 250px;
     }
 
-    /* Top nav */
+    /* Nav */
     .hero-nav {
       position: absolute; top:0; left:0; right:0; z-index:10;
       display:flex; align-items:center; justify-content:space-between;
       padding: 30px 44px;
     }
     .hero-nav .band-name {
-      font-family: var(--fc);
-      font-weight: 600;
-      font-size: clamp(14px, 1.8vw, 22px);
-      letter-spacing: 0;
-      text-transform: uppercase;
+      font-family: var(--fc); font-weight:600;
+      font-size: clamp(14px,1.8vw,22px);
+      letter-spacing:0; text-transform:uppercase;
     }
     .hero-nav .socials {
       display:flex; gap:28px;
-      font-weight: 200; font-size: 13px;
-      letter-spacing: 0; text-transform: uppercase;
+      font-weight:200; font-size:13px; letter-spacing:0; text-transform:uppercase;
     }
-    .hero-nav .socials a { opacity:.7; transition:opacity .2s, color .2s; }
+    .hero-nav .socials a { opacity:.7; transition:opacity .2s,color .2s; }
     .hero-nav .socials a:hover { opacity:1; color:var(--pink); }
 
-    /* Newsletter – mittig im Hero */
+    /* Newsletter – zentriert */
     .hero-center {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+      position: absolute; top:50%; left:50%;
+      transform: translate(-50%,-50%);
       z-index: 10;
-      display: flex; flex-direction: column;
-      align-items: center; gap: 12px;
-      text-align: center;
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      text-align:center;
     }
     .nl-label {
-      font-weight: 600; font-size: 11px;
-      letter-spacing: .25em; text-transform: uppercase; opacity: .5;
+      font-weight:600; font-size:11px;
+      letter-spacing:.25em; text-transform:uppercase; opacity:.5;
     }
     .nl-form {
       display:flex;
@@ -275,7 +231,7 @@
     }
     .nl-form input::placeholder { opacity:.38; }
     .nl-form button {
-      background: var(--pink); border:none; color:var(--black);
+      background:var(--pink); border:none; color:var(--black);
       font-family:var(--f); font-weight:600;
       font-size:11px; letter-spacing:.18em; text-transform:uppercase;
       padding:12px 22px; cursor:none; transition:background .2s;
@@ -287,12 +243,11 @@
     }
     .nl-success.show { opacity:1; }
 
-    /* Tagline unten links */
+    /* Tagline */
     .hero-tagline {
-      position: absolute; bottom:42px; left:44px; z-index:10;
-      font-weight: 200; font-size: 12px;
-      letter-spacing: .22em; text-transform: uppercase;
-      opacity: .5; line-height: 2;
+      position:absolute; bottom:42px; left:44px; z-index:10;
+      font-weight:200; font-size:12px;
+      letter-spacing:.22em; text-transform:uppercase; opacity:.5; line-height:2;
     }
 
     /* Scroll hint */
@@ -314,33 +269,25 @@
     ════════════════════════════════════════════════════════ */
     .ticker-wrap {
       overflow:hidden;
-      border-top:   1px solid rgba(254,64,185,.14);
+      border-top:1px solid rgba(254,64,185,.14);
       border-bottom:1px solid rgba(254,64,185,.14);
-      background: rgba(254,64,185,.03);
-      padding: 9px 0;
+      background:rgba(254,64,185,.03); padding:9px 0;
     }
-    .ticker { display:flex; white-space:nowrap; animation: tick 22s linear infinite; }
+    .ticker { display:flex; white-space:nowrap; animation:tick 22s linear infinite; }
     .ticker-inner { display:flex; }
     .ticker span {
       font-family:var(--f); font-weight:600;
       font-size:10px; letter-spacing:.3em; text-transform:uppercase;
       color:var(--pink); opacity:.6; padding:0 34px;
     }
-    @keyframes tick {
-      from { transform:translateX(0); }
-      to   { transform:translateX(-50%); }
-    }
+    @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
     /* ════════════════════════════════════════════════════════
        SECTION BASICS
     ════════════════════════════════════════════════════════ */
-    .section-wrap {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 88px 44px;
-    }
+    .section-wrap { max-width:960px; margin:0 auto; padding:88px 44px; }
     .section-label {
-      font-size: 10px; letter-spacing:.32em; text-transform:uppercase;
+      font-size:10px; letter-spacing:.32em; text-transform:uppercase;
       color:var(--pink); font-weight:600; margin-bottom:26px;
       display:flex; align-items:center; gap:14px;
     }
@@ -349,103 +296,111 @@
       background:var(--pink); opacity:.45;
     }
     .divider {
-      max-width: 960px; margin: 0 auto;
-      height:1px;
-      background:linear-gradient(to right, transparent, rgba(232,228,221,.1), transparent);
+      max-width:960px; margin:0 auto; height:1px;
+      background:linear-gradient(to right,transparent,rgba(232,228,221,.1),transparent);
     }
 
     /* ════════════════════════════════════════════════════════
        VIDEO SECTION
     ════════════════════════════════════════════════════════ */
-    #video { padding-bottom: 0; }
+    #video { padding-bottom:0; }
+
     .video-card {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      display: block;
+      position:relative; width:100%; aspect-ratio:16/9; display:block;
     }
-    .video-card .tilt-img {
-      object-position: center center;
-    }
-    /* Play-Button */
-    .video-play {
-      position: absolute; inset:0; z-index:5;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .video-play img {
-      width: clamp(70px, 10vw, 140px);
-      opacity: .9;
-      transition: transform .25s ease, opacity .25s ease;
-      filter: drop-shadow(0 4px 28px rgba(0,0,0,.8));
-    }
-    .video-card:hover .video-play img {
-      transform: scale(1.1);
-      opacity: 1;
-    }
-    /* Overlay für Video */
+    .video-card .tilt-img { object-position:center center; }
     .video-overlay {
-      position: absolute; inset:0; z-index:3;
-      background: rgba(8,8,8,.18);
-      transition: background .3s;
+      position:absolute; inset:0; z-index:3;
+      background:rgba(8,8,8,.22); transition:background .3s;
     }
-    .video-card:hover .video-overlay { background: rgba(8,8,8,.08); }
+    .video-card:hover .video-overlay { background:rgba(8,8,8,.08); }
+
+    /* ── Custom SVG Play Button ── */
+    .video-play {
+      position:absolute; inset:0; z-index:5;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:14px;
+    }
+    .play-btn {
+      width: clamp(60px,8vw,100px);
+      height: clamp(60px,8vw,100px);
+      border-radius: 50%;
+      border: 2px solid rgba(232,228,221,.9);
+      display: flex; align-items:center; justify-content:center;
+      background: rgba(8,8,8,.45);
+      backdrop-filter: blur(6px);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+      flex-shrink: 0;
+    }
+    .play-btn svg {
+      width: 35%; height: 35%;
+      fill: var(--off);
+      margin-left: 8%;  /* optisch zentrieren */
+      transition: fill .25s ease;
+    }
+    .video-card:hover .play-btn {
+      transform: scale(1.1);
+      background: rgba(254,64,185,.25);
+      border-color: var(--pink);
+    }
+    .video-card:hover .play-btn svg { fill: var(--pink); }
+
+    .play-label {
+      font-family: var(--f); font-weight:600;
+      font-size: clamp(9px,1vw,11px);
+      letter-spacing:.3em; text-transform:uppercase;
+      color: var(--off); opacity:.6;
+      transition: opacity .25s, color .25s;
+    }
+    .video-card:hover .play-label { opacity:1; color:var(--pink); }
 
     /* ════════════════════════════════════════════════════════
        BIO
     ════════════════════════════════════════════════════════ */
     #bio .bio-text {
-      font-weight: 200;
-      font-size: clamp(15px, 1.75vw, 20px);
-      line-height: 1.85; max-width: 680px; opacity: .88;
+      font-weight:200; font-size:clamp(15px,1.75vw,20px);
+      line-height:1.85; max-width:680px; opacity:.88;
     }
-    #bio .bio-text p + p { margin-top: 1.4em; }
-    #bio .bio-text strong { font-weight: 600; }
-    #bio .bio-text em { font-style: italic; color: var(--pink); }
+    #bio .bio-text p + p { margin-top:1.4em; }
+    #bio .bio-text strong { font-weight:600; }
+    #bio .bio-text em { font-style:italic; color:var(--pink); }
 
     /* ════════════════════════════════════════════════════════
-       INSTAGRAM GRID
+       INSTAGRAM
     ════════════════════════════════════════════════════════ */
-    #instagram { padding-bottom: 0; }
-    .ig-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-    }
-    /* Behold.so embed container */
-    #behold-feed { width:100%; }
-    /* Fallback-Platzhalter solange kein Feed konfiguriert */
+    #instagram { padding-bottom:0; }
+    .ig-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
     .ig-placeholder {
-      aspect-ratio: 1;
-      background: rgba(232,228,221,.05);
-      display: flex; align-items:center; justify-content:center;
+      aspect-ratio:1; background:rgba(232,228,221,.05);
+      display:flex; align-items:center; justify-content:center;
       font-size:11px; letter-spacing:.2em; text-transform:uppercase;
-      opacity:.3; font-weight:200;
+      opacity:.3; font-weight:200; text-align:center; line-height:1.8;
+      transition:opacity .2s, background .2s;
     }
+    .ig-placeholder:hover { opacity:.7; background:rgba(254,64,185,.06); }
 
     /* ════════════════════════════════════════════════════════
        MUSIK
     ════════════════════════════════════════════════════════ */
-    #musik { padding-top: 0; }
+    #musik { padding-top:0; }
     .music-links { display:flex; flex-wrap:wrap; gap:14px; margin-top:6px; }
     .music-link {
       display:inline-flex; align-items:center; gap:10px;
-      border: 1px solid rgba(232,228,221,.18);
-      padding: 13px 26px;
+      border:1px solid rgba(232,228,221,.18);
+      padding:13px 26px;
       font-family:var(--f); font-weight:600;
       font-size:12px; letter-spacing:.18em; text-transform:uppercase;
-      transition: border-color .2s, color .2s, background .2s;
+      transition:border-color .2s,color .2s,background .2s;
     }
     .music-link:hover { border-color:var(--pink); color:var(--pink); }
-    .music-link.featured {
-      background:var(--pink); border-color:var(--pink); color:var(--black);
-    }
+    .music-link.featured { background:var(--pink); border-color:var(--pink); color:var(--black); }
     .music-link.featured:hover { background:#ff62c4; border-color:#ff62c4; }
     .music-link svg { width:15px; height:15px; fill:currentColor; flex-shrink:0; }
 
     /* ════════════════════════════════════════════════════════
        KONTAKT
     ════════════════════════════════════════════════════════ */
-    #kontakt { padding-bottom: 110px; }
+    #kontakt { padding-bottom:110px; }
     .kontakt-grid { display:grid; grid-template-columns:1fr 1fr; gap:44px; }
     .k-block h3 {
       font-family:var(--f); font-weight:600;
@@ -473,10 +428,7 @@
     /* ════════════════════════════════════════════════════════
        REVEAL
     ════════════════════════════════════════════════════════ */
-    .reveal {
-      opacity:0; transform:translateY(22px);
-      transition: opacity .75s ease, transform .75s ease;
-    }
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity .75s ease,transform .75s ease; }
     .reveal.visible { opacity:1; transform:none; }
 
     /* ════════════════════════════════════════════════════════
@@ -493,31 +445,23 @@
       .kontakt-grid { grid-template-columns:1fr; }
       footer { padding:22px; flex-direction:column; align-items:flex-start; gap:6px; }
       .nl-form input { width:160px; }
-      .ig-grid { grid-template-columns: repeat(2,1fr); }
+      .ig-grid { grid-template-columns:repeat(2,1fr); }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ MOLOTOV CURSOR (echter SVG) ════════════════════════════ -->
+<!-- ══ MOLOTOV CURSOR ══════════════════════════════════════════ -->
 <div id="cur">
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Flamme oben -->
     <ellipse cx="13" cy="4" rx="2.5" ry="3.5" fill="#ff9900" opacity="0.95"/>
     <ellipse cx="13" cy="3.5" rx="1.4" ry="2.2" fill="#ffe066"/>
-    <!-- Docht -->
     <rect x="12.3" y="6.5" width="1.4" height="3" rx=".7" fill="#888"/>
-    <!-- Flaschenhals -->
     <rect x="10.5" y="9" width="5" height="4" rx="1.5" fill="#c0d8a0"/>
-    <!-- Lappen -->
     <rect x="9.5" y="9" width="1.5" height="3" rx=".6" fill="#e05020" transform="rotate(-10 10 10)"/>
-    <!-- Flaschenbauch -->
     <rect x="8" y="12.5" width="10" height="14" rx="4" fill="#b8d890"/>
-    <!-- Flüssigkeit innen -->
     <rect x="9.5" y="16" width="7" height="9" rx="2.5" fill="#80b840" opacity=".7"/>
-    <!-- Highlight -->
     <rect x="9.5" y="13.5" width="2.5" height="5" rx="1.2" fill="rgba(255,255,255,0.28)"/>
-    <!-- Boden -->
     <rect x="8.5" y="25.5" width="9" height="2" rx="1" fill="#90c060"/>
   </svg>
 </div>
@@ -540,18 +484,17 @@
     <div class="socials">
       <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.youtube.com/@DEIN_KANAL" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://DEINNAME.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+      <a href="https://steinwalterfrankmeier.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
     </div>
   </nav>
 
-  <!-- Newsletter zentriert -->
   <div class="hero-center">
     <span class="nl-label">Newsletter</span>
     <form class="nl-form" onsubmit="handleNL(event)">
       <input type="email" placeholder="deine@email.de" id="nlInput" autocomplete="off" />
       <button type="submit">Subscribe</button>
     </form>
-    <span class="nl-success" id="nlMsg">✓ Danke — wir melden uns!</span>
+    <span class="nl-success" id="nlMsg">✓ E-Mail-App wird geöffnet …</span>
   </div>
 
   <p class="hero-tagline">Punk<br>aus Hannover</p>
@@ -599,8 +542,12 @@
     </div>
     <div class="gloss-layer"></div>
     <div class="video-overlay"></div>
+    <!-- Custom Play Button -->
     <div class="video-play">
-      <img src="notwehr-play.png" alt="Play" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <span class="play-label">Notwehr — Live Video</span>
     </div>
   </a>
 </div>
@@ -635,47 +582,30 @@
 <div class="divider"></div>
 
 <!-- ══════════════════════════════════════════════════════════
-     INSTAGRAM FEED
-     Anleitung: https://behold.so kostenlos registrieren,
-     Instagram verbinden, Feed-ID kopieren und unten eintragen.
+     INSTAGRAM
+     Anleitung: behold.so kostenlos registrieren,
+     Instagram verbinden, dann Kommentar unten folgen.
 ══════════════════════════════════════════════════════════════ -->
 <div class="section-wrap" id="instagram">
   <div class="section-label reveal">Instagram</div>
-
   <!--
-    OPTION A (empfohlen, kostenlos):
-    1. Geh auf https://behold.so und registriere dich
-    2. Verbinde @steinwalterfrankmeiermusik
-    3. Erstelle einen Feed, kopiere deine Feed-ID
-    4. Ersetze "DEINE_FEED_ID" unten mit der ID
-    5. Entferne den "ig-fallback"-Block darunter
+    BEHOLD.SO EINRICHTEN (kostenlos):
+    1. https://behold.so → Account erstellen
+    2. @steinwalterfrankmeiermusik verbinden
+    3. Feed erstellen → Feed-ID kopieren
+    4. Diese zwei Zeilen aktivieren (Kommentarzeichen // entfernen):
+       <script src="https://w.behold.so/widget.js" type="module"><\/script>
+       <behold-widget feed-id="DEINE_FEED_ID"></behold-widget>
+    5. Den ig-fallback-Block darunter löschen
   -->
-  <div id="behold-placeholder">
-    <!-- Platzhalter-Grid bis Behold konfiguriert ist -->
-    <div class="ig-grid" id="ig-fallback">
-      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
-         class="ig-placeholder">Instagram<br>öffnen →</a>
-      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
-         class="ig-placeholder">@steinwalter<br>frankmeier</a>
-      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
-         class="ig-placeholder">Fotos &amp;<br>Videos</a>
-      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
-         class="ig-placeholder">Jetzt<br>folgen →</a>
-      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
-         class="ig-placeholder">Live<br>Shows</a>
-      <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener"
-         class="ig-placeholder">Hannover<br>Punk</a>
-    </div>
+  <div class="ig-grid" id="ig-fallback">
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Instagram<br>öffnen →</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">@steinwalter<br>frankmeier</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Fotos &amp;<br>Videos</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Jetzt<br>folgen →</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Live<br>Shows</a>
+    <a href="https://www.instagram.com/steinwalterfrankmeiermusik/" target="_blank" rel="noopener" class="ig-placeholder">Hannover<br>Punk</a>
   </div>
-
-  <!--
-    OPTION B: Wenn ihr Behold eingerichtet habt, kommentiert
-    den Block oben aus und aktiviert diese zwei Zeilen:
-
-    <script src="https://w.behold.so/widget.js" type="module"></script>
-    <behold-widget feed-id="DEINE_FEED_ID"></behold-widget>
-  -->
-
 </div>
 
 <div class="divider"></div>
@@ -687,7 +617,7 @@
   <div class="section-label reveal">Musik</div>
   <div class="music-links">
     <a class="music-link featured reveal"
-       href="https://DEINNAME.bandcamp.com" target="_blank" rel="noopener">
+       href="https://steinwalterfrankmeier.bandcamp.com" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
       Bandcamp
     </a>
@@ -714,7 +644,7 @@
   <div class="kontakt-grid">
     <div class="k-block reveal">
       <h3>Allgemein &amp; Booking</h3>
-      <a href="mailto:steinwalterfrankmeier@gmail.com">steinwalterfrankmeier@gmail.com</a>
+      <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a>
     </div>
     <div class="k-block reveal">
       <h3>Instagram</h3>
@@ -737,17 +667,13 @@
 ══════════════════════════════════════════════════════════════ -->
 <script>
 
-/* ════════════════════════════════════════════════
-   MOLOTOV CURSOR
-════════════════════════════════════════════════ */
+/* ── MOLOTOV CURSOR ──────────────────────────────────────── */
 const cur = document.getElementById('cur');
-let mx = -200, my = -200;
-let cx = -200, cy = -200;
+let mx = -200, my = -200, cx = -200, cy = -200;
 let throwing = false;
 
 document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
-// Smooth cursor follow
 (function moveCur() {
   if (!throwing) {
     cx += (mx - cx) * 0.18;
@@ -758,12 +684,11 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
   requestAnimationFrame(moveCur);
 })();
 
-// Klick = werfen + Ring + Feuer
 document.addEventListener('click', e => {
   if (throwing) return;
   throwing = true;
 
-  // Pink click-ring
+  // Pink ring
   const ring = document.createElement('div');
   ring.className = 'click-ring';
   ring.style.left = e.clientX + 'px';
@@ -771,10 +696,9 @@ document.addEventListener('click', e => {
   document.body.appendChild(ring);
   setTimeout(() => ring.remove(), 550);
 
-  // Wurf-Animation
+  // Wurf
   cur.classList.add('thrown');
   setTimeout(() => {
-    // Feuer-Burst
     const burst = document.createElement('div');
     burst.className = 'burst';
     burst.textContent = '🔥';
@@ -793,31 +717,23 @@ document.addEventListener('click', e => {
   }, 560);
 });
 
-/* ════════════════════════════════════════════════
-   TILT — gemeinsame Funktion
-════════════════════════════════════════════════ */
+/* ── TILT ────────────────────────────────────────────────── */
 function initTilt(container, tiltEl, imgEl, maxTilt, maxPar) {
-  let tTX=0, tTY=0, tPX=0, tPY=0;
-  let cTX=0, cTY=0, cPX=0, cPY=0;
+  let tTX=0,tTY=0,tPX=0,tPY=0;
+  let cTX=0,cTY=0,cPX=0,cPY=0;
   const L = 0.065;
-
   container.addEventListener('mousemove', e => {
-    const r  = container.getBoundingClientRect();
+    const r = container.getBoundingClientRect();
     const nx = (e.clientX - r.left) / r.width  - 0.5;
     const ny = (e.clientY - r.top)  / r.height - 0.5;
-    tTX = ny * -maxTilt;
-    tTY = nx *  maxTilt;
-    tPX = nx * -maxPar;
-    tPY = ny * -maxPar;
+    tTX = ny * -maxTilt; tTY = nx * maxTilt;
+    tPX = nx * -maxPar;  tPY = ny * -maxPar;
   });
-  container.addEventListener('mouseleave', () => {
-    tTX = tTY = tPX = tPY = 0;
-  });
-
-  function lerp(a,b,t){ return a+(b-a)*t; }
+  container.addEventListener('mouseleave', () => { tTX=tTY=tPX=tPY=0; });
+  const lerp = (a,b,t) => a+(b-a)*t;
   (function anim() {
-    cTX = lerp(cTX,tTX,L); cTY = lerp(cTY,tTY,L);
-    cPX = lerp(cPX,tPX,L); cPY = lerp(cPY,tPY,L);
+    cTX=lerp(cTX,tTX,L); cTY=lerp(cTY,tTY,L);
+    cPX=lerp(cPX,tPX,L); cPY=lerp(cPY,tPY,L);
     tiltEl.style.transform = `rotateX(${cTX}deg) rotateY(${cTY}deg)`;
     imgEl.style.transform  = `translate(${cPX}px,${cPY}px) scale(1.04)`;
     requestAnimationFrame(anim);
@@ -837,9 +753,7 @@ initTilt(
   6, 12
 );
 
-/* ════════════════════════════════════════════════
-   SCROLL REVEAL
-════════════════════════════════════════════════ */
+/* ── SCROLL REVEAL ───────────────────────────────────────── */
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -850,20 +764,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ════════════════════════════════════════════════
-   NEWSLETTER
-   ─────────────────────────────────────────────
-   Mailchimp (kostenlos bis 500 Kontakte):
-   1. mailchimp.com → Audience → Signup forms
-      → Embedded forms → kopiere die action-URL
-   2. Trage sie in MAILCHIMP_URL ein
-   ─────────────────────────────────────────────
-   Brevo (kostenlos bis 300 Mails/Tag):
-   1. brevo.com → Contacts → Forms → neues Formular
-   2. Kopiere die action-URL → in MAILCHIMP_URL eintragen
-════════════════════════════════════════════════ */
-const MAILCHIMP_URL = ''; // ← URL hier eintragen, z.B. 'https://xxx.list-manage.com/subscribe/post?...'
-
+/* ── NEWSLETTER → öffnet E-Mail-App ─────────────────────── */
 function handleNL(e) {
   e.preventDefault();
   const input = document.getElementById('nlInput');
@@ -871,12 +772,12 @@ function handleNL(e) {
   const email = input.value.trim();
   if (!email.includes('@')) return;
 
-  if (MAILCHIMP_URL) {
-    // Echter API-Call zu Mailchimp / Brevo
-    const data = new FormData();
-    data.append('EMAIL', email);
-    fetch(MAILCHIMP_URL, { method:'POST', body:data, mode:'no-cors' });
-  }
+  // Öffnet das E-Mail-Programm mit vorausgefüllter Mail an euch
+  window.location.href =
+    'mailto:steinwalter@mailbox.org'
+    + '?subject=Newsletter%20Anmeldung'
+    + '&body=Bitte%20tragt%20mich%20in%20euren%20Newsletter%20ein%3A%20'
+    + encodeURIComponent(email);
 
   input.value = '';
   msg.classList.add('show');
