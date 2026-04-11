@@ -233,20 +233,22 @@
     .video-card:hover .play-label { opacity:1; color:var(--pink); }
 
     /* Free Download Link */
+    .free-download-wrap { display:flex; justify-content:center; margin-top:32px; }
     .free-download {
-      display:inline-flex; align-items:center; gap:10px;
-      margin-top:18px;
-      font-weight:600; font-size:12px;
-      letter-spacing:.22em; text-transform:uppercase;
-      color:var(--pink);
-      border:1px solid rgba(254,64,185,.4);
-      padding:12px 24px;
-      transition:background .2s, border-color .2s, color .2s;
+      display:inline-flex; align-items:center; gap:16px;
+      font-weight:700; font-size:clamp(24px,4vw,44px);
+      letter-spacing:.18em; text-transform:uppercase;
+      background: linear-gradient(135deg, #f5e07a 0%, #c9a84c 35%, #ffe899 55%, #a07830 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      border:2px solid #c9a84c;
+      padding:20px 52px;
+      transition:opacity .2s, transform .2s;
+      filter: drop-shadow(0 0 22px rgba(201,168,76,.4));
     }
-    .free-download:hover {
-      background:var(--pink); color:var(--black); border-color:var(--pink);
-    }
-    .free-download svg { width:14px; height:14px; fill:currentColor; flex-shrink:0; }
+    .free-download:hover { opacity:.82; transform:scale(1.02); }
+    .free-download svg { width:30px; height:30px; fill:#c9a84c; flex-shrink:0; -webkit-text-fill-color:unset; }
 
     /* ── BIO ── */
     .bio-text { font-weight:200; font-size:clamp(15px,1.75vw,20px); line-height:1.85; max-width:680px; opacity:.88; }
@@ -402,10 +404,12 @@
   </a>
 
   <!-- FREE DOWNLOAD -->
-  <a class="free-download" href="https://steinwalterfrankmeier.bandcamp.com" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
-    Free Download
-  </a>
+  <div class="free-download-wrap">
+    <a class="free-download" href="https://steinwalterfrankmeier.bandcamp.com" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+      Free Download
+    </a>
+  </div>
 </div>
 
 <div class="divider" style="margin-top:88px;"></div>
@@ -453,7 +457,7 @@
   <div class="k-grid">
     <div class="k-block">
       <h3>Allgemein &amp; Booking</h3>
-      <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a>
+      <a href="/cdn-cgi/l/email-protection#572423323e3920363b233225173a363e3b35382f79382530"><span class="__cf_email__" data-cfemail="a4d7d0c1cdcad3c5c8d0c1d6e4c9c5cdc8c6cbdc8acbd6c3">[email&#160;protected]</span></a>
     </div>
     <div class="k-block">
       <h3>Instagram</h3>
@@ -470,7 +474,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── CURSOR ── */
 var mol = document.getElementById('molotov');
 var mouseX = 0, mouseY = 0, curX = 0, curY = 0, isThrown = false;
@@ -569,13 +573,4 @@ document.getElementById('nlForm').addEventListener('submit', function(e) {
   if (!email.includes('@')) return;
   fetch('https://formspree.io/f/mpqolygp', {
     method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({email:email})
-  }).catch(function(){});
-  document.getElementById('nlEmail').value = '';
-  ok.classList.add('show');
-  setTimeout(function() { ok.classList.remove('show'); }, 4000);
-});
-</script>
-</body>
-</html>
+    headers:{'Content-Type':'application/json','Accept':'applic
