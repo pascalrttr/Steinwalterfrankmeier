@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenschutz — stein walter frank meier</title>
+  <style>
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Lig.otf') format('opentype'); font-weight:200; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-DemBol.otf') format('opentype'); font-weight:600; }
+
+    :root { --pink:#fe40b9; --black:#080808; --off:#e8e4dd; }
+
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      background:var(--black); color:var(--off);
+      font-family:'EG',sans-serif; font-weight:200;
+      font-size:16px; line-height:1.8; min-height:100vh;
+    }
+    a { color:var(--pink); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    header {
+      padding:36px 44px 28px;
+      border-bottom:1px solid rgba(232,228,221,.08);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    header a.back {
+      font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+      font-weight:600; color:var(--off); opacity:.5;
+      display:flex; align-items:center; gap:8px;
+      transition:opacity .2s, color .2s;
+    }
+    header a.back:hover { opacity:1; color:var(--pink); text-decoration:none; }
+    header a.back svg { width:14px; height:14px; fill:currentColor; }
+    header .logo {
+      font-weight:600; font-size:13px;
+      letter-spacing:.08em; text-transform:uppercase; opacity:.5;
+    }
+
+    main { max-width:680px; margin:0 auto; padding:80px 44px 120px; }
+
+    h1 {
+      font-weight:600; font-size:11px;
+      letter-spacing:.32em; text-transform:uppercase;
+      color:var(--pink); margin-bottom:48px;
+      display:flex; align-items:center; gap:14px;
+    }
+    h1::after { content:''; width:34px; height:1px; background:var(--pink); opacity:.45; }
+
+    h2 {
+      font-weight:600; font-size:11px;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:var(--off); opacity:.45;
+      margin-top:44px; margin-bottom:10px;
+    }
+
+    p { font-weight:200; opacity:.8; line-height:1.85; }
+    p + p { margin-top:.8em; }
+
+    footer {
+      border-top:1px solid rgba(232,228,221,.07); padding:24px 44px;
+      font-size:11px; font-weight:200; opacity:.3;
+      display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    }
+    footer a { color:inherit; }
+    footer a:hover { color:var(--pink); opacity:1; text-decoration:none; }
+
+    @media (max-width:600px) {
+      header { padding:22px; }
+      main { padding:52px 22px 80px; }
+      footer { padding:20px 22px; flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Zurück
+  </a>
+  <span class="logo">stein walter frank meier</span>
+</header>
+
+<main>
+  <h1>Datenschutzerklärung</h1>
+
+  <h2>1. Verantwortlicher</h2>
+  <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
+  <p>Pascal Ritter<br>
+  Charlottenstraße 83<br>
+  30449 Hannover<br>
+  E-Mail: <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a></p>
+
+  <h2>2. Hosting (GitHub Pages)</h2>
+  <p>Diese Website wird über GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Website werden automatisch technische Zugriffsdaten (z.B. IP-Adresse, Browsertyp, Uhrzeit des Zugriffs) in Server-Logfiles gespeichert. Diese Verarbeitung erfolgt auf Basis von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren Betrieb der Website).</p>
+  <p>Weitere Informationen: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub Datenschutzerklärung</a></p>
+
+  <h2>3. Newsletter (Formspree)</h2>
+  <p>Wenn du dich für unseren Newsletter anmeldest, wird deine E-Mail-Adresse an Formspree (Formspree Inc., USA) übermittelt und dort gespeichert. Diese Daten werden ausschließlich für den Versand unseres Newsletters genutzt und nicht an Dritte weitergegeben.</p>
+  <p>Die Verarbeitung erfolgt auf Grundlage deiner Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Du kannst deine Einwilligung jederzeit widerrufen, indem du uns eine E-Mail an <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a> schickst.</p>
+  <p>Weitere Informationen: <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener">Formspree Datenschutzerklärung</a></p>
+
+  <h2>4. Keine Cookies, kein Tracking</h2>
+  <p>Diese Website verwendet keine Cookies und kein Tracking. Es werden keine Analyse-Tools wie Google Analytics eingesetzt. Wir sammeln keine personenbezogenen Daten über das Surfverhalten unserer Besucher.</p>
+
+  <h2>5. Externe Links</h2>
+  <p>Diese Website enthält Links zu externen Diensten (Instagram, YouTube, Bandcamp). Wenn du diese Links aufrufst, gelten die jeweiligen Datenschutzerklärungen der Anbieter. Wir haben keinen Einfluss auf deren Datenverarbeitung.</p>
+
+  <h2>6. Kontaktaufnahme per E-Mail</h2>
+  <p>Wenn du uns per E-Mail kontaktierst, werden deine Angaben zur Bearbeitung deiner Anfrage gespeichert. Diese Daten werden nicht ohne deine Einwilligung an Dritte weitergegeben. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.</p>
+
+  <h2>7. Deine Rechte</h2>
+  <p>Du hast jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung deiner gespeicherten Daten. Wende dich dazu einfach an <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a>.</p>
+  <p>Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Die zuständige Behörde für Niedersachsen ist der Landesbeauftragte für den Datenschutz Niedersachsen.</p>
+</main>
+
+<footer>
+  <span>© 2025 stein walter frank meier</span>
+  <a href="index.html">← Zurück zur Website</a>
+</footer>
+
+</body>
+</html>
