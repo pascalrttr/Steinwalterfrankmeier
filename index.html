@@ -44,35 +44,26 @@
       width:0; height:0; transform:translate(-50%,-50%);
       animation:ring-expand .5s ease-out forwards;
     }
-    @keyframes ring-expand {
-      0%   { width:8px;  height:8px;  opacity:1; }
-      100% { width:60px; height:60px; opacity:0; }
-    }
+    @keyframes ring-expand { 0%{width:8px;height:8px;opacity:1} 100%{width:60px;height:60px;opacity:0} }
     .fire-burst {
       position:fixed; pointer-events:none; z-index:999998;
-      font-size:36px; line-height:1;
-      transform:translate(-50%,-50%);
+      font-size:36px; line-height:1; transform:translate(-50%,-50%);
       animation:fire-pop .6s ease-out forwards;
     }
     @keyframes fire-pop {
-      0%   { opacity:1; transform:translate(-50%,-50%) scale(.3); }
-      50%  { opacity:1; transform:translate(-50%,-50%) scale(1.4); }
-      100% { opacity:0; transform:translate(-50%,-50%) scale(1.8); }
+      0%{opacity:1;transform:translate(-50%,-50%) scale(.3)}
+      50%{opacity:1;transform:translate(-50%,-50%) scale(1.4)}
+      100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}
     }
 
     /* ══ TILT ══ */
     .tilt-card { position:relative; overflow:hidden; perspective:900px; }
     .tilt-inner { position:absolute; inset:0; transform-style:preserve-3d; }
-    .tilt-photo {
-      position:absolute; inset:-8%;
-      width:116%; height:116%;
-      object-fit:cover; object-position:center 25%; display:block;
-    }
+    .tilt-photo { position:absolute; inset:-8%; width:116%; height:116%; object-fit:cover; object-position:center 25%; display:block; }
     .gloss { position:absolute; inset:0; z-index:2; pointer-events:none; overflow:hidden; }
     .gloss::after {
-      content:''; position:absolute; top:-50%; left:-80%;
-      width:55%; height:200%;
-      background:linear-gradient(105deg, transparent 30%, rgba(255,255,255,.06) 44%, rgba(255,255,255,.18) 50%, rgba(255,255,255,.06) 56%, transparent 70%);
+      content:''; position:absolute; top:-50%; left:-80%; width:55%; height:200%;
+      background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.06) 44%,rgba(255,255,255,.18) 50%,rgba(255,255,255,.06) 56%,transparent 70%);
       transform:skewX(-15deg); opacity:0;
     }
     .tilt-card:hover .gloss::after { opacity:1; animation:gloss-go .8s cubic-bezier(.4,0,.2,1) forwards; }
@@ -83,9 +74,8 @@
     #hero .tilt-card { width:100%; height:100%; }
     .hero-grad {
       position:absolute; inset:0; z-index:3;
-      background:
-        linear-gradient(to bottom, rgba(8,8,8,.5) 0%, rgba(8,8,8,0) 28%, rgba(8,8,8,0) 50%, rgba(8,8,8,.95) 100%),
-        linear-gradient(to right, rgba(8,8,8,.25) 0%, rgba(8,8,8,0) 38%);
+      background:linear-gradient(to bottom,rgba(8,8,8,.5) 0%,rgba(8,8,8,0) 28%,rgba(8,8,8,0) 50%,rgba(8,8,8,.95) 100%),
+                 linear-gradient(to right,rgba(8,8,8,.25) 0%,rgba(8,8,8,0) 38%);
     }
     .hero-grain {
       position:absolute; inset:0; z-index:4; pointer-events:none;
@@ -109,27 +99,14 @@
 
     .hero-center {
       position:absolute; top:50%; left:50%;
-      transform:translate(-50%, calc(-50% + 75px));
-      z-index:10;
-      display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
+      transform:translate(-50%,calc(-50% + 75px));
+      z-index:10; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
     }
     .nl-label { font-weight:600; font-size:11px; letter-spacing:.25em; text-transform:uppercase; opacity:.5; }
-    .nl-form {
-      display:flex; border:1px solid rgba(232,228,221,.28);
-      background:rgba(8,8,8,.6); backdrop-filter:blur(14px);
-    }
-    .nl-form input {
-      background:transparent; border:none; outline:none;
-      font-family:'EG',sans-serif; font-size:13px; font-weight:200;
-      color:var(--off); padding:12px 18px; width:220px;
-    }
+    .nl-form { display:flex; border:1px solid rgba(232,228,221,.28); background:rgba(8,8,8,.6); backdrop-filter:blur(14px); }
+    .nl-form input { background:transparent; border:none; outline:none; font-family:'EG',sans-serif; font-size:13px; font-weight:200; color:var(--off); padding:12px 18px; width:220px; }
     .nl-form input::placeholder { opacity:.38; }
-    .nl-form button {
-      background:var(--pink); border:none; color:var(--black);
-      font-family:'EG',sans-serif; font-weight:600;
-      font-size:11px; letter-spacing:.18em; text-transform:uppercase;
-      padding:12px 22px; cursor:none; transition:background .2s;
-    }
+    .nl-form button { background:var(--pink); border:none; color:var(--black); font-family:'EG',sans-serif; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:12px 22px; cursor:none; transition:background .2s; }
     .nl-form button:hover { background:#ff62c4; }
     .nl-ok { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--pink); font-weight:600; opacity:0; transition:opacity .4s; min-height:16px; }
     .nl-ok.show { opacity:1; }
@@ -153,6 +130,81 @@
     .sec-label::after { content:''; width:34px; height:1px; background:var(--pink); opacity:.45; }
     .divider { max-width:960px; margin:0 auto; height:1px; background:linear-gradient(to right,transparent,rgba(232,228,221,.1),transparent); }
 
+    /* ══ MUSIK PLAYER SECTION ══ */
+    #single { padding-bottom:0; }
+
+    .single-layout {
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap: 44px;
+      align-items: start;
+    }
+
+    .single-cover {
+      position:relative;
+      width:100%;
+      aspect-ratio:1;
+      overflow:hidden;
+    }
+    .single-cover img {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+
+    .single-info {
+      display:flex; flex-direction:column; gap:20px; padding-top:4px;
+    }
+    .single-title {
+      font-weight:600;
+      font-size:clamp(22px,3vw,38px);
+      letter-spacing:0;
+      line-height:1.1;
+    }
+    .single-artist {
+      font-weight:200; font-size:14px;
+      letter-spacing:.18em; text-transform:uppercase; opacity:.5;
+    }
+
+    /* Custom Audio Player */
+    .player-wrap { display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+
+    .player-controls { display:flex; align-items:center; gap:16px; }
+    .play-pause-btn {
+      width:48px; height:48px; border-radius:50%;
+      background:var(--pink); border:none; cursor:none;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; transition:background .2s, transform .15s;
+    }
+    .play-pause-btn:hover { background:#ff62c4; transform:scale(1.08); }
+    .play-pause-btn svg { width:18px; height:18px; fill:var(--black); margin-left:2px; }
+    .play-pause-btn.playing svg { margin-left:0; }
+
+    .player-time-wrap { flex:1; display:flex; flex-direction:column; gap:6px; }
+    .progress-bar-wrap {
+      width:100%; height:3px; background:rgba(232,228,221,.15);
+      cursor:none; position:relative;
+    }
+    .progress-bar-fill { height:100%; background:var(--pink); width:0%; transition:width .1s linear; }
+    .player-times { display:flex; justify-content:space-between; font-size:10px; letter-spacing:.1em; opacity:.4; font-weight:200; }
+
+    /* Action buttons */
+    .single-btns { display:flex; flex-wrap:wrap; gap:12px; margin-top:4px; }
+    .single-btn {
+      display:inline-flex; align-items:center; gap:10px;
+      font-weight:600; font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+      padding:12px 24px; border:1px solid rgba(232,228,221,.2);
+      transition:border-color .2s, color .2s, background .2s;
+    }
+    .single-btn:hover { border-color:var(--pink); color:var(--pink); }
+    .single-btn svg { width:14px; height:14px; fill:currentColor; flex-shrink:0; }
+    .single-btn.gold-btn {
+      background:linear-gradient(135deg,#f5e07a 0%,#c9a84c 35%,#ffe899 55%,#a07830 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      border-color:#c9a84c;
+      filter:drop-shadow(0 0 12px rgba(201,168,76,.25));
+    }
+    .single-btn.gold-btn:hover { border-color:#f5e07a; }
+    .single-btn.gold-btn svg { fill:#c9a84c; }
+
     /* ══ VIDEO ══ */
     #video { padding-bottom:0; }
     .video-card { position:relative; width:100%; aspect-ratio:16/9; display:block; }
@@ -167,19 +219,16 @@
     .play-label { font-weight:600; font-size:clamp(9px,1vw,11px); letter-spacing:.3em; text-transform:uppercase; color:var(--off); opacity:.55; transition:opacity .25s,color .25s; }
     .video-card:hover .play-label { opacity:1; color:var(--pink); }
 
-    /* ══ FREE DOWNLOAD ══ */
     .free-download-wrap { display:flex; justify-content:center; margin-top:32px; }
     .free-download {
       display:inline-flex; align-items:center; gap:16px;
       font-family:'EG',sans-serif; font-weight:700;
-      font-size:clamp(24px,4vw,44px);
-      letter-spacing:.18em; text-transform:uppercase;
-      background:linear-gradient(135deg, #f5e07a 0%, #c9a84c 35%, #ffe899 55%, #a07830 100%);
+      font-size:clamp(24px,4vw,44px); letter-spacing:.18em; text-transform:uppercase;
+      background:linear-gradient(135deg,#f5e07a 0%,#c9a84c 35%,#ffe899 55%,#a07830 100%);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      border:2px solid #c9a84c;
-      padding:20px 52px;
+      border:2px solid #c9a84c; padding:20px 52px;
       filter:drop-shadow(0 0 22px rgba(201,168,76,.4));
-      transition:opacity .2s, transform .2s;
+      transition:opacity .2s,transform .2s;
     }
     .free-download:hover { opacity:.82; transform:scale(1.02); }
     .free-download-icon { width:28px; height:28px; fill:#c9a84c; flex-shrink:0; }
@@ -219,6 +268,8 @@
       .hero-nav .socials { gap:14px; font-size:11px; }
       .hero-tagline { left:22px; }
       .wrap { padding:60px 22px; }
+      .single-layout { grid-template-columns:1fr; }
+      .single-cover { max-width:260px; }
       .k-grid { grid-template-columns:1fr; }
       footer { padding:22px; flex-direction:column; gap:6px; }
       .nl-form input { width:160px; }
@@ -231,15 +282,15 @@
 <!-- CURSOR -->
 <div id="molotov">
   <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="14" cy="4.5" rx="3"   ry="4"   fill="#ff9900"/>
-    <ellipse cx="14" cy="4"   rx="1.6" ry="2.5" fill="#ffe066"/>
-    <rect x="13.2" y="7.5"  width="1.6" height="3.5" rx=".8"  fill="#777"/>
-    <rect x="11"   y="10.5" width="6"   height="5"   rx="2"   fill="#b8d488"/>
-    <rect x="9.5"  y="10.5" width="2"   height="3.5" rx=".8"  fill="#cc4010" transform="rotate(-12 10 11)"/>
-    <rect x="8.5"  y="14.5" width="12"  height="16"  rx="5"   fill="#a8cc78"/>
-    <rect x="10.5" y="18.5" width="8"   height="10"  rx="3"   fill="#78aa44" opacity=".75"/>
-    <rect x="10.5" y="15.5" width="3"   height="6"   rx="1.5" fill="rgba(255,255,255,.30)"/>
-    <rect x="9.5"  y="29.5" width="11"  height="2.5" rx="1.2" fill="#90c060"/>
+    <ellipse cx="14" cy="4.5" rx="3" ry="4" fill="#ff9900"/>
+    <ellipse cx="14" cy="4" rx="1.6" ry="2.5" fill="#ffe066"/>
+    <rect x="13.2" y="7.5" width="1.6" height="3.5" rx=".8" fill="#777"/>
+    <rect x="11" y="10.5" width="6" height="5" rx="2" fill="#b8d488"/>
+    <rect x="9.5" y="10.5" width="2" height="3.5" rx=".8" fill="#cc4010" transform="rotate(-12 10 11)"/>
+    <rect x="8.5" y="14.5" width="12" height="16" rx="5" fill="#a8cc78"/>
+    <rect x="10.5" y="18.5" width="8" height="10" rx="3" fill="#78aa44" opacity=".75"/>
+    <rect x="10.5" y="15.5" width="3" height="6" rx="1.5" fill="rgba(255,255,255,.30)"/>
+    <rect x="9.5" y="29.5" width="11" height="2.5" rx="1.2" fill="#90c060"/>
   </svg>
 </div>
 
@@ -302,6 +353,63 @@
     </div>
   </div>
 </div>
+
+<!-- SINGLE: RACHE FÜR DOLLY -->
+<div class="wrap" id="single">
+  <div class="sec-label">Neue Single</div>
+  <div class="single-layout">
+
+    <!-- Cover -->
+    <div class="single-cover">
+      <img src="rache-dolly-cover.jpg" alt="Rache für Dolly — Cover" />
+    </div>
+
+    <!-- Info + Player -->
+    <div class="single-info">
+      <div>
+        <div class="single-title">Rache für Dolly</div>
+        <div class="single-artist">Stein Walter Frank Meier</div>
+      </div>
+
+      <!-- Audio Player -->
+      <div class="player-wrap">
+        <audio id="audioPlayer" preload="none" src="rache-fuer-dolly.mp3"></audio>
+        <div class="player-controls">
+          <button class="play-pause-btn" id="playBtn" onclick="togglePlay()">
+            <!-- Play icon -->
+            <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <!-- Pause icon (hidden) -->
+            <svg id="iconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <div class="player-time-wrap">
+            <div class="progress-bar-wrap" id="progressWrap">
+              <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+            <div class="player-times">
+              <span id="timeCurrent">0:00</span>
+              <span id="timeTotal">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="single-btns">
+        <a class="single-btn gold-btn" href="rache-fuer-dolly.mp3" download="Rache-fuer-Dolly-SWFM.mp3">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          Free Download
+        </a>
+        <a class="single-btn" href="https://steinwalterfrankmeier.bandcamp.com/track/rache-f-r-dolly" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+          Bandcamp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider" style="margin-top:88px;"></div>
 
 <!-- VIDEO -->
 <div class="wrap" id="video">
@@ -399,7 +507,7 @@ window.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = 
   if (!isThrown) {
     curX += (mouseX - curX) * 0.16;
     curY += (mouseY - curY) * 0.16;
-    mol.style.transform = 'translate(' + (curX-12) + 'px,' + (curY-32) + 'px) rotate(-40deg)';
+    mol.style.transform = 'translate('+(curX-12)+'px,'+(curY-32)+'px) rotate(-40deg)';
   }
   requestAnimationFrame(loop);
 })();
@@ -408,8 +516,7 @@ window.addEventListener('click', function(e) {
   isThrown = true;
   var ring = document.createElement('div');
   ring.className = 'click-ring';
-  ring.style.left = e.clientX + 'px';
-  ring.style.top  = e.clientY + 'px';
+  ring.style.left = e.clientX+'px'; ring.style.top = e.clientY+'px';
   document.body.appendChild(ring);
   setTimeout(function() { if (ring.parentNode) ring.parentNode.removeChild(ring); }, 600);
   var sx = curX-12, sy = curY-32;
@@ -417,8 +524,8 @@ window.addEventListener('click', function(e) {
   var dur = 560, t0 = null;
   function animThrow(ts) {
     if (!t0) t0 = ts;
-    var p = Math.min((ts-t0)/dur, 1);
-    var i = Math.min(Math.floor(p*(frames.length-1)), frames.length-2);
+    var p = Math.min((ts-t0)/dur,1);
+    var i = Math.min(Math.floor(p*(frames.length-1)),frames.length-2);
     var lp = p*(frames.length-1)-i;
     var a = frames[i], b = frames[i+1];
     mol.style.transform = 'translate('+(a.x+(b.x-a.x)*lp)+'px,'+(a.y+(b.y-a.y)*lp)+'px) rotate('+(a.r+(b.r-a.r)*lp)+'deg) scale('+(a.s+(b.s-a.s)*lp)+')';
@@ -456,8 +563,58 @@ function makeTilt(cardId, innerId, photoId, tiltAmt, parAmt) {
     requestAnimationFrame(loop);
   })();
 }
-makeTilt('heroCard',  'heroInner',  'heroPhoto',  9, 18);
-makeTilt('videoCard', 'videoInner', 'videoPhoto', 6, 12);
+makeTilt('heroCard','heroInner','heroPhoto',9,18);
+makeTilt('videoCard','videoInner','videoPhoto',6,12);
+
+/* ── AUDIO PLAYER ── */
+var audio = document.getElementById('audioPlayer');
+var playBtn = document.getElementById('playBtn');
+var iconPlay = document.getElementById('iconPlay');
+var iconPause = document.getElementById('iconPause');
+var progressFill = document.getElementById('progressFill');
+var progressWrap = document.getElementById('progressWrap');
+var timeCurrent = document.getElementById('timeCurrent');
+var timeTotal = document.getElementById('timeTotal');
+
+function fmt(s) {
+  var m = Math.floor(s/60);
+  var sec = Math.floor(s%60);
+  return m+':'+(sec<10?'0':'')+sec;
+}
+function togglePlay() {
+  if (audio.paused) {
+    audio.play();
+    iconPlay.style.display = 'none';
+    iconPause.style.display = 'block';
+    playBtn.classList.add('playing');
+  } else {
+    audio.pause();
+    iconPlay.style.display = 'block';
+    iconPause.style.display = 'none';
+    playBtn.classList.remove('playing');
+  }
+}
+audio.addEventListener('timeupdate', function() {
+  if (audio.duration) {
+    progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+    timeCurrent.textContent = fmt(audio.currentTime);
+  }
+});
+audio.addEventListener('loadedmetadata', function() {
+  timeTotal.textContent = fmt(audio.duration);
+});
+audio.addEventListener('ended', function() {
+  iconPlay.style.display = 'block';
+  iconPause.style.display = 'none';
+  playBtn.classList.remove('playing');
+  progressFill.style.width = '0%';
+  timeCurrent.textContent = '0:00';
+});
+progressWrap.addEventListener('click', function(e) {
+  if (!audio.duration) return;
+  var r = progressWrap.getBoundingClientRect();
+  audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
+});
 
 /* ── NEWSLETTER ── */
 document.getElementById('nlForm').addEventListener('submit', function(e) {
@@ -465,7 +622,7 @@ document.getElementById('nlForm').addEventListener('submit', function(e) {
   var email = document.getElementById('nlEmail').value.trim();
   var ok = document.getElementById('nlOk');
   if (!email.includes('@')) return;
-  fetch('https://formspree.io/f/mpqolygp', {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify({email:email})}).catch(function(){});
+  fetch('https://formspree.io/f/mpqolygp', {method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:email})}).catch(function(){});
   document.getElementById('nlEmail').value = '';
   ok.classList.add('show');
   setTimeout(function() { ok.classList.remove('show'); }, 4000);
