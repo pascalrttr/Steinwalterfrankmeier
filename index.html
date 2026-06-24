@@ -171,6 +171,7 @@
       .free-download { padding:14px 28px; }
     }
   </style>
+
 </head>
 <body>
 
@@ -280,7 +281,7 @@
         </div>
       </div>
       <div class="single-btns">
-        <a class="single-btn gold-btn" href="rache-fuer-dolly.mp3" download="Rache-fuer-Dolly-SWFM.mp3">
+        <a class="single-btn gold-btn" href="rache-fuer-dolly.mp3" download="Rache-fuer-Dolly-SWFM.mp3" onclick="trackDownload('rache-fuer-dolly')">
           <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           Free Download
         </a>
@@ -326,7 +327,7 @@
         </div>
       </div>
       <div class="single-btns">
-        <a class="single-btn gold-btn" href="Notwehr.mp3" download="Notwehr-SWFM.mp3">
+        <a class="single-btn gold-btn" href="Notwehr.mp3" download="Notwehr-SWFM.mp3" onclick="trackDownload('notwehr')">
           <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           Free Download
         </a>
@@ -512,6 +513,26 @@ document.getElementById('nlForm').addEventListener('submit',function(e){
   fetch('https://formspree.io/f/mpqolygp',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:email})}).catch(function(){});
   document.getElementById('nlEmail').value='';ok.classList.add('show');setTimeout(function(){ok.classList.remove('show');},4000);
 });
+
+/* ── DOWNLOAD TRACKING via Formspree ──
+   Jeder Klick auf "Free Download" schickt einen
+   stillen Ping an euer Formspree-Dashboard.
+   Dort seht ihr unter "Submissions" wie oft
+   jeder Song heruntergeladen wurde.
+   Kein neuer Service, keine fremden Daten.
+── */
+function trackDownload(songName) {
+  fetch('https://formspree.io/f/mpqolygp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      _subject: 'Download: ' + songName,
+      song: songName,
+      event: 'download',
+      time: new Date().toLocaleString('de-DE')
+    })
+  }).catch(function(){});
+}
 </script>
 </body>
 </html>
