@@ -22,86 +22,41 @@
 
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; }
-    body {
-      background:var(--black); color:var(--off);
-      font-family:'EG',sans-serif; font-weight:200;
-      font-size:16px; line-height:1.6;
-      overflow-x:hidden; cursor:none;
-    }
+    body { background:var(--black); color:var(--off); font-family:'EG',sans-serif; font-weight:200; font-size:16px; line-height:1.6; overflow-x:hidden; cursor:none; }
     a { color:inherit; text-decoration:none; }
     ::selection { background:var(--pink); color:var(--black); }
 
     /* ══ CURSOR ══ */
-    #molotov {
-      position:fixed; top:0; left:0;
-      width:36px; height:36px;
-      pointer-events:none; z-index:999999;
-      transform:translate(-200px,-200px) rotate(-40deg);
-    }
-    .click-ring {
-      position:fixed; pointer-events:none; z-index:999998;
-      border-radius:50%; border:2px solid var(--pink);
-      width:0; height:0; transform:translate(-50%,-50%);
-      animation:ring-expand .5s ease-out forwards;
-    }
+    #molotov { position:fixed; top:0; left:0; width:36px; height:36px; pointer-events:none; z-index:999999; transform:translate(-200px,-200px) rotate(-40deg); }
+    .click-ring { position:fixed; pointer-events:none; z-index:999998; border-radius:50%; border:2px solid var(--pink); width:0; height:0; transform:translate(-50%,-50%); animation:ring-expand .5s ease-out forwards; }
     @keyframes ring-expand { 0%{width:8px;height:8px;opacity:1} 100%{width:60px;height:60px;opacity:0} }
-    .fire-burst {
-      position:fixed; pointer-events:none; z-index:999998;
-      font-size:36px; line-height:1; transform:translate(-50%,-50%);
-      animation:fire-pop .6s ease-out forwards;
-    }
-    @keyframes fire-pop {
-      0%{opacity:1;transform:translate(-50%,-50%) scale(.3)}
-      50%{opacity:1;transform:translate(-50%,-50%) scale(1.4)}
-      100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}
-    }
+    .fire-burst { position:fixed; pointer-events:none; z-index:999998; font-size:36px; line-height:1; transform:translate(-50%,-50%); animation:fire-pop .6s ease-out forwards; }
+    @keyframes fire-pop { 0%{opacity:1;transform:translate(-50%,-50%) scale(.3)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.4)} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)} }
 
     /* ══ TILT ══ */
     .tilt-card { position:relative; overflow:hidden; perspective:900px; }
     .tilt-inner { position:absolute; inset:0; transform-style:preserve-3d; }
     .tilt-photo { position:absolute; inset:-8%; width:116%; height:116%; object-fit:cover; object-position:center 25%; display:block; }
     .gloss { position:absolute; inset:0; z-index:2; pointer-events:none; overflow:hidden; }
-    .gloss::after {
-      content:''; position:absolute; top:-50%; left:-80%; width:55%; height:200%;
-      background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.06) 44%,rgba(255,255,255,.18) 50%,rgba(255,255,255,.06) 56%,transparent 70%);
-      transform:skewX(-15deg); opacity:0;
-    }
+    .gloss::after { content:''; position:absolute; top:-50%; left:-80%; width:55%; height:200%; background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.06) 44%,rgba(255,255,255,.18) 50%,rgba(255,255,255,.06) 56%,transparent 70%); transform:skewX(-15deg); opacity:0; }
     .tilt-card:hover .gloss::after { opacity:1; animation:gloss-go .8s cubic-bezier(.4,0,.2,1) forwards; }
     @keyframes gloss-go { from{left:-80%} to{left:160%} }
 
     /* ══ HERO ══ */
     #hero { position:relative; width:100vw; height:100dvh; }
     #hero .tilt-card { width:100%; height:100%; }
-    .hero-grad {
-      position:absolute; inset:0; z-index:3;
-      background:linear-gradient(to bottom,rgba(8,8,8,.5) 0%,rgba(8,8,8,0) 28%,rgba(8,8,8,0) 50%,rgba(8,8,8,.95) 100%),
-                 linear-gradient(to right,rgba(8,8,8,.25) 0%,rgba(8,8,8,0) 38%);
-    }
-    .hero-grain {
-      position:absolute; inset:0; z-index:4; pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
-      background-size:250px;
-    }
-    .hero-nav {
-      position:absolute; top:0; left:0; right:0; z-index:10;
-      display:grid; grid-template-columns:1fr auto 1fr;
-      align-items:center; padding:28px 44px;
-    }
+    .hero-grad { position:absolute; inset:0; z-index:3; background:linear-gradient(to bottom,rgba(8,8,8,.5) 0%,rgba(8,8,8,0) 28%,rgba(8,8,8,0) 50%,rgba(8,8,8,.95) 100%),linear-gradient(to right,rgba(8,8,8,.25) 0%,rgba(8,8,8,0) 38%); }
+    .hero-grain { position:absolute; inset:0; z-index:4; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E"); background-size:250px; }
+
+    .hero-nav { position:absolute; top:0; left:0; right:0; z-index:10; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:28px 44px; }
     .hero-nav .logo img { height:clamp(40px,5.5vw,70px); width:auto; display:block; }
-    .hero-nav .socials {
-      grid-column:3; display:flex; gap:24px; justify-content:flex-end; align-items:center;
-      font-weight:200; font-size:13px; text-transform:uppercase;
-    }
+    .hero-nav .socials { grid-column:3; display:flex; gap:24px; justify-content:flex-end; align-items:center; font-weight:200; font-size:13px; text-transform:uppercase; }
     .hero-nav .socials a { opacity:.65; transition:opacity .2s,color .2s; }
     .hero-nav .socials a:hover { opacity:1; color:var(--pink); }
     .presse-link { display:flex; align-items:center; gap:8px; padding-left:8px; border-left:1px solid rgba(232,228,221,.2); }
     .presse-link svg { width:13px; height:13px; flex-shrink:0; }
 
-    .hero-center {
-      position:absolute; top:50%; left:50%;
-      transform:translate(-50%,calc(-50% + 75px));
-      z-index:10; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
-    }
+    .hero-center { position:absolute; top:50%; left:50%; transform:translate(-50%,calc(-50% + 75px)); z-index:10; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; }
     .nl-label { font-weight:600; font-size:11px; letter-spacing:.25em; text-transform:uppercase; opacity:.5; }
     .nl-form { display:flex; border:1px solid rgba(232,228,221,.28); background:rgba(8,8,8,.6); backdrop-filter:blur(14px); }
     .nl-form input { background:transparent; border:none; outline:none; font-family:'EG',sans-serif; font-size:13px; font-weight:200; color:var(--off); padding:12px 18px; width:220px; }
@@ -130,106 +85,46 @@
     .sec-label::after { content:''; width:34px; height:1px; background:var(--pink); opacity:.45; }
     .divider { max-width:960px; margin:0 auto; height:1px; background:linear-gradient(to right,transparent,rgba(232,228,221,.1),transparent); }
 
-    /* ══ MUSIK PLAYER SECTION ══ */
-    #single { padding-bottom:0; }
+    /* ══ SINGLE PLAYER ══ */
+    .single-layout { display:grid; grid-template-columns:280px 1fr; gap:44px; align-items:start; }
+    .single-cover { width:100%; aspect-ratio:1; overflow:hidden; }
+    .single-cover img { width:100%; height:100%; object-fit:cover; display:block; }
+    .single-info { display:flex; flex-direction:column; gap:20px; padding-top:4px; }
+    .single-title { font-weight:600; font-size:clamp(22px,3vw,38px); letter-spacing:0; line-height:1.1; }
+    .single-artist { font-weight:200; font-size:14px; letter-spacing:.18em; text-transform:uppercase; opacity:.5; }
 
-    .single-layout {
-      display:grid;
-      grid-template-columns: 280px 1fr;
-      gap: 44px;
-      align-items: start;
-    }
-
-    .single-cover {
-      position:relative;
-      width:100%;
-      aspect-ratio:1;
-      overflow:hidden;
-    }
-    .single-cover img {
-      width:100%; height:100%; object-fit:cover; display:block;
-    }
-
-    .single-info {
-      display:flex; flex-direction:column; gap:20px; padding-top:4px;
-    }
-    .single-title {
-      font-weight:600;
-      font-size:clamp(22px,3vw,38px);
-      letter-spacing:0;
-      line-height:1.1;
-    }
-    .single-artist {
-      font-weight:200; font-size:14px;
-      letter-spacing:.18em; text-transform:uppercase; opacity:.5;
-    }
-
-    /* Custom Audio Player */
     .player-wrap { display:flex; flex-direction:column; gap:10px; margin-top:4px; }
-
     .player-controls { display:flex; align-items:center; gap:16px; }
-    .play-pause-btn {
-      width:48px; height:48px; border-radius:50%;
-      background:var(--pink); border:none; cursor:none;
-      display:flex; align-items:center; justify-content:center;
-      flex-shrink:0; transition:background .2s, transform .15s;
-    }
+    .play-pause-btn { width:48px; height:48px; border-radius:50%; background:var(--pink); border:none; cursor:none; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s,transform .15s; }
     .play-pause-btn:hover { background:#ff62c4; transform:scale(1.08); }
     .play-pause-btn svg { width:18px; height:18px; fill:var(--black); margin-left:2px; }
-    .play-pause-btn.playing svg { margin-left:0; }
-
     .player-time-wrap { flex:1; display:flex; flex-direction:column; gap:6px; }
-    .progress-bar-wrap {
-      width:100%; height:3px; background:rgba(232,228,221,.15);
-      cursor:none; position:relative;
-    }
-    .progress-bar-fill { height:100%; background:var(--pink); width:0%; transition:width .1s linear; }
+    .progress-bar-wrap { width:100%; height:3px; background:rgba(232,228,221,.15); cursor:pointer; position:relative; }
+    .progress-bar-fill { height:100%; background:var(--pink); width:0%; transition:width .1s linear; pointer-events:none; }
     .player-times { display:flex; justify-content:space-between; font-size:10px; letter-spacing:.1em; opacity:.4; font-weight:200; }
 
-    /* Action buttons */
     .single-btns { display:flex; flex-wrap:wrap; gap:12px; margin-top:4px; }
-    .single-btn {
-      display:inline-flex; align-items:center; gap:10px;
-      font-weight:600; font-size:11px; letter-spacing:.2em; text-transform:uppercase;
-      padding:12px 24px; border:1px solid rgba(232,228,221,.2);
-      transition:border-color .2s, color .2s, background .2s;
-    }
+    .single-btn { display:inline-flex; align-items:center; gap:10px; font-weight:600; font-size:11px; letter-spacing:.2em; text-transform:uppercase; padding:12px 24px; border:1px solid rgba(232,228,221,.2); transition:border-color .2s,color .2s,background .2s; }
     .single-btn:hover { border-color:var(--pink); color:var(--pink); }
     .single-btn svg { width:14px; height:14px; fill:currentColor; flex-shrink:0; }
-    .single-btn.gold-btn {
-      background:linear-gradient(135deg,#f5e07a 0%,#c9a84c 35%,#ffe899 55%,#a07830 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      border-color:#c9a84c;
-      filter:drop-shadow(0 0 12px rgba(201,168,76,.25));
-    }
+    .single-btn.gold-btn { background:linear-gradient(135deg,#f5e07a 0%,#c9a84c 35%,#ffe899 55%,#a07830 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; border-color:#c9a84c; filter:drop-shadow(0 0 12px rgba(201,168,76,.25)); }
     .single-btn.gold-btn:hover { border-color:#f5e07a; }
     .single-btn.gold-btn svg { fill:#c9a84c; }
 
     /* ══ VIDEO ══ */
-    #video { padding-bottom:0; }
     .video-card { position:relative; width:100%; aspect-ratio:16/9; display:block; }
     .video-card .tilt-photo { object-position:center center; }
     .video-veil { position:absolute; inset:0; z-index:3; background:rgba(8,8,8,.22); transition:background .3s; }
     .video-card:hover .video-veil { background:rgba(8,8,8,.08); }
     .video-play { position:absolute; inset:0; z-index:5; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; }
-    .play-btn { width:clamp(60px,8vw,100px); height:clamp(60px,8vw,100px); border-radius:50%; border:2px solid rgba(232,228,221,.85); display:flex; align-items:center; justify-content:center; background:rgba(8,8,8,.45); backdrop-filter:blur(6px); transition:transform .25s,background .25s,border-color .25s; }
-    .play-btn svg { width:36%; height:36%; fill:var(--off); margin-left:8%; transition:fill .25s; }
-    .video-card:hover .play-btn { transform:scale(1.1); background:rgba(254,64,185,.25); border-color:var(--pink); }
-    .video-card:hover .play-btn svg { fill:var(--pink); }
+    .v-play-btn { width:clamp(60px,8vw,100px); height:clamp(60px,8vw,100px); border-radius:50%; border:2px solid rgba(232,228,221,.85); display:flex; align-items:center; justify-content:center; background:rgba(8,8,8,.45); backdrop-filter:blur(6px); transition:transform .25s,background .25s,border-color .25s; }
+    .v-play-btn svg { width:36%; height:36%; fill:var(--off); margin-left:8%; transition:fill .25s; }
+    .video-card:hover .v-play-btn { transform:scale(1.1); background:rgba(254,64,185,.25); border-color:var(--pink); }
+    .video-card:hover .v-play-btn svg { fill:var(--pink); }
     .play-label { font-weight:600; font-size:clamp(9px,1vw,11px); letter-spacing:.3em; text-transform:uppercase; color:var(--off); opacity:.55; transition:opacity .25s,color .25s; }
     .video-card:hover .play-label { opacity:1; color:var(--pink); }
-
     .free-download-wrap { display:flex; justify-content:center; margin-top:32px; }
-    .free-download {
-      display:inline-flex; align-items:center; gap:16px;
-      font-family:'EG',sans-serif; font-weight:700;
-      font-size:clamp(24px,4vw,44px); letter-spacing:.18em; text-transform:uppercase;
-      background:linear-gradient(135deg,#f5e07a 0%,#c9a84c 35%,#ffe899 55%,#a07830 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      border:2px solid #c9a84c; padding:20px 52px;
-      filter:drop-shadow(0 0 22px rgba(201,168,76,.4));
-      transition:opacity .2s,transform .2s;
-    }
+    .free-download { display:inline-flex; align-items:center; gap:16px; font-family:'EG',sans-serif; font-weight:700; font-size:clamp(24px,4vw,44px); letter-spacing:.18em; text-transform:uppercase; background:linear-gradient(135deg,#f5e07a 0%,#c9a84c 35%,#ffe899 55%,#a07830 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; border:2px solid #c9a84c; padding:20px 52px; filter:drop-shadow(0 0 22px rgba(201,168,76,.4)); transition:opacity .2s,transform .2s; }
     .free-download:hover { opacity:.82; transform:scale(1.02); }
     .free-download-icon { width:28px; height:28px; fill:#c9a84c; flex-shrink:0; }
 
@@ -355,48 +250,38 @@
 </div>
 
 <!-- SINGLE: RACHE FÜR DOLLY -->
-<div class="wrap" id="single">
+<div class="wrap" id="single1">
   <div class="sec-label">Neue Single</div>
   <div class="single-layout">
-
-    <!-- Cover -->
     <div class="single-cover">
       <img src="rache-dolly-cover.jpg" alt="Rache für Dolly — Cover" />
     </div>
-
-    <!-- Info + Player -->
     <div class="single-info">
       <div>
         <div class="single-title">Rache für Dolly</div>
         <div class="single-artist">Stein Walter Frank Meier</div>
       </div>
-
-      <!-- Audio Player -->
       <div class="player-wrap">
-        <audio id="audioPlayer" preload="none" src="rache-fuer-dolly.mp3"></audio>
+        <audio id="audio1" preload="none" src="rache-fuer-dolly.mp3"></audio>
         <div class="player-controls">
-          <button class="play-pause-btn" id="playBtn" onclick="togglePlay()">
-            <!-- Play icon -->
-            <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            <!-- Pause icon (hidden) -->
-            <svg id="iconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <button class="play-pause-btn" id="playBtn1" onclick="togglePlay('audio1','playBtn1','icon1play','icon1pause','prog1fill','time1cur','time1tot')">
+            <svg id="icon1play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="icon1pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
           </button>
           <div class="player-time-wrap">
-            <div class="progress-bar-wrap" id="progressWrap">
-              <div class="progress-bar-fill" id="progressFill"></div>
+            <div class="progress-bar-wrap" onclick="seek('audio1',event,this)">
+              <div class="progress-bar-fill" id="prog1fill"></div>
             </div>
             <div class="player-times">
-              <span id="timeCurrent">0:00</span>
-              <span id="timeTotal">—</span>
+              <span id="time1cur">0:00</span>
+              <span id="time1tot">—</span>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Buttons -->
       <div class="single-btns">
         <a class="single-btn gold-btn" href="rache-fuer-dolly.mp3" download="Rache-fuer-Dolly-SWFM.mp3">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           Free Download
         </a>
         <a class="single-btn" href="https://steinwalterfrankmeier.bandcamp.com/track/rache-f-r-dolly" target="_blank" rel="noopener">
@@ -405,11 +290,56 @@
         </a>
       </div>
     </div>
-
   </div>
 </div>
 
-<div class="divider" style="margin-top:88px;"></div>
+<div class="divider"></div>
+
+<!-- SINGLE: NOTWEHR -->
+<div class="wrap" id="single2">
+  <div class="sec-label">Single</div>
+  <div class="single-layout">
+    <div class="single-cover">
+      <img src="NotwehrCover.jpeg" alt="Notwehr — Cover" />
+    </div>
+    <div class="single-info">
+      <div>
+        <div class="single-title">Notwehr</div>
+        <div class="single-artist">Stein Walter Frank Meier</div>
+      </div>
+      <div class="player-wrap">
+        <audio id="audio2" preload="none" src="Notwehr.mp3"></audio>
+        <div class="player-controls">
+          <button class="play-pause-btn" id="playBtn2" onclick="togglePlay('audio2','playBtn2','icon2play','icon2pause','prog2fill','time2cur','time2tot')">
+            <svg id="icon2play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="icon2pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <div class="player-time-wrap">
+            <div class="progress-bar-wrap" onclick="seek('audio2',event,this)">
+              <div class="progress-bar-fill" id="prog2fill"></div>
+            </div>
+            <div class="player-times">
+              <span id="time2cur">0:00</span>
+              <span id="time2tot">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="single-btns">
+        <a class="single-btn gold-btn" href="Notwehr.mp3" download="Notwehr-SWFM.mp3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Free Download
+        </a>
+        <a class="single-btn" href="https://steinwalterfrankmeier.bandcamp.com/track/notwehr" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+          Bandcamp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
 
 <!-- VIDEO -->
 <div class="wrap" id="video">
@@ -422,7 +352,7 @@
     <div class="gloss"></div>
     <div class="video-veil"></div>
     <div class="video-play">
-      <div class="play-btn">
+      <div class="v-play-btn">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <span class="play-label">Notwehr — Live Video</span>
@@ -481,7 +411,7 @@
   <div class="k-grid">
     <div class="k-block">
       <h3>Allgemein &amp; Booking</h3>
-      <a href="mailto:steinwalter@mailbox.org">steinwalter@mailbox.org</a>
+      <a href="mailto:steinwalterfrankmeier@gmail.com">steinwalterfrankmeier@gmail.com</a>
     </div>
     <div class="k-block">
       <h3>Instagram</h3>
@@ -501,131 +431,86 @@
 <script>
 /* ── CURSOR ── */
 var mol = document.getElementById('molotov');
-var mouseX = 0, mouseY = 0, curX = 0, curY = 0, isThrown = false;
-window.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
-(function loop() {
-  if (!isThrown) {
-    curX += (mouseX - curX) * 0.16;
-    curY += (mouseY - curY) * 0.16;
-    mol.style.transform = 'translate('+(curX-12)+'px,'+(curY-32)+'px) rotate(-40deg)';
-  }
+var mouseX=0,mouseY=0,curX=0,curY=0,isThrown=false;
+window.addEventListener('mousemove',function(e){mouseX=e.clientX;mouseY=e.clientY;});
+(function loop(){
+  if(!isThrown){curX+=(mouseX-curX)*.16;curY+=(mouseY-curY)*.16;mol.style.transform='translate('+(curX-12)+'px,'+(curY-32)+'px) rotate(-40deg)';}
   requestAnimationFrame(loop);
 })();
-window.addEventListener('click', function(e) {
-  if (isThrown) return;
-  isThrown = true;
-  var ring = document.createElement('div');
-  ring.className = 'click-ring';
-  ring.style.left = e.clientX+'px'; ring.style.top = e.clientY+'px';
-  document.body.appendChild(ring);
-  setTimeout(function() { if (ring.parentNode) ring.parentNode.removeChild(ring); }, 600);
-  var sx = curX-12, sy = curY-32;
-  var frames = [{x:sx,y:sy,r:-40,s:1,o:1},{x:sx+80,y:sy-120,r:-100,s:1.15,o:1},{x:sx+160,y:sy-60,r:-170,s:0.9,o:0.7},{x:sx+220,y:sy+40,r:-230,s:0.5,o:0}];
-  var dur = 560, t0 = null;
-  function animThrow(ts) {
-    if (!t0) t0 = ts;
-    var p = Math.min((ts-t0)/dur,1);
-    var i = Math.min(Math.floor(p*(frames.length-1)),frames.length-2);
-    var lp = p*(frames.length-1)-i;
-    var a = frames[i], b = frames[i+1];
-    mol.style.transform = 'translate('+(a.x+(b.x-a.x)*lp)+'px,'+(a.y+(b.y-a.y)*lp)+'px) rotate('+(a.r+(b.r-a.r)*lp)+'deg) scale('+(a.s+(b.s-a.s)*lp)+')';
-    mol.style.opacity = a.o+(b.o-a.o)*lp;
-    if (p < 1) { requestAnimationFrame(animThrow); }
-    else {
-      var fire = document.createElement('div');
-      fire.className = 'fire-burst'; fire.textContent = '🔥';
-      fire.style.left = (e.clientX+100)+'px'; fire.style.top = (e.clientY-10)+'px';
-      document.body.appendChild(fire);
-      setTimeout(function() { if (fire.parentNode) fire.parentNode.removeChild(fire); }, 700);
-      mol.style.opacity = '1'; curX = mouseX; curY = mouseY; isThrown = false;
-    }
+window.addEventListener('click',function(e){
+  if(isThrown)return;isThrown=true;
+  var ring=document.createElement('div');ring.className='click-ring';ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';document.body.appendChild(ring);
+  setTimeout(function(){if(ring.parentNode)ring.parentNode.removeChild(ring);},600);
+  var sx=curX-12,sy=curY-32;
+  var frames=[{x:sx,y:sy,r:-40,s:1,o:1},{x:sx+80,y:sy-120,r:-100,s:1.15,o:1},{x:sx+160,y:sy-60,r:-170,s:0.9,o:0.7},{x:sx+220,y:sy+40,r:-230,s:0.5,o:0}];
+  var dur=560,t0=null;
+  function animThrow(ts){
+    if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var i=Math.min(Math.floor(p*(frames.length-1)),frames.length-2);var lp=p*(frames.length-1)-i;var a=frames[i],b=frames[i+1];
+    mol.style.transform='translate('+(a.x+(b.x-a.x)*lp)+'px,'+(a.y+(b.y-a.y)*lp)+'px) rotate('+(a.r+(b.r-a.r)*lp)+'deg) scale('+(a.s+(b.s-a.s)*lp)+')';mol.style.opacity=a.o+(b.o-a.o)*lp;
+    if(p<1){requestAnimationFrame(animThrow);}
+    else{var fire=document.createElement('div');fire.className='fire-burst';fire.textContent='🔥';fire.style.left=(e.clientX+100)+'px';fire.style.top=(e.clientY-10)+'px';document.body.appendChild(fire);setTimeout(function(){if(fire.parentNode)fire.parentNode.removeChild(fire);},700);mol.style.opacity='1';curX=mouseX;curY=mouseY;isThrown=false;}
   }
   requestAnimationFrame(animThrow);
 });
 
 /* ── TILT ── */
-function makeTilt(cardId, innerId, photoId, tiltAmt, parAmt) {
-  var card = document.getElementById(cardId);
-  var inner = document.getElementById(innerId);
-  var photo = document.getElementById(photoId);
-  if (!card || !inner || !photo) return;
+function makeTilt(cardId,innerId,photoId,tA,pA){
+  var card=document.getElementById(cardId),inner=document.getElementById(innerId),photo=document.getElementById(photoId);
+  if(!card||!inner||!photo)return;
   var tx=0,ty=0,px=0,py=0,cx=0,cy=0,cpx=0,cpy=0;
-  card.addEventListener('mousemove', function(e) {
-    var r = card.getBoundingClientRect();
-    var nx = (e.clientX-r.left)/r.width-0.5, ny = (e.clientY-r.top)/r.height-0.5;
-    tx=ny*-tiltAmt; ty=nx*tiltAmt; px=nx*-parAmt; py=ny*-parAmt;
-  });
-  card.addEventListener('mouseleave', function() { tx=ty=px=py=0; });
-  (function loop() {
-    cx+=(tx-cx)*.07; cy+=(ty-cy)*.07; cpx+=(px-cpx)*.07; cpy+=(py-cpy)*.07;
-    inner.style.transform = 'rotateX('+cx+'deg) rotateY('+cy+'deg)';
-    photo.style.transform = 'translate('+cpx+'px,'+cpy+'px) scale(1.04)';
-    requestAnimationFrame(loop);
-  })();
+  card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();var nx=(e.clientX-r.left)/r.width-.5,ny=(e.clientY-r.top)/r.height-.5;tx=ny*-tA;ty=nx*tA;px=nx*-pA;py=ny*-pA;});
+  card.addEventListener('mouseleave',function(){tx=ty=px=py=0;});
+  (function loop(){cx+=(tx-cx)*.07;cy+=(ty-cy)*.07;cpx+=(px-cpx)*.07;cpy+=(py-cpy)*.07;inner.style.transform='rotateX('+cx+'deg) rotateY('+cy+'deg)';photo.style.transform='translate('+cpx+'px,'+cpy+'px) scale(1.04)';requestAnimationFrame(loop);})();
 }
 makeTilt('heroCard','heroInner','heroPhoto',9,18);
 makeTilt('videoCard','videoInner','videoPhoto',6,12);
 
-/* ── AUDIO PLAYER ── */
-var audio = document.getElementById('audioPlayer');
-var playBtn = document.getElementById('playBtn');
-var iconPlay = document.getElementById('iconPlay');
-var iconPause = document.getElementById('iconPause');
-var progressFill = document.getElementById('progressFill');
-var progressWrap = document.getElementById('progressWrap');
-var timeCurrent = document.getElementById('timeCurrent');
-var timeTotal = document.getElementById('timeTotal');
+/* ── AUDIO PLAYERS ── */
+function fmt(s){var m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}
 
-function fmt(s) {
-  var m = Math.floor(s/60);
-  var sec = Math.floor(s%60);
-  return m+':'+(sec<10?'0':'')+sec;
-}
-function togglePlay() {
-  if (audio.paused) {
-    audio.play();
-    iconPlay.style.display = 'none';
-    iconPause.style.display = 'block';
-    playBtn.classList.add('playing');
+function togglePlay(audioId,btnId,playIconId,pauseIconId,fillId,curId,totId){
+  var a=document.getElementById(audioId);
+  var pi=document.getElementById(playIconId),pa=document.getElementById(pauseIconId);
+  if(a.paused){
+    // Pause all others
+    ['audio1','audio2'].forEach(function(id){if(id!==audioId){var x=document.getElementById(id);if(!x.paused)x.pause();}});
+    // Reset other icons
+    if(audioId==='audio1'){document.getElementById('icon2play').style.display='block';document.getElementById('icon2pause').style.display='none';}
+    else{document.getElementById('icon1play').style.display='block';document.getElementById('icon1pause').style.display='none';}
+    a.play();pi.style.display='none';pa.style.display='block';
   } else {
-    audio.pause();
-    iconPlay.style.display = 'block';
-    iconPause.style.display = 'none';
-    playBtn.classList.remove('playing');
+    a.pause();pi.style.display='block';pa.style.display='none';
   }
 }
-audio.addEventListener('timeupdate', function() {
-  if (audio.duration) {
-    progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
-    timeCurrent.textContent = fmt(audio.currentTime);
-  }
-});
-audio.addEventListener('loadedmetadata', function() {
-  timeTotal.textContent = fmt(audio.duration);
-});
-audio.addEventListener('ended', function() {
-  iconPlay.style.display = 'block';
-  iconPause.style.display = 'none';
-  playBtn.classList.remove('playing');
-  progressFill.style.width = '0%';
-  timeCurrent.textContent = '0:00';
-});
-progressWrap.addEventListener('click', function(e) {
-  if (!audio.duration) return;
-  var r = progressWrap.getBoundingClientRect();
-  audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
-});
+
+function seek(audioId,event,wrap){
+  var a=document.getElementById(audioId);
+  if(!a.duration)return;
+  var r=wrap.getBoundingClientRect();
+  a.currentTime=((event.clientX-r.left)/r.width)*a.duration;
+}
+
+function bindPlayer(audioId,fillId,curId,totId){
+  var a=document.getElementById(audioId);
+  a.addEventListener('timeupdate',function(){
+    if(a.duration){document.getElementById(fillId).style.width=(a.currentTime/a.duration*100)+'%';document.getElementById(curId).textContent=fmt(a.currentTime);}
+  });
+  a.addEventListener('loadedmetadata',function(){document.getElementById(totId).textContent=fmt(a.duration);});
+  a.addEventListener('ended',function(){
+    if(audioId==='audio1'){document.getElementById('icon1play').style.display='block';document.getElementById('icon1pause').style.display='none';}
+    else{document.getElementById('icon2play').style.display='block';document.getElementById('icon2pause').style.display='none';}
+    document.getElementById(fillId).style.width='0%';document.getElementById(curId).textContent='0:00';
+  });
+}
+bindPlayer('audio1','prog1fill','time1cur','time1tot');
+bindPlayer('audio2','prog2fill','time2cur','time2tot');
 
 /* ── NEWSLETTER ── */
-document.getElementById('nlForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  var email = document.getElementById('nlEmail').value.trim();
-  var ok = document.getElementById('nlOk');
-  if (!email.includes('@')) return;
-  fetch('https://formspree.io/f/mpqolygp', {method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:email})}).catch(function(){});
-  document.getElementById('nlEmail').value = '';
-  ok.classList.add('show');
-  setTimeout(function() { ok.classList.remove('show'); }, 4000);
+document.getElementById('nlForm').addEventListener('submit',function(e){
+  e.preventDefault();var email=document.getElementById('nlEmail').value.trim();var ok=document.getElementById('nlOk');
+  if(!email.includes('@'))return;
+  fetch('https://formspree.io/f/mpqolygp',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:email})}).catch(function(){});
+  document.getElementById('nlEmail').value='';ok.classList.add('show');setTimeout(function(){ok.classList.remove('show');},4000);
 });
 </script>
 </body>
