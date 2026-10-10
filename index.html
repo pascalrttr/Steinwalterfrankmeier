@@ -104,6 +104,22 @@
     .track-dl:hover { opacity:1; }
     .track-dl svg { width:12px; height:12px; stroke:var(--gold); flex-shrink:0; }
 
+    /* EP Download All */
+    .ep-download-all {
+      display:flex; align-items:center; justify-content:center; gap:14px;
+      width:100%; margin-top:28px; padding:16px 28px;
+      border:1px solid #c9a84c;
+      font-family:'EG',sans-serif; font-weight:700; font-size:12px;
+      letter-spacing:.28em; text-transform:uppercase;
+      background:linear-gradient(135deg,#f5e07a 0%,#c9a84c 35%,#ffe899 55%,#a07830 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+      filter:drop-shadow(0 0 14px rgba(201,168,76,.2));
+      cursor:none; transition:filter .2s, border-color .2s;
+    }
+    .ep-download-all:hover { filter:drop-shadow(0 0 22px rgba(201,168,76,.5)); border-color:#f5e07a; }
+    .ep-download-all svg { width:16px; height:16px; stroke:#c9a84c; flex-shrink:0; }
+
     /* ══ SINGLE PLAYER ══ */
     .single-layout { display:grid; grid-template-columns:280px 1fr; gap:44px; align-items:start; }
     .single-cover { width:100%; aspect-ratio:1; overflow:hidden; }
@@ -372,6 +388,14 @@
         </div>
 
       </div><!-- /ep-tracks -->
+
+      <!-- Download EP Button -->
+      <button class="ep-download-all" onclick="downloadEP()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        Notwehr EP herunterladen
+      </button>
 
       <!-- Hidden audio -->
       <audio id="ep1" preload="none" src="01 Radikale Mitte.mp3"></audio>
@@ -684,6 +708,24 @@ for(var _i=1;_i<=3;_i++){
     a.addEventListener('loadedmetadata',function(){document.getElementById('tot'+n).textContent=fmt(a.duration);});
     a.addEventListener('ended',function(){document.getElementById('icon'+n+'play').style.display='block';document.getElementById('icon'+n+'pause').style.display='none';document.getElementById('prog'+n).style.width='0%';document.getElementById('cur'+n).textContent='0:00';});
   })(_i);
+}
+
+/* ── EP DOWNLOAD ALL ── */
+function downloadEP(){
+  var tracks=[
+    {src:'01 Radikale Mitte.mp3',   dl:'01-Radikale-Mitte-SWFM.mp3'},
+    {src:'02 Rache für Dolly.mp3',  dl:'02-Rache-fuer-Dolly-SWFM.mp3'},
+    {src:'03 Notwehr.mp3',          dl:'03-Notwehr-SWFM.mp3'},
+    {src:'04 Calzone.mp3',          dl:'04-Calzone-SWFM.mp3'}
+  ];
+  tracks.forEach(function(t, i){
+    setTimeout(function(){
+      var a=document.createElement('a');
+      a.href=t.src; a.download=t.dl;
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a);
+    }, i*400);
+  });
 }
 
 /* ── NEWSLETTER ── */
