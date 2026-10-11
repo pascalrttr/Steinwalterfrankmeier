@@ -104,23 +104,39 @@
     .track-dl:hover { opacity:1; }
     .track-dl svg { width:12px; height:12px; stroke:var(--gold); flex-shrink:0; }
 
+    /* EP CTA row */
+    .ep-cta-row { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
+
     /* EP Download All button */
     .ep-download-all {
+      flex:1; min-width:140px;
       display:flex; align-items:center; justify-content:center; gap:10px;
-      margin-top:28px; width:100%;
-      padding:16px 24px;
+      padding:15px 20px;
       background:transparent;
+      border:1px solid rgba(232,228,221,.2);
+      font-family:'EG',sans-serif; font-weight:700; font-size:9px;
+      letter-spacing:.22em; text-transform:uppercase; color:var(--off);
+      cursor:none; transition:border-color .2s, color .2s;
+    }
+    .ep-download-all:hover { border-color:var(--pink); color:var(--pink); }
+    .ep-download-all svg { width:13px; height:13px; stroke:currentColor; flex-shrink:0; }
+
+    /* EP Vinyl buy button */
+    .ep-vinyl-btn {
+      flex:1; min-width:140px;
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      padding:15px 20px;
       border:1px solid #c9a84c;
-      font-family:'EG',sans-serif; font-weight:700; font-size:10px;
-      letter-spacing:.24em; text-transform:uppercase;
+      font-family:'EG',sans-serif; font-weight:700; font-size:9px;
+      letter-spacing:.22em; text-transform:uppercase;
       background:linear-gradient(135deg,#f5e07a 0%,#c9a84c 35%,#ffe899 55%,#a07830 100%);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       background-clip:text;
-      filter:drop-shadow(0 0 10px rgba(201,168,76,.15));
-      cursor:none; transition:filter .2s, border-color .2s;
+      filter:drop-shadow(0 0 8px rgba(201,168,76,.1));
+      cursor:none; transition:filter .2s, border-color .2s; text-decoration:none;
     }
-    .ep-download-all:hover { filter:drop-shadow(0 0 26px rgba(201,168,76,.6)); border-color:#f5e07a; }
-    .ep-download-all svg { width:15px; height:15px; stroke:#c9a84c; flex-shrink:0; }
+    .ep-vinyl-btn:hover { filter:drop-shadow(0 0 22px rgba(201,168,76,.55)); border-color:#f5e07a; }
+    .ep-vinyl-btn svg { width:13px; height:13px; stroke:#c9a84c; flex-shrink:0; }
 
     /* EP Buttons row */
     .ep-buttons { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
@@ -182,31 +198,6 @@
     .free-download:hover { opacity:.82; transform:scale(1.02); }
     .free-download-icon { width:28px; height:28px; fill:#c9a84c; }
 
-    /* ══ VINYL (inline im EP-Block) ══ */
-    .ep-vinyl-wrap {
-      width:100%; aspect-ratio:1;
-      position:sticky; top:28px;
-      filter:drop-shadow(0 20px 52px rgba(0,0,0,.9));
-    }
-    .vinyl-record {
-      width:100%; height:100%;
-      animation:spin 4s linear infinite;
-      transform-origin:center center;
-    }
-    .vinyl-record.paused { animation-play-state:paused; }
-    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-    .vinyl-shine {
-      position:absolute; inset:0; border-radius:50%; pointer-events:none;
-      background:conic-gradient(
-        from 0deg,
-        transparent 0deg, rgba(255,255,255,.04) 20deg, transparent 40deg,
-        transparent 90deg, rgba(255,255,255,.06) 110deg, transparent 130deg,
-        transparent 200deg, rgba(255,255,255,.03) 220deg, transparent 240deg,
-        transparent 300deg, rgba(255,255,255,.05) 320deg, transparent 340deg
-      );
-      animation:spin 4s linear infinite;
-    }
-    .vinyl-shine.paused { animation-play-state:paused; }
 
     /* ══ BIO ══ */
     .bio-text { font-weight:200; font-size:clamp(15px,1.75vw,20px); line-height:1.85; max-width:680px; opacity:.88; }
@@ -334,50 +325,9 @@
   <div class="sec-label">Notwehr EP</div>
   <div class="ep-layout">
 
-    <!-- Drehende Vinyl-Platte -->
-    <div class="ep-vinyl-wrap" id="vinylStage">
-      <svg class="vinyl-record" id="vinylRecord" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="labelPat" patternUnits="userSpaceOnUse" x="128" y="128" width="144" height="144">
-            <image href="notwehr-ep-cover.jpeg" x="0" y="0" width="144" height="144" preserveAspectRatio="xMidYMid slice"/>
-          </pattern>
-        </defs>
-        <!-- Vinyl body -->
-        <circle cx="200" cy="200" r="200" fill="#0e0c0c"/>
-        <!-- Grooves fine -->
-        <g stroke="#2a2424" stroke-width=".6" fill="none" opacity=".9">
-          <circle cx="200" cy="200" r="195"/><circle cx="200" cy="200" r="190"/>
-          <circle cx="200" cy="200" r="185"/><circle cx="200" cy="200" r="180"/>
-          <circle cx="200" cy="200" r="175"/><circle cx="200" cy="200" r="170"/>
-          <circle cx="200" cy="200" r="165"/><circle cx="200" cy="200" r="160"/>
-          <circle cx="200" cy="200" r="155"/><circle cx="200" cy="200" r="150"/>
-          <circle cx="200" cy="200" r="145"/><circle cx="200" cy="200" r="140"/>
-          <circle cx="200" cy="200" r="136"/><circle cx="200" cy="200" r="132"/>
-          <circle cx="200" cy="200" r="128"/><circle cx="200" cy="200" r="124"/>
-          <circle cx="200" cy="200" r="120"/><circle cx="200" cy="200" r="116"/>
-          <circle cx="200" cy="200" r="112"/><circle cx="200" cy="200" r="108"/>
-          <circle cx="200" cy="200" r="104"/><circle cx="200" cy="200" r="100"/>
-          <circle cx="200" cy="200" r="96"/> <circle cx="200" cy="200" r="92"/>
-          <circle cx="200" cy="200" r="88"/> <circle cx="200" cy="200" r="84"/>
-          <circle cx="200" cy="200" r="80"/> <circle cx="200" cy="200" r="76"/>
-        </g>
-        <!-- Grooves accent -->
-        <g stroke="#3a3030" stroke-width="1.2" fill="none" opacity=".45">
-          <circle cx="200" cy="200" r="192"/><circle cx="200" cy="200" r="172"/>
-          <circle cx="200" cy="200" r="152"/><circle cx="200" cy="200" r="132"/>
-          <circle cx="200" cy="200" r="112"/><circle cx="200" cy="200" r="92"/>
-        </g>
-        <!-- Lead-in -->
-        <circle cx="200" cy="200" r="76" stroke="#1a1414" stroke-width="4" fill="none"/>
-        <!-- Label (EP cover) -->
-        <circle cx="200" cy="200" r="72" fill="url(#labelPat)"/>
-        <circle cx="200" cy="200" r="72" fill="rgba(8,8,8,.10)"/>
-        <circle cx="200" cy="200" r="72" fill="none" stroke="rgba(254,64,185,.12)" stroke-width="1.5"/>
-        <!-- Center hole -->
-        <circle cx="200" cy="200" r="5" fill="#0e0c0c"/>
-        <circle cx="200" cy="200" r="5" fill="none" stroke="rgba(232,228,221,.2)" stroke-width=".5"/>
-      </svg>
-      <div class="vinyl-shine" id="vinylShine"></div>
+    <!-- Statisches EP-Cover -->
+    <div class="ep-cover">
+      <img src="notwehr-ep-cover.jpeg" alt="Notwehr EP — Stein Walter Frank Meier" />
     </div>
 
     <!-- Tracklist -->
@@ -477,13 +427,24 @@
 
       </div><!-- /ep-tracks -->
 
-      <!-- Download EP Button -->
-      <button class="ep-download-all" onclick="downloadEP()">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-        </svg>
-        Notwehr EP herunterladen
-      </button>
+      <!-- EP Buttons -->
+      <div class="ep-cta-row">
+        <button class="ep-download-all" onclick="downloadEP()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          EP herunterladen
+        </button>
+        <a class="ep-vinyl-btn"
+           href="https://steinwalterfrankmeier.bandcamp.com"
+           target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          Vinyl kaufen
+        </a>
+      </div>
 
       <!-- Hidden audio -->
       <audio id="ep1" preload="none" src="01 Radikale Mitte.mp3"></audio>
@@ -798,21 +759,6 @@ for(var _i=1;_i<=3;_i++){
   })(_i);
 }
 
-/* ── VINYL HOVER ── */
-(function(){
-  var stage=document.getElementById('vinylStage');
-  var rec=document.getElementById('vinylRecord');
-  var shine=document.getElementById('vinylShine');
-  if(!stage||!rec)return;
-  stage.addEventListener('mouseenter',function(){
-    rec.classList.add('paused');
-    if(shine)shine.classList.add('paused');
-  });
-  stage.addEventListener('mouseleave',function(){
-    rec.classList.remove('paused');
-    if(shine)shine.classList.remove('paused');
-  });
-})();
 
 /* ── EP DOWNLOAD ALL ── */
 function downloadEP(){
