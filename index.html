@@ -217,6 +217,17 @@
     .k-block a { font-weight:200; font-size:16px; opacity:.72; display:block; line-height:1.9; transition:opacity .2s,color .2s; }
     .k-block a:hover { opacity:1; color:var(--pink); }
 
+    /* ══ STEINZEICHEN CEREMONY BLOCK ══ */
+    .ceremony-block { position:relative; overflow:hidden; padding:80px 44px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:24px; border-top:1px solid rgba(254,64,185,.1); border-bottom:1px solid rgba(254,64,185,.1); background:radial-gradient(ellipse 60% 100% at 50% 50%, rgba(254,64,185,.07) 0%, transparent 70%); }
+    .ceremony-block::before { content:'STEINZEICHEN'; position:absolute; font-family:'EG-Con',sans-serif; font-weight:700; font-size:clamp(80px,16vw,200px); letter-spacing:-.03em; text-transform:uppercase; color:var(--off); opacity:.025; pointer-events:none; user-select:none; white-space:nowrap; }
+    .ceremony-label { font-size:10px; letter-spacing:.36em; text-transform:uppercase; color:var(--pink); font-weight:600; position:relative; z-index:1; }
+    .ceremony-title { font-family:'EG-Con',sans-serif; font-weight:700; font-size:clamp(36px,7vw,88px); text-transform:uppercase; letter-spacing:-.02em; line-height:.95; position:relative; z-index:1; }
+    .ceremony-sub { font-weight:200; font-size:14px; letter-spacing:.1em; opacity:.45; max-width:360px; line-height:1.65; position:relative; z-index:1; }
+    .ceremony-btn { position:relative; z-index:1; display:inline-flex; align-items:center; gap:14px; padding:18px 52px; border:1px solid var(--pink); background:transparent; color:var(--pink); font-family:'EG',sans-serif; font-weight:700; font-size:10px; letter-spacing:.3em; text-transform:uppercase; text-decoration:none; cursor:none; transition:background .2s, color .2s, box-shadow .25s; box-shadow:0 0 0 rgba(254,64,185,0); margin-top:4px; }
+    .ceremony-btn:hover { background:var(--pink); color:var(--black); box-shadow:0 0 40px rgba(254,64,185,.35); }
+    .ceremony-btn svg { width:15px; height:15px; flex-shrink:0; transition:transform .2s; }
+    .ceremony-btn:hover svg { transform:translateX(3px); }
+
     /* ══ FOOTER ══ */
     footer { border-top:1px solid rgba(232,228,221,.07); padding:26px 44px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:200; opacity:.35; }
     footer a:hover { opacity:1; color:var(--pink); }
@@ -316,6 +327,19 @@
       <span>Niemand muss Miete zahlen.</span><span>·</span>
     </div>
   </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     STEINZEICHEN CEREMONY BUTTON
+═══════════════════════════════════ -->
+<div class="ceremony-block">
+  <p class="ceremony-label">stein walter frank meier präsentiert</p>
+  <h2 class="ceremony-title">Steinzeichen<br>Zeremonie</h2>
+  <p class="ceremony-sub">Acht Fragen. Ein Schicksal. Finde heraus, welches Steinzeichen dir das Universum zugedacht hat.</p>
+  <a class="ceremony-btn" href="steinzeichen.html">
+    Zeremonie beginnen
+    <svg viewBox="0 0 15 15" fill="none"><path d="M3 7.5h9M8 3l4.5 4.5L8 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
 </div>
 
 <!-- ═══════════════════════════════════
