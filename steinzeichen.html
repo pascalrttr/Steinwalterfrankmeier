@@ -50,7 +50,7 @@
     .start-btn:hover { background:var(--pink); color:var(--black); border-color:var(--pink); }
     .intro-deco { position:absolute; font-size:clamp(120px,20vw,220px); opacity:.025; font-family:'EG-Con',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:-.04em; pointer-events:none; user-select:none; }
     .intro-mascot { display:flex; flex-direction:column; align-items:center; gap:12px; }
-    .intro-mascot > img { width:160px; height:auto; object-fit:contain; filter:drop-shadow(0 0 28px rgba(254,64,185,.28)); }
+    .intro-mascot > img { width:640px; max-width:90vw; height:auto; object-fit:contain; filter:drop-shadow(0 0 28px rgba(254,64,185,.28)); }
     .speech-bubble { position:relative; background:rgba(254,64,185,.1); border:1px solid rgba(254,64,185,.45); padding:12px 20px; font-size:11px; letter-spacing:.07em; line-height:1.7; text-align:center; max-width:240px; color:var(--off); }
     .speech-bubble::after { content:''; position:absolute; bottom:-9px; left:50%; transform:translateX(-50%); border-width:5px 5px 0; border-style:solid; border-color:rgba(254,64,185,.45) transparent transparent; }
 
@@ -139,7 +139,7 @@
       .tri-bottom-row { width:300px; }
       #tri-svg { width:300px; height:236px; }
       .tri-corner-blk img { width:115px; height:115px; }
-      .intro-mascot > img { width:140px; }
+      .intro-mascot > img { width:88vw; }
       .result-graphic { max-width:min(320px,86vw); }
       body { cursor:auto; }
       #molotov { display:none; }
@@ -425,6 +425,7 @@ function updateProgress() {
 
 /* ══════ CEREMONY FLOW ══════ */
 function startCeremony() {
+  playMagic();
   goTo('s-q1');
 }
 
