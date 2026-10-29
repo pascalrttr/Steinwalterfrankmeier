@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steinzeichen Zeremonie — stein walter frank meier</title>
+  <style>
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-XLig.otf') format('opentype'); font-weight:100; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Lig.otf') format('opentype'); font-weight:200; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Reg.otf') format('opentype'); font-weight:400; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Med.otf') format('opentype'); font-weight:500; }
+    @font-face { font-family:'EG'; src:url('fonts/EuropaGroteskSH-Bol.otf') format('opentype'); font-weight:700; }
+    @font-face { font-family:'EG-Con'; src:url('fonts/EuropaGroteskSH-BolCon.otf') format('opentype'); font-weight:700; }
+
+    :root { --pink:#fe40b9; --black:#080808; --off:#e8e4dd; --gold:#c9a84c; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html, body { width:100%; height:100%; overflow:hidden; }
+    body { background:var(--black); color:var(--off); font-family:'EG',sans-serif; font-weight:200; cursor:none; }
+    ::selection { background:var(--pink); color:var(--black); }
+
+    /* ══ CURSOR ══ */
+    #molotov { position:fixed; top:0; left:0; width:36px; height:36px; pointer-events:none; z-index:999999; transform:translate(-200px,-200px) rotate(-40deg); }
+    .click-ring { position:fixed; pointer-events:none; z-index:999998; border-radius:50%; border:2px solid var(--pink); width:0; height:0; transform:translate(-50%,-50%); animation:ring-expand .5s ease-out forwards; }
+    @keyframes ring-expand { 0%{width:8px;height:8px;opacity:1} 100%{width:60px;height:60px;opacity:0} }
+    .fire-burst { position:fixed; pointer-events:none; z-index:999998; font-size:36px; line-height:1; transform:translate(-50%,-50%); animation:fire-pop .6s ease-out forwards; }
+    @keyframes fire-pop { 0%{opacity:1;transform:translate(-50%,-50%) scale(.3)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.4)} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)} }
+
+    /* ══ GRAIN ══ */
+    body::after { content:''; position:fixed; inset:0; z-index:99998; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E"); background-size:250px; }
+
+    /* ══ BACK NAV ══ */
+    .back-nav { position:fixed; top:28px; left:36px; z-index:9999; font-size:10px; letter-spacing:.28em; text-transform:uppercase; font-weight:600; color:var(--off); opacity:.38; transition:opacity .2s; text-decoration:none; display:flex; align-items:center; gap:8px; }
+    .back-nav:hover { opacity:.8; }
+    .back-nav svg { width:13px; height:13px; }
+
+    /* ══ PROGRESS BAR ══ */
+    #progress-bar { position:fixed; top:0; left:0; height:2px; background:var(--pink); z-index:9999; transition:width .5s cubic-bezier(.4,0,.2,1); width:0%; opacity:0; }
+
+    /* ══ SCREENS ══ */
+    .screen { position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 24px; opacity:0; pointer-events:none; transition:opacity .55s cubic-bezier(.4,0,.2,1); will-change:opacity; }
+    .screen.active { opacity:1; pointer-events:all; }
+    .screen.exit { opacity:0; pointer-events:none; }
+
+    /* ══ INTRO ══ */
+    #s-intro { gap:32px; text-align:center; }
+    .intro-label { font-size:10px; letter-spacing:.38em; text-transform:uppercase; color:var(--pink); font-weight:600; }
+    .intro-title { font-family:'EG-Con',sans-serif; font-weight:700; font-size:clamp(52px,10vw,110px); letter-spacing:-.01em; line-height:.95; text-transform:uppercase; }
+    .intro-subtitle { font-weight:200; font-size:clamp(13px,2vw,16px); opacity:.55; letter-spacing:.08em; max-width:380px; line-height:1.7; }
+    .start-btn { margin-top:8px; padding:16px 44px; border:1px solid rgba(254,64,185,.4); background:transparent; color:var(--pink); font-family:'EG',sans-serif; font-weight:700; font-size:10px; letter-spacing:.32em; text-transform:uppercase; cursor:none; transition:background .2s, border-color .2s, color .2s; }
+    .start-btn:hover { background:var(--pink); color:var(--black); border-color:var(--pink); }
+    .intro-deco { position:absolute; font-size:clamp(120px,20vw,220px); opacity:.025; font-family:'EG-Con',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:-.04em; pointer-events:none; user-select:none; }
+
+    /* ══ QUESTION LAYOUT ══ */
+    .q-wrap { width:100%; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:24px; }
+    .q-number { font-size:9px; letter-spacing:.38em; text-transform:uppercase; color:var(--pink); font-weight:600; opacity:.7; }
+    .q-text { font-family:'EG-Con',sans-serif; font-weight:700; font-size:clamp(28px,5.5vw,62px); letter-spacing:-.01em; line-height:1.1; text-transform:uppercase; text-align:center; }
+    .q-graphic { width:auto; max-width:min(260px, 38vw); max-height:220px; object-fit:contain; display:block; filter:drop-shadow(0 0 24px rgba(254,64,185,.12)); transition:opacity .35s, transform .35s; }
+    .q-graphic.hidden { opacity:0; transform:scale(.88); }
+
+    /* ══ CHOICE BUTTONS ══ */
+    .choices { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; }
+    .choice-btn { padding:13px 26px; border:1px solid rgba(232,228,221,.2); background:transparent; color:var(--off); font-family:'EG',sans-serif; font-weight:600; font-size:10px; letter-spacing:.24em; text-transform:uppercase; cursor:none; transition:border-color .2s, color .2s, background .2s, transform .15s; }
+    .choice-btn:hover { border-color:var(--pink); color:var(--pink); transform:translateY(-1px); }
+    .choice-btn.selected { border-color:var(--pink); background:rgba(254,64,185,.1); color:var(--pink); }
+
+    /* ══ TEXT INPUT ══ */
+    .q-input { width:100%; max-width:480px; padding:14px 20px; background:transparent; border:none; border-bottom:1px solid rgba(232,228,221,.25); color:var(--off); font-family:'EG',sans-serif; font-weight:200; font-size:18px; letter-spacing:.04em; outline:none; text-align:center; transition:border-color .2s; }
+    .q-input::placeholder { opacity:.28; }
+    .q-input:focus { border-color:var(--pink); }
+    .next-btn { margin-top:12px; padding:13px 38px; border:1px solid rgba(232,228,221,.2); background:transparent; color:var(--off); font-family:'EG',sans-serif; font-weight:700; font-size:9px; letter-spacing:.28em; text-transform:uppercase; cursor:none; transition:border-color .2s, color .2s; }
+    .next-btn:hover { border-color:var(--pink); color:var(--pink); }
+    .next-btn:disabled { opacity:.25; pointer-events:none; }
+
+    /* ══ TRIANGLE ══ */
+    .triangle-wrap { position:relative; display:flex; flex-direction:column; align-items:center; gap:16px; }
+    #tri-svg { cursor:none; }
+    .tri-labels { display:flex; justify-content:space-between; width:100%; pointer-events:none; }
+    .tri-label { font-size:9px; letter-spacing:.28em; text-transform:uppercase; font-weight:700; color:var(--off); opacity:.45; }
+    .tri-label.top { position:absolute; top:-28px; left:50%; transform:translateX(-50%); }
+    .tri-label.bl { position:absolute; bottom:-28px; left:-10px; }
+    .tri-label.br { position:absolute; bottom:-28px; right:-10px; }
+    .tri-container { position:relative; }
+
+    /* ══ TRANSITION SCREEN ══ */
+    #s-transition { background:var(--black); z-index:99; }
+    .trans-text { font-family:'EG-Con',sans-serif; font-weight:700; font-size:clamp(40px,8vw,80px); text-transform:uppercase; letter-spacing:-.02em; text-align:center; opacity:0; animation:trans-in 1.8s forwards; }
+    @keyframes trans-in { 0%{opacity:0;letter-spacing:.4em} 30%{opacity:1;letter-spacing:-.02em} 80%{opacity:1} 100%{opacity:0} }
+
+    /* ══ RESULT ══ */
+    #s-result { gap:0; }
+    .result-wrap { width:100%; max-width:800px; display:flex; flex-direction:column; align-items:center; }
+    .result-label { font-size:9px; letter-spacing:.38em; text-transform:uppercase; color:var(--pink); font-weight:700; margin-bottom:16px; opacity:0; animation:fade-up .6s .2s forwards; }
+    .result-name { font-family:'EG-Con',sans-serif; font-weight:700; font-size:clamp(68px,14vw,160px); text-transform:uppercase; line-height:.9; letter-spacing:-.03em; opacity:0; animation:fade-up .8s .4s forwards; }
+    .result-name .r-prefix { font-size:.38em; display:block; letter-spacing:.06em; font-weight:200; font-family:'EG',sans-serif; opacity:.55; margin-bottom:6px; text-transform:none; }
+    .result-graphic { width:auto; max-width:min(220px,35vw); max-height:220px; object-fit:contain; filter:drop-shadow(0 0 40px rgba(254,64,185,.25)); opacity:0; animation:fade-up .9s .7s forwards; margin:24px 0 20px; }
+    .result-desc { font-size:clamp(12px,1.6vw,15px); font-weight:200; line-height:1.75; opacity:0; animation:fade-up .7s 1s forwards; max-width:600px; text-align:center; color:rgba(232,228,221,.75); }
+    .result-quote { margin-top:24px; font-size:clamp(11px,1.5vw,14px); font-weight:700; letter-spacing:.06em; color:var(--pink); opacity:0; animation:fade-up .7s 1.4s forwards; text-align:center; }
+    .result-quote::before { content:'"'; }
+    .result-quote::after { content:'"'; }
+    .result-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:32px; opacity:0; animation:fade-up .7s 1.8s forwards; }
+    .result-share-btn { padding:13px 32px; border:1px solid rgba(232,228,221,.2); background:transparent; color:var(--off); font-family:'EG',sans-serif; font-weight:700; font-size:9px; letter-spacing:.24em; text-transform:uppercase; cursor:none; transition:border-color .2s, color .2s; text-decoration:none; display:flex; align-items:center; gap:8px; }
+    .result-share-btn:hover { border-color:var(--pink); color:var(--pink); }
+    .result-share-btn.again { border-color:var(--pink); color:var(--pink); }
+    .result-share-btn.again:hover { background:var(--pink); color:var(--black); }
+
+    @keyframes fade-up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ══ GLITCH name reveal ══ */
+    .glitch-text { position:relative; }
+    .glitch-text::before,
+    .glitch-text::after { content:attr(data-text); position:absolute; inset:0; opacity:.6; }
+    .glitch-text::before { color:var(--pink); animation:glitch-a .12s infinite; clip-path:polygon(0 0,100% 0,100% 35%,0 35%); }
+    .glitch-text::after  { color:#0ff; animation:glitch-b .1s .05s infinite; clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%); }
+    @keyframes glitch-a { 0%{transform:translateX(-2px)} 50%{transform:translateX(2px)} 100%{transform:translateX(-1px)} }
+    @keyframes glitch-b { 0%{transform:translateX(3px)} 50%{transform:translateX(-3px)} 100%{transform:translateX(1px)} }
+    .glitch-text.settled::before, .glitch-text.settled::after { display:none; }
+
+    /* ══ MOBILE ══ */
+    @media(max-width:600px) {
+      .choices { gap:8px; }
+      .choice-btn { padding:11px 18px; font-size:9px; }
+      body { cursor:auto; }
+      #molotov { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="molotov">
+  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="14" cy="4.5" rx="3" ry="4" fill="#ff9900"/>
+    <ellipse cx="14" cy="4" rx="1.6" ry="2.5" fill="#ffe066"/>
+    <rect x="13.2" y="7.5" width="1.6" height="3.5" rx=".8" fill="#777"/>
+    <rect x="11" y="10.5" width="6" height="5" rx="2" fill="#b8d488"/>
+    <rect x="9.5" y="10.5" width="2" height="3.5" rx=".8" fill="#cc4010" transform="rotate(-12 10 11)"/>
+    <rect x="8.5" y="14.5" width="12" height="16" rx="5" fill="#a8cc78"/>
+    <rect x="10.5" y="18.5" width="8" height="10" rx="3" fill="#78aa44" opacity=".75"/>
+    <rect x="10.5" y="15.5" width="3" height="6" rx="1.5" fill="rgba(255,255,255,.30)"/>
+    <rect x="9.5" y="29.5" width="11" height="2.5" rx="1.2" fill="#90c060"/>
+  </svg>
+</div>
+
+<div id="progress-bar"></div>
+
+<a href="index.html" class="back-nav">
+  <svg viewBox="0 0 13 13" fill="none"><path d="M8 2L3 6.5L8 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  Zurück
+</a>
+
+<!-- ══════════ INTRO ══════════ -->
+<div class="screen active" id="s-intro">
+  <span class="intro-deco" style="top:-10%;left:-5%;">STEIN</span>
+  <span class="intro-deco" style="bottom:-10%;right:-5%;">ZEICHEN</span>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:28px;position:relative;z-index:1;text-align:center;">
+    <p class="intro-label">stein walter frank meier präsentiert</p>
+    <h1 class="intro-title">Stein&shy;zeichen<br>Zeremonie</h1>
+    <p class="intro-subtitle">Acht Fragen. Ein Schicksal. Finde heraus, welches Steinzeichen dir das Universum zugedacht hat.</p>
+    <button class="start-btn" onclick="startCeremony()">Zeremonie beginnen</button>
+  </div>
+</div>
+
+<!-- ══════════ Q1 — SONNENAUFGANG ══════════ -->
+<div class="screen" id="s-q1">
+  <div class="q-wrap">
+    <p class="q-number">Frage 1 von 8</p>
+    <h2 class="q-text">Sonnenaufgang oder<br>Sonnenuntergang?</h2>
+    <div class="choices">
+      <button class="choice-btn" onclick="answer(1,'Sonnenaufgang',this)">Sonnenaufgang</button>
+      <button class="choice-btn" onclick="answer(1,'Sonnenuntergang',this)">Sonnenuntergang</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ Q2 — INSTRUMENT ══════════ -->
+<div class="screen" id="s-q2">
+  <div class="q-wrap">
+    <p class="q-number">Frage 2 von 8</p>
+    <h2 class="q-text">Welches Instrument<br>wählst du?</h2>
+    <img class="q-graphic hidden" id="g-q2" src="" alt="" />
+    <div class="choices">
+      <button class="choice-btn" onclick="answerWithGraphic(2,'Gitarre','gitarre.png',this)">Gitarre</button>
+      <button class="choice-btn" onclick="answerWithGraphic(2,'Bass','bass.png',this)">Bass</button>
+      <button class="choice-btn" onclick="answerWithGraphic(2,'Drums','drums.png',this)">Drums</button>
+      <button class="choice-btn" onclick="answerWithGraphic(2,'Nasenflöte','nasenflöte.png',this)">Nasenflöte</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ Q3 — FEIND ══════════ -->
+<div class="screen" id="s-q3">
+  <div class="q-wrap">
+    <p class="q-number">Frage 3 von 8</p>
+    <h2 class="q-text">Wer ist dein Feind<br>(most recently)?</h2>
+    <img class="q-graphic hidden" id="g-q3" src="" alt="" />
+    <div class="choices">
+      <button class="choice-btn" onclick="answerWithGraphic(3,'Macker','macker.png',this)">Macker</button>
+      <button class="choice-btn" onclick="answerWithGraphic(3,'Vermieter','vermieter.png',this)">Vermieter</button>
+      <button class="choice-btn" onclick="answerWithGraphic(3,'Nazi','nazi.png',this)">Nazi</button>
+      <button class="choice-btn" onclick="answerWithGraphic(3,'Cop','cop.png',this)">Cop</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ Q4 — TIER ══════════ -->
+<div class="screen" id="s-q4">
+  <div class="q-wrap">
+    <p class="q-number">Frage 4 von 8</p>
+    <h2 class="q-text">Welches Tier<br>wählst du?</h2>
+    <div class="choices">
+      <button class="choice-btn" onclick="answer(4,'Ratte',this)">Ratte</button>
+      <button class="choice-btn" onclick="answer(4,'Mücke',this)">Mücke</button>
+      <button class="choice-btn" onclick="answer(4,'Zecke',this)">Zecke</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ Q5 — DREIECK ══════════ -->
+<div class="screen" id="s-q5">
+  <div class="q-wrap">
+    <p class="q-number">Frage 5 von 8</p>
+    <h2 class="q-text">Wo ordnest du dich<br>im Dreieck ein?</h2>
+    <div class="triangle-wrap" id="tri-wrap">
+      <div class="tri-container" id="tri-container">
+        <svg id="tri-svg" width="280" height="262" viewBox="0 0 280 262">
+          <!-- Triangle -->
+          <polygon id="tri-poly" points="140,12 16,250 264,250" fill="rgba(232,228,221,.04)" stroke="rgba(232,228,221,.22)" stroke-width="1.5"/>
+          <!-- Vertex glows -->
+          <circle cx="140" cy="12" r="4" fill="var(--pink)" opacity=".5"/>
+          <circle cx="16" cy="250" r="4" fill="var(--pink)" opacity=".5"/>
+          <circle cx="264" cy="250" r="4" fill="var(--pink)" opacity=".5"/>
+          <!-- Placed point -->
+          <circle id="tri-dot" cx="-100" cy="-100" r="8" fill="var(--pink)" opacity="1" filter="url(#glow)"/>
+          <defs>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+        </svg>
+        <span class="tri-label top">Fotzig</span>
+        <span class="tri-label bl">Atzig</span>
+        <span class="tri-label br">Mausig</span>
+      </div>
+      <img class="q-graphic hidden" id="g-q5" src="" alt="" style="max-width:160px;max-height:160px;" />
+      <p id="tri-hint" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.3;margin-top:-8px;">Tippe auf das Dreieck</p>
+      <button class="next-btn" id="tri-next-btn" onclick="confirmTri()" disabled>Weiter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ Q6 — MITTEL ══════════ -->
+<div class="screen" id="s-q6">
+  <div class="q-wrap">
+    <p class="q-number">Frage 6 von 8</p>
+    <h2 class="q-text">Was ist dein<br>Mittel der Wahl?</h2>
+    <img class="q-graphic hidden" id="g-q6" src="" alt="" />
+    <div class="choices">
+      <button class="choice-btn" onclick="answerWithGraphic(6,'Moltow','moltow.png',this)">Moltow</button>
+      <button class="choice-btn" onclick="answerWithGraphic(6,'Diskutieren','diskutieren.png',this)">Diskutieren</button>
+      <button class="choice-btn" onclick="answerWithGraphic(6,'Blockieren','blockieren.png',this)">Blockieren</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ Q7 — LIEBLINGSSONG ══════════ -->
+<div class="screen" id="s-q7">
+  <div class="q-wrap">
+    <p class="q-number">Frage 7 von 8</p>
+    <h2 class="q-text">Welches ist dein<br>lieblings Stein Walter Song?</h2>
+    <input class="q-input" id="inp-q7" type="text" placeholder="Songtitel eingeben…" oninput="checkInput(7)" onkeydown="if(event.key==='Enter')nextFromInput(7)" />
+    <button class="next-btn" id="next-q7" onclick="nextFromInput(7)" disabled>Weiter</button>
+  </div>
+</div>
+
+<!-- ══════════ Q8 — PUNKNAME ══════════ -->
+<div class="screen" id="s-q8">
+  <div class="q-wrap">
+    <p class="q-number">Frage 8 von 8</p>
+    <h2 class="q-text">Welches ist<br>dein Punkname?</h2>
+    <input class="q-input" id="inp-q8" type="text" placeholder="Dein Punkname…" oninput="checkInput(8)" onkeydown="if(event.key==='Enter')nextFromInput(8)" />
+    <button class="next-btn" id="next-q8" onclick="nextFromInput(8)" disabled>Ergebnis enthüllen</button>
+  </div>
+</div>
+
+<!-- ══════════ TRANSITION ══════════ -->
+<div class="screen" id="s-transition" style="z-index:100;">
+  <p class="trans-text" id="trans-text">Das Steinzeichen<br>entscheidet…</p>
+</div>
+
+<!-- ══════════ RESULT ══════════ -->
+<div class="screen" id="s-result" style="overflow-y:auto;overflow-x:hidden;padding:80px 24px 60px;">
+  <div class="result-wrap">
+    <p class="result-label">Dein Steinzeichen</p>
+    <h2 class="result-name">
+      <span class="r-prefix" id="res-prefix">Das Steinzeichen</span>
+      <span class="glitch-text" id="res-name" data-text="">STEIN</span>
+    </h2>
+    <img class="result-graphic" id="res-graphic" src="" alt="" />
+    <p class="result-desc" id="res-desc"></p>
+    <p class="result-quote" id="res-quote"></p>
+    <div class="result-actions">
+      <button class="result-share-btn again" onclick="resetCeremony()">Nochmal spielen</button>
+      <a class="result-share-btn" href="index.html">Zur Website</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════ STATE ══════ */
+var answers = {};
+var triChoice = null;
+var currentScreen = 's-intro';
+
+var RESULTS = {
+  Stein: {
+    desc: 'Das Steinzeichen Stein ist ein aktives, dynamisches, direktes Zeichen und liebt Aktion! Es wird nicht viel geplant, lieber gleich geworfen. Steine sind geradlinig und leben am liebsten in der Luft Richtung Auto. Sie sind provokativ, sitzen nicht gerne still und diskutieren gerne mal die ein oder anderen Bitcoin-Bros von der Demo weg. Sie sind mal fotzig und energiegeladen, während der Style nach dem Motto „ist das ein Top oder ist das ein Kleid" ihren Vibe nach außen trägt. Manchmal sind sie aber auch einfach mausig und zurückgezogen im Bettchen und gucken mit einer Packung Chips die neue Folge Game Changer.',
+    quote: 'Wer ohne Immobilienportfolio ist, werfe den ersten Stein!',
+    img: 'Stein.png'
+  },
+  Walter: {
+    desc: 'Das Steinzeichen Walter ist entspannt und gelassen. Die Revolution wird durch Arbeitszeitbetrug und lustige Memes bequem von Zuhause aus angezettelt. Walter sind empathisch, bodenständig, stabil und stur — aber machen sofort die Klappe auf, wenn irgendein Macker wieder etwas Intolerables gemacht oder gesagt hat. Sie lieben und leben Genuss. Kulinarisch wird gerne einmal die ein oder andere Soßenkombination auf unkonventionellen Gerichten ausprobiert.',
+    quote: 'Das wird hier alles Verboten, wenn ich Bundespräsident bin!',
+    img: 'Walter.png'
+  },
+  Frank: {
+    desc: 'Das Steinzeichen Frank ist gesprächig und wissbegierig. Franks haben mindestens einen Podcast am Laufen, um mitzubekommen, warum welcher Quatsch gerade auf der Welt passiert. Franks sind pragmatisch, obwohl ihnen Style auch sehr wichtig ist. Sie feiern gerne und sind häufig auf dem Sprung — brauchen aber auch gerne mal etwas längere Zeit für sich allein.',
+    quote: 'Verspeisen Sie Reich?',
+    img: 'Frank.png'
+  },
+  Meier: {
+    desc: 'Das Steinzeichen Meier ist the life of the party. Meier versammeln gerne Menschen auf Partys, mit denen dann zu Karaokeeinlagen von Vicky Leandros' „Ich liebe das Leben" sich in den Armen liegend gesungen wird. Meier sprühen voller Ideen und setzen diese um, ohne darüber nachzudenken, wie umsetzbar diese sind. Probleme werden vielleicht nicht perfekt, aber immer kreativ gelöst. Meier rebellieren gerne und auch häufig. Ihnen ist es egal, ob das irgendwer doof findet. Wenn Meier ein Finger wären, wären sie ein Mittelfinger.',
+    quote: 'Meier Meier Pants on Fire!',
+    img: 'Meier.png'
+  }
+};
+
+/* ══════ SCREEN TRANSITIONS ══════ */
+function goTo(id, delay) {
+  delay = delay || 0;
+  setTimeout(function() {
+    var prev = document.getElementById(currentScreen);
+    var next = document.getElementById(id);
+    if (prev) { prev.classList.remove('active'); prev.classList.add('exit'); setTimeout(function(){ prev.classList.remove('exit'); }, 600); }
+    next.classList.add('active');
+    currentScreen = id;
+    updateProgress();
+  }, delay);
+}
+
+function updateProgress() {
+  var bar = document.getElementById('progress-bar');
+  var map = { 's-intro':0, 's-q1':1, 's-q2':2, 's-q3':3, 's-q4':4, 's-q5':5, 's-q6':6, 's-q7':7, 's-q8':8 };
+  var step = map[currentScreen] || 0;
+  if (step > 0) {
+    bar.style.opacity = '1';
+    bar.style.width = (step / 8 * 100) + '%';
+  } else {
+    bar.style.opacity = '0';
+  }
+}
+
+/* ══════ CEREMONY FLOW ══════ */
+function startCeremony() {
+  goTo('s-q1');
+}
+
+function answer(qNum, val, btn) {
+  answers[qNum] = val;
+  // Mark selected
+  var btns = btn.parentNode.querySelectorAll('.choice-btn');
+  btns.forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  // Advance after short pause
+  setTimeout(function() { goTo('s-q' + (qNum + 1)); }, 420);
+}
+
+function answerWithGraphic(qNum, val, imgSrc, btn) {
+  answers[qNum] = val;
+  var btns = btn.parentNode.querySelectorAll('.choice-btn');
+  btns.forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  // Show graphic
+  var gEl = document.getElementById('g-q' + qNum);
+  if (gEl) {
+    gEl.src = imgSrc;
+    gEl.alt = val;
+    gEl.classList.remove('hidden');
+  }
+  setTimeout(function() {
+    // Reset graphic for next time
+    if (gEl) { gEl.classList.add('hidden'); }
+    var nextId = qNum === 6 ? 's-q7' : 's-q' + (qNum + 1);
+    goTo(nextId);
+  }, 700);
+}
+
+/* ══════ TEXT INPUTS ══════ */
+function checkInput(qNum) {
+  var inp = document.getElementById('inp-q' + qNum);
+  var btn = document.getElementById('next-q' + qNum);
+  btn.disabled = inp.value.trim().length < 1;
+}
+
+function nextFromInput(qNum) {
+  var inp = document.getElementById('inp-q' + qNum);
+  if (!inp.value.trim()) return;
+  answers[qNum] = inp.value.trim();
+  if (qNum === 8) {
+    showTransition();
+  } else {
+    goTo('s-q' + (qNum + 1));
+  }
+}
+
+/* ══════ TRIANGLE ══════ */
+var triPts = { top:[140,12], bl:[16,250], br:[264,250] };
+var triPlaced = false;
+var triW = 280, triH = 262;
+
+function pointInTriangle(px, py) {
+  var A=triPts.top, B=triPts.bl, C=triPts.br;
+  var d1=(px-B[0])*(A[1]-B[1])-(A[0]-B[0])*(py-B[1]);
+  var d2=(px-C[0])*(B[1]-C[1])-(B[0]-C[0])*(py-C[1]);
+  var d3=(px-A[0])*(C[1]-A[1])-(C[0]-A[0])*(py-A[1]);
+  var has_neg=(d1<0)||(d2<0)||(d3<0);
+  var has_pos=(d1>0)||(d2>0)||(d3>0);
+  return !(has_neg&&has_pos);
+}
+
+function clampToTriangle(px, py) {
+  var A=triPts.top, B=triPts.bl, C=triPts.br;
+  // Simple clamp: find closest point on triangle if outside
+  if (pointInTriangle(px, py)) return [px, py];
+  // Project onto edges and pick closest
+  function closestOnSeg(ax,ay,bx,by,px,py){
+    var dx=bx-ax,dy=by-ay,t=((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy);
+    t=Math.max(0,Math.min(1,t));
+    return [ax+t*dx, ay+t*dy];
+  }
+  var pts = [closestOnSeg(A[0],A[1],B[0],B[1],px,py), closestOnSeg(B[0],B[1],C[0],C[1],px,py), closestOnSeg(A[0],A[1],C[0],C[1],px,py)];
+  var best=pts[0], bestD=Infinity;
+  pts.forEach(function(p){ var d=Math.hypot(p[0]-px,p[1]-py); if(d<bestD){bestD=d;best=p;} });
+  return best;
+}
+
+function triDominant(px, py) {
+  var A=triPts.top, B=triPts.bl, C=triPts.br;
+  var dA=Math.hypot(px-A[0],py-A[1]);
+  var dB=Math.hypot(px-B[0],py-B[1]);
+  var dC=Math.hypot(px-C[0],py-C[1]);
+  if(dA<=dB&&dA<=dC) return {name:'Fotzig', img:'fotzig.png'};
+  if(dB<=dA&&dB<=dC) return {name:'Atzig', img:'atzig.png'};
+  return {name:'Mausig', img:'mausig.png'};
+}
+
+document.getElementById('tri-svg').addEventListener('click', function(e) {
+  var rect = this.getBoundingClientRect();
+  var rawX = (e.clientX - rect.left) * (triW / rect.width);
+  var rawY = (e.clientY - rect.top) * (triH / rect.height);
+  var pt = clampToTriangle(rawX, rawY);
+  var dot = document.getElementById('tri-dot');
+  dot.setAttribute('cx', pt[0]);
+  dot.setAttribute('cy', pt[1]);
+  triPlaced = true;
+  triChoice = triDominant(pt[0], pt[1]);
+  // Show graphic
+  var gEl = document.getElementById('g-q5');
+  gEl.src = triChoice.img;
+  gEl.alt = triChoice.name;
+  gEl.classList.remove('hidden');
+  document.getElementById('tri-hint').style.opacity = '0';
+  document.getElementById('tri-next-btn').disabled = false;
+  answers[5] = triChoice.name;
+});
+
+function confirmTri() {
+  goTo('s-q6');
+}
+
+/* ══════ TRANSITION + REVEAL ══════ */
+function showTransition() {
+  var punkname = answers[8] || '';
+  var transText = document.getElementById('trans-text');
+  transText.innerHTML = 'Das Steinzeichen<br>entscheidet…';
+
+  // Go to transition screen
+  var prev = document.getElementById(currentScreen);
+  var next = document.getElementById('s-transition');
+  if (prev) { prev.classList.remove('active'); }
+  next.classList.add('active');
+  currentScreen = 's-transition';
+
+  // After 2s, reveal result
+  setTimeout(function() {
+    showResult();
+  }, 2200);
+}
+
+function showResult() {
+  var keys = Object.keys(RESULTS);
+  var pick = keys[Math.floor(Math.random() * keys.length)];
+  var data = RESULTS[pick];
+
+  // Populate result
+  var nameEl = document.getElementById('res-name');
+  nameEl.setAttribute('data-text', pick.toUpperCase());
+  nameEl.textContent = pick.toUpperCase();
+  nameEl.classList.remove('settled');
+
+  document.getElementById('res-graphic').src = data.img;
+  document.getElementById('res-graphic').alt = pick;
+  document.getElementById('res-desc').textContent = data.desc;
+  document.getElementById('res-quote').textContent = data.quote;
+
+  // Transition to result screen
+  var prev = document.getElementById('s-transition');
+  var next = document.getElementById('s-result');
+  prev.classList.remove('active');
+  next.classList.add('active');
+  currentScreen = 's-result';
+
+  // Settle glitch after animation plays
+  setTimeout(function() {
+    nameEl.classList.add('settled');
+  }, 2200);
+}
+
+function resetCeremony() {
+  answers = {};
+  triChoice = null;
+  triPlaced = false;
+
+  // Reset inputs
+  document.getElementById('inp-q7').value = '';
+  document.getElementById('inp-q8').value = '';
+  document.getElementById('next-q7').disabled = true;
+  document.getElementById('next-q8').disabled = true;
+
+  // Reset triangle
+  var dot = document.getElementById('tri-dot');
+  dot.setAttribute('cx', -100);
+  dot.setAttribute('cy', -100);
+  document.getElementById('g-q5').classList.add('hidden');
+  document.getElementById('tri-hint').style.opacity = '.3';
+  document.getElementById('tri-next-btn').disabled = true;
+
+  // Reset all choice buttons
+  document.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+
+  // Reset all q-graphics
+  document.querySelectorAll('.q-graphic').forEach(function(g){ g.classList.add('hidden'); g.src=''; });
+
+  // Reset result animations (re-trigger)
+  document.querySelectorAll('.result-label,.result-name,.result-graphic,.result-desc,.result-quote,.result-actions').forEach(function(el){ el.style.animation='none'; el.offsetHeight; el.style.animation=''; });
+
+  goTo('s-intro');
+  document.getElementById('progress-bar').style.opacity = '0';
+  document.getElementById('progress-bar').style.width = '0%';
+}
+
+/* ══════ CURSOR ══════ */
+var mol=document.getElementById('molotov');
+var mouseX=0,mouseY=0,curX=0,curY=0,isThrown=false;
+window.addEventListener('mousemove',function(e){mouseX=e.clientX;mouseY=e.clientY;});
+(function loop(){if(!isThrown){curX+=(mouseX-curX)*.16;curY+=(mouseY-curY)*.16;mol.style.transform='translate('+(curX-12)+'px,'+(curY-32)+'px) rotate(-40deg)';}requestAnimationFrame(loop);})();
+window.addEventListener('click',function(e){
+  if(isThrown)return;isThrown=true;
+  var ring=document.createElement('div');ring.className='click-ring';ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';document.body.appendChild(ring);
+  setTimeout(function(){if(ring.parentNode)ring.parentNode.removeChild(ring);},600);
+  var sx=curX-12,sy=curY-32;
+  var frames=[{x:sx,y:sy,r:-40,s:1,o:1},{x:sx+80,y:sy-120,r:-100,s:1.15,o:1},{x:sx+160,y:sy-60,r:-170,s:.9,o:.7},{x:sx+220,y:sy+40,r:-230,s:.5,o:0}];
+  var dur=560,t0=null;
+  function animThrow(ts){
+    if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var i=Math.min(Math.floor(p*(frames.length-1)),frames.length-2);var lp=p*(frames.length-1)-i;var a=frames[i],b=frames[i+1];
+    mol.style.transform='translate('+(a.x+(b.x-a.x)*lp)+'px,'+(a.y+(b.y-a.y)*lp)+'px) rotate('+(a.r+(b.r-a.r)*lp)+'deg) scale('+(a.s+(b.s-a.s)*lp)+')';mol.style.opacity=a.o+(b.o-a.o)*lp;
+    if(p<1){requestAnimationFrame(animThrow);}
+    else{var fire=document.createElement('div');fire.className='fire-burst';fire.textContent='🔥';fire.style.left=(e.clientX+100)+'px';fire.style.top=(e.clientY-10)+'px';document.body.appendChild(fire);setTimeout(function(){if(fire.parentNode)fire.parentNode.removeChild(fire);},700);mol.style.opacity='1';curX=mouseX;curY=mouseY;isThrown=false;}
+  }
+  requestAnimationFrame(animThrow);
+});
+</script>
+</body>
+</html>
