@@ -51,17 +51,26 @@
     .intro-deco { position:absolute; font-size:clamp(120px,20vw,220px); opacity:.025; font-family:'EG-Con',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:-.04em; pointer-events:none; user-select:none; }
 
     /* ══ QUESTION LAYOUT ══ */
-    .q-wrap { width:100%; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:24px; }
+    .q-wrap { width:100%; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:20px; }
     .q-number { font-size:9px; letter-spacing:.38em; text-transform:uppercase; color:var(--pink); font-weight:600; opacity:.7; }
-    .q-text { font-family:'EG-Con',sans-serif; font-weight:700; font-size:clamp(28px,5.5vw,62px); letter-spacing:-.01em; line-height:1.1; text-transform:uppercase; text-align:center; }
-    .q-graphic { width:auto; max-width:min(260px, 38vw); max-height:220px; object-fit:contain; display:block; filter:drop-shadow(0 0 24px rgba(254,64,185,.12)); transition:opacity .35s, transform .35s; }
-    .q-graphic.hidden { opacity:0; transform:scale(.88); }
+    .q-text { font-family:'EG-Con',sans-serif; font-weight:700; font-size:clamp(26px,5vw,58px); letter-spacing:-.01em; line-height:1.1; text-transform:uppercase; text-align:center; }
 
-    /* ══ CHOICE BUTTONS ══ */
-    .choices { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; }
+    /* ══ PLAIN CHOICE BUTTONS ══ */
+    .choices { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:4px; }
     .choice-btn { padding:13px 26px; border:1px solid rgba(232,228,221,.2); background:transparent; color:var(--off); font-family:'EG',sans-serif; font-weight:600; font-size:10px; letter-spacing:.24em; text-transform:uppercase; cursor:none; transition:border-color .2s, color .2s, background .2s, transform .15s; }
     .choice-btn:hover { border-color:var(--pink); color:var(--pink); transform:translateY(-1px); }
     .choice-btn.selected { border-color:var(--pink); background:rgba(254,64,185,.1); color:var(--pink); }
+
+    /* ══ IMAGE CHOICE CARDS ══ */
+    .img-grid { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:4px; }
+    .img-card { display:flex; flex-direction:column; align-items:center; gap:10px; padding:14px 14px 12px; border:1px solid rgba(232,228,221,.14); background:transparent; cursor:none; transition:border-color .22s, background .22s; width:116px; }
+    .img-card img { width:74px; height:74px; object-fit:contain; transition:filter .22s, transform .22s; display:block; }
+    .img-card span { font-size:8px; letter-spacing:.22em; text-transform:uppercase; font-weight:700; color:rgba(232,228,221,.65); }
+    .img-card:hover { border-color:rgba(254,64,185,.5); }
+    .img-card:hover img { filter:drop-shadow(0 0 12px rgba(254,64,185,.45)); transform:scale(1.06); }
+    .img-card.selected { border-color:var(--pink); background:rgba(254,64,185,.09); }
+    .img-card.selected img { filter:drop-shadow(0 0 16px rgba(254,64,185,.55)); }
+    .img-card.selected span { color:var(--pink); }
 
     /* ══ TEXT INPUT ══ */
     .q-input { width:100%; max-width:480px; padding:14px 20px; background:transparent; border:none; border-bottom:1px solid rgba(232,228,221,.25); color:var(--off); font-family:'EG',sans-serif; font-weight:200; font-size:18px; letter-spacing:.04em; outline:none; text-align:center; transition:border-color .2s; }
@@ -71,15 +80,15 @@
     .next-btn:hover { border-color:var(--pink); color:var(--pink); }
     .next-btn:disabled { opacity:.25; pointer-events:none; }
 
-    /* ══ TRIANGLE ══ */
-    .triangle-wrap { position:relative; display:flex; flex-direction:column; align-items:center; gap:16px; }
-    #tri-svg { cursor:none; }
-    .tri-labels { display:flex; justify-content:space-between; width:100%; pointer-events:none; }
-    .tri-label { font-size:9px; letter-spacing:.28em; text-transform:uppercase; font-weight:700; color:var(--off); opacity:.45; }
-    .tri-label.top { position:absolute; top:-28px; left:50%; transform:translateX(-50%); }
-    .tri-label.bl { position:absolute; bottom:-28px; left:-10px; }
-    .tri-label.br { position:absolute; bottom:-28px; right:-10px; }
-    .tri-container { position:relative; }
+    /* ══ TRIANGLE SCENE ══ */
+    .triangle-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .tri-scene { display:flex; flex-direction:column; align-items:center; gap:0; }
+    .tri-corner-blk { display:flex; flex-direction:column; align-items:center; gap:5px; opacity:.28; transition:opacity .28s cubic-bezier(.4,0,.2,1), filter .28s cubic-bezier(.4,0,.2,1); pointer-events:none; user-select:none; }
+    .tri-corner-blk.dominant { opacity:1; filter:drop-shadow(0 0 16px rgba(254,64,185,.35)); }
+    .tri-corner-blk img { width:62px; height:62px; object-fit:contain; display:block; }
+    .tri-corner-blk span { font-size:8px; letter-spacing:.24em; text-transform:uppercase; font-weight:700; color:var(--off); }
+    .tri-bottom-row { display:flex; justify-content:space-between; align-items:flex-start; width:280px; padding:0 2px; }
+    #tri-svg { cursor:crosshair; display:block; touch-action:none; }
 
     /* ══ TRANSITION SCREEN ══ */
     #s-transition { background:var(--black); z-index:99; }
@@ -119,6 +128,12 @@
     @media(max-width:600px) {
       .choices { gap:8px; }
       .choice-btn { padding:11px 18px; font-size:9px; }
+      .img-grid { gap:8px; }
+      .img-card { width:96px; padding:10px 10px 9px; }
+      .img-card img { width:58px; height:58px; }
+      .tri-bottom-row { width:240px; }
+      #tri-svg { width:240px; height:188px; }
+      .tri-corner-blk img { width:50px; height:50px; }
       body { cursor:auto; }
       #molotov { display:none; }
     }
@@ -177,12 +192,23 @@
   <div class="q-wrap">
     <p class="q-number">Frage 2 von 8</p>
     <h2 class="q-text">Welches Instrument<br>wählst du?</h2>
-    <img class="q-graphic hidden" id="g-q2" src="" alt="" />
-    <div class="choices">
-      <button class="choice-btn" onclick="answerWithGraphic(2,'Gitarre','gitarre.png',this)">Gitarre</button>
-      <button class="choice-btn" onclick="answerWithGraphic(2,'Bass','bass.png',this)">Bass</button>
-      <button class="choice-btn" onclick="answerWithGraphic(2,'Drums','drums.png',this)">Drums</button>
-      <button class="choice-btn" onclick="answerWithGraphic(2,'Nasenflöte','nasenflöte.png',this)">Nasenflöte</button>
+    <div class="img-grid">
+      <button class="img-card" onclick="imgAnswer(2,'Gitarre',this)">
+        <img src="gitarre.png" alt="Gitarre" />
+        <span>Gitarre</span>
+      </button>
+      <button class="img-card" onclick="imgAnswer(2,'Bass',this)">
+        <img src="bass.png" alt="Bass" />
+        <span>Bass</span>
+      </button>
+      <button class="img-card" onclick="imgAnswer(2,'Drums',this)">
+        <img src="drums.png" alt="Drums" />
+        <span>Drums</span>
+      </button>
+      <button class="img-card" onclick="imgAnswer(2,'Nasenflöte',this)">
+        <img src="nasenflöte.png" alt="Nasenflöte" />
+        <span>Nasenflöte</span>
+      </button>
     </div>
   </div>
 </div>
@@ -192,12 +218,23 @@
   <div class="q-wrap">
     <p class="q-number">Frage 3 von 8</p>
     <h2 class="q-text">Wer ist dein Feind<br>(most recently)?</h2>
-    <img class="q-graphic hidden" id="g-q3" src="" alt="" />
-    <div class="choices">
-      <button class="choice-btn" onclick="answerWithGraphic(3,'Macker','macker.png',this)">Macker</button>
-      <button class="choice-btn" onclick="answerWithGraphic(3,'Vermieter','vermieter.png',this)">Vermieter</button>
-      <button class="choice-btn" onclick="answerWithGraphic(3,'Nazi','nazi.png',this)">Nazi</button>
-      <button class="choice-btn" onclick="answerWithGraphic(3,'Cop','cop.png',this)">Cop</button>
+    <div class="img-grid">
+      <button class="img-card" onclick="imgAnswer(3,'Macker',this)">
+        <img src="macker.png" alt="Macker" />
+        <span>Macker</span>
+      </button>
+      <button class="img-card" onclick="imgAnswer(3,'Vermieter',this)">
+        <img src="vermieter.png" alt="Vermieter" />
+        <span>Vermieter</span>
+      </button>
+      <button class="img-card" onclick="imgAnswer(3,'Nazi',this)">
+        <img src="nazi.png" alt="Nazi" />
+        <span>Nazi</span>
+      </button>
+      <button class="img-card" onclick="imgAnswer(3,'Cop',this)">
+        <img src="cop.png" alt="Cop" />
+        <span>Cop</span>
+      </button>
     </div>
   </div>
 </div>
@@ -220,27 +257,37 @@
   <div class="q-wrap">
     <p class="q-number">Frage 5 von 8</p>
     <h2 class="q-text">Wo ordnest du dich<br>im Dreieck ein?</h2>
-    <div class="triangle-wrap" id="tri-wrap">
-      <div class="tri-container" id="tri-container">
-        <svg id="tri-svg" width="280" height="262" viewBox="0 0 280 262">
-          <!-- Triangle -->
-          <polygon id="tri-poly" points="140,12 16,250 264,250" fill="rgba(232,228,221,.04)" stroke="rgba(232,228,221,.22)" stroke-width="1.5"/>
-          <!-- Vertex glows -->
-          <circle cx="140" cy="12" r="4" fill="var(--pink)" opacity=".5"/>
-          <circle cx="16" cy="250" r="4" fill="var(--pink)" opacity=".5"/>
-          <circle cx="264" cy="250" r="4" fill="var(--pink)" opacity=".5"/>
-          <!-- Placed point -->
-          <circle id="tri-dot" cx="-100" cy="-100" r="8" fill="var(--pink)" opacity="1" filter="url(#glow)"/>
+    <div class="triangle-wrap">
+      <div class="tri-scene">
+        <!-- Top: Fotzig -->
+        <div class="tri-corner-blk" id="tcb-fotzig">
+          <img src="fotzig.png" alt="Fotzig" />
+          <span>Fotzig</span>
+        </div>
+        <!-- Triangle SVG -->
+        <svg id="tri-svg" width="280" height="220" viewBox="0 0 280 220">
+          <polygon points="140,10 10,210 270,210" fill="rgba(232,228,221,.04)" stroke="rgba(232,228,221,.22)" stroke-width="1.5"/>
+          <circle cx="140" cy="10"  r="4" fill="var(--pink)" opacity=".5"/>
+          <circle cx="10"  cy="210" r="4" fill="var(--pink)" opacity=".5"/>
+          <circle cx="270" cy="210" r="4" fill="var(--pink)" opacity=".5"/>
+          <circle id="tri-dot" cx="-100" cy="-100" r="9" fill="var(--pink)" opacity="1" filter="url(#glow)"/>
           <defs>
             <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           </defs>
         </svg>
-        <span class="tri-label top">Fotzig</span>
-        <span class="tri-label bl">Atzig</span>
-        <span class="tri-label br">Mausig</span>
+        <!-- Bottom: Atzig & Mausig -->
+        <div class="tri-bottom-row">
+          <div class="tri-corner-blk" id="tcb-atzig">
+            <img src="atzig.png" alt="Atzig" />
+            <span>Atzig</span>
+          </div>
+          <div class="tri-corner-blk" id="tcb-mausig">
+            <img src="mausig.png" alt="Mausig" />
+            <span>Mausig</span>
+          </div>
+        </div>
       </div>
-      <img class="q-graphic hidden" id="g-q5" src="" alt="" style="max-width:160px;max-height:160px;" />
-      <p id="tri-hint" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.3;margin-top:-8px;">Tippe auf das Dreieck</p>
+      <p id="tri-hint" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.3;margin-top:2px;">Ziehe den Punkt</p>
       <button class="next-btn" id="tri-next-btn" onclick="confirmTri()" disabled>Weiter</button>
     </div>
   </div>
@@ -251,11 +298,19 @@
   <div class="q-wrap">
     <p class="q-number">Frage 6 von 8</p>
     <h2 class="q-text">Was ist dein<br>Mittel der Wahl?</h2>
-    <img class="q-graphic hidden" id="g-q6" src="" alt="" />
-    <div class="choices">
-      <button class="choice-btn" onclick="answerWithGraphic(6,'Moltow','moltow.png',this)">Moltow</button>
-      <button class="choice-btn" onclick="answerWithGraphic(6,'Diskutieren','diskutieren.png',this)">Diskutieren</button>
-      <button class="choice-btn" onclick="answerWithGraphic(6,'Blockieren','blockieren.png',this)">Blockieren</button>
+    <div class="img-grid">
+      <button class="img-card" onclick="imgAnswer(6,'Moltow',this)">
+        <img src="moltow.png" alt="Moltow" />
+        <span>Moltow</span>
+      </button>
+      <button class="img-card" onclick="imgAnswer(6,'Diskutieren',this)">
+        <img src="diskutieren.png" alt="Diskutieren" />
+        <span>Diskutieren</span>
+      </button>
+      <button class="img-card" onclick="imgAnswer(6,'Blockieren',this)">
+        <img src="blockieren.png" alt="Blockieren" />
+        <span>Blockieren</span>
+      </button>
     </div>
   </div>
 </div>
@@ -362,34 +417,25 @@ function startCeremony() {
   goTo('s-q1');
 }
 
+/* Plain text-button questions (Q1, Q4) */
 function answer(qNum, val, btn) {
   answers[qNum] = val;
-  // Mark selected
   var btns = btn.parentNode.querySelectorAll('.choice-btn');
   btns.forEach(function(b){ b.classList.remove('selected'); });
   btn.classList.add('selected');
-  // Advance after short pause
   setTimeout(function() { goTo('s-q' + (qNum + 1)); }, 420);
 }
 
-function answerWithGraphic(qNum, val, imgSrc, btn) {
+/* Image-card questions (Q2, Q3, Q6) */
+function imgAnswer(qNum, val, btn) {
   answers[qNum] = val;
-  var btns = btn.parentNode.querySelectorAll('.choice-btn');
-  btns.forEach(function(b){ b.classList.remove('selected'); });
+  var cards = btn.parentNode.querySelectorAll('.img-card');
+  cards.forEach(function(c){ c.classList.remove('selected'); });
   btn.classList.add('selected');
-  // Show graphic
-  var gEl = document.getElementById('g-q' + qNum);
-  if (gEl) {
-    gEl.src = imgSrc;
-    gEl.alt = val;
-    gEl.classList.remove('hidden');
-  }
   setTimeout(function() {
-    // Reset graphic for next time
-    if (gEl) { gEl.classList.add('hidden'); }
     var nextId = qNum === 6 ? 's-q7' : 's-q' + (qNum + 1);
     goTo(nextId);
-  }, 700);
+  }, 360);
 }
 
 /* ══════ TEXT INPUTS ══════ */
@@ -410,10 +456,11 @@ function nextFromInput(qNum) {
   }
 }
 
-/* ══════ TRIANGLE ══════ */
-var triPts = { top:[140,12], bl:[16,250], br:[264,250] };
+/* ══════ TRIANGLE — DRAGGABLE ══════ */
+var triPts = { top:[140,10], bl:[10,210], br:[270,210] };
 var triPlaced = false;
-var triW = 280, triH = 262;
+var triW = 280, triH = 220;
+var triIsDragging = false;
 
 function pointInTriangle(px, py) {
   var A=triPts.top, B=triPts.bl, C=triPts.br;
@@ -426,50 +473,78 @@ function pointInTriangle(px, py) {
 }
 
 function clampToTriangle(px, py) {
-  var A=triPts.top, B=triPts.bl, C=triPts.br;
-  // Simple clamp: find closest point on triangle if outside
   if (pointInTriangle(px, py)) return [px, py];
-  // Project onto edges and pick closest
-  function closestOnSeg(ax,ay,bx,by,px,py){
+  var A=triPts.top, B=triPts.bl, C=triPts.br;
+  function closestOnSeg(ax,ay,bx,by,px,py) {
     var dx=bx-ax,dy=by-ay,t=((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy);
     t=Math.max(0,Math.min(1,t));
     return [ax+t*dx, ay+t*dy];
   }
-  var pts = [closestOnSeg(A[0],A[1],B[0],B[1],px,py), closestOnSeg(B[0],B[1],C[0],C[1],px,py), closestOnSeg(A[0],A[1],C[0],C[1],px,py)];
+  var pts=[closestOnSeg(A[0],A[1],B[0],B[1],px,py), closestOnSeg(B[0],B[1],C[0],C[1],px,py), closestOnSeg(A[0],A[1],C[0],C[1],px,py)];
   var best=pts[0], bestD=Infinity;
   pts.forEach(function(p){ var d=Math.hypot(p[0]-px,p[1]-py); if(d<bestD){bestD=d;best=p;} });
   return best;
 }
 
-function triDominant(px, py) {
+function triDominantName(px, py) {
   var A=triPts.top, B=triPts.bl, C=triPts.br;
   var dA=Math.hypot(px-A[0],py-A[1]);
   var dB=Math.hypot(px-B[0],py-B[1]);
   var dC=Math.hypot(px-C[0],py-C[1]);
-  if(dA<=dB&&dA<=dC) return {name:'Fotzig', img:'fotzig.png'};
-  if(dB<=dA&&dB<=dC) return {name:'Atzig', img:'atzig.png'};
-  return {name:'Mausig', img:'mausig.png'};
+  if(dA<=dB&&dA<=dC) return 'Fotzig';
+  if(dB<=dA&&dB<=dC) return 'Atzig';
+  return 'Mausig';
 }
 
-document.getElementById('tri-svg').addEventListener('click', function(e) {
-  var rect = this.getBoundingClientRect();
-  var rawX = (e.clientX - rect.left) * (triW / rect.width);
-  var rawY = (e.clientY - rect.top) * (triH / rect.height);
+function triUpdateCorners(dominantName) {
+  document.getElementById('tcb-fotzig').classList.toggle('dominant', dominantName === 'Fotzig');
+  document.getElementById('tcb-atzig').classList.toggle('dominant', dominantName === 'Atzig');
+  document.getElementById('tcb-mausig').classList.toggle('dominant', dominantName === 'Mausig');
+}
+
+function triHandlePos(clientX, clientY) {
+  var svg = document.getElementById('tri-svg');
+  var rect = svg.getBoundingClientRect();
+  var rawX = (clientX - rect.left) * (triW / rect.width);
+  var rawY = (clientY - rect.top)  * (triH / rect.height);
   var pt = clampToTriangle(rawX, rawY);
   var dot = document.getElementById('tri-dot');
   dot.setAttribute('cx', pt[0]);
   dot.setAttribute('cy', pt[1]);
   triPlaced = true;
-  triChoice = triDominant(pt[0], pt[1]);
-  // Show graphic
-  var gEl = document.getElementById('g-q5');
-  gEl.src = triChoice.img;
-  gEl.alt = triChoice.name;
-  gEl.classList.remove('hidden');
+  var dom = triDominantName(pt[0], pt[1]);
+  triChoice = { name: dom, img: dom.toLowerCase() + '.png' };
+  triUpdateCorners(dom);
   document.getElementById('tri-hint').style.opacity = '0';
   document.getElementById('tri-next-btn').disabled = false;
-  answers[5] = triChoice.name;
+  answers[5] = dom;
+}
+
+var triSvg = document.getElementById('tri-svg');
+
+triSvg.addEventListener('mousedown', function(e) {
+  triIsDragging = true;
+  triHandlePos(e.clientX, e.clientY);
+  e.preventDefault();
 });
+triSvg.addEventListener('touchstart', function(e) {
+  triIsDragging = true;
+  triHandlePos(e.touches[0].clientX, e.touches[0].clientY);
+  e.preventDefault();
+}, { passive: false });
+
+window.addEventListener('mousemove', function(e) {
+  if (!triIsDragging) return;
+  triHandlePos(e.clientX, e.clientY);
+});
+window.addEventListener('touchmove', function(e) {
+  if (!triIsDragging) return;
+  triHandlePos(e.touches[0].clientX, e.touches[0].clientY);
+  e.preventDefault();
+}, { passive: false });
+
+window.addEventListener('mouseup',  function() { triIsDragging = false; });
+window.addEventListener('touchend', function() { triIsDragging = false; });
 
 function confirmTri() {
   goTo('s-q6');
@@ -535,18 +610,18 @@ function resetCeremony() {
   document.getElementById('next-q8').disabled = true;
 
   // Reset triangle
-  var dot = document.getElementById('tri-dot');
-  dot.setAttribute('cx', -100);
-  dot.setAttribute('cy', -100);
-  document.getElementById('g-q5').classList.add('hidden');
+  document.getElementById('tri-dot').setAttribute('cx', -100);
+  document.getElementById('tri-dot').setAttribute('cy', -100);
   document.getElementById('tri-hint').style.opacity = '.3';
   document.getElementById('tri-next-btn').disabled = true;
+  triIsDragging = false;
+  document.querySelectorAll('.tri-corner-blk').forEach(function(b){ b.classList.remove('dominant'); });
 
-  // Reset all choice buttons
+  // Reset plain choice buttons
   document.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
 
-  // Reset all q-graphics
-  document.querySelectorAll('.q-graphic').forEach(function(g){ g.classList.add('hidden'); g.src=''; });
+  // Reset image cards
+  document.querySelectorAll('.img-card').forEach(function(c){ c.classList.remove('selected'); });
 
   // Reset result animations (re-trigger)
   document.querySelectorAll('.result-label,.result-name,.result-graphic,.result-desc,.result-quote,.result-actions').forEach(function(el){ el.style.animation='none'; el.offsetHeight; el.style.animation=''; });
