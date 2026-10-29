@@ -326,7 +326,7 @@ var RESULTS = {
     img: 'Frank.png'
   },
   Meier: {
-    desc: 'Das Steinzeichen Meier ist the life of the party. Meier versammeln gerne Menschen auf Partys, mit denen dann zu Karaokeeinlagen von Vicky Leandros' „Ich liebe das Leben" sich in den Armen liegend gesungen wird. Meier sprühen voller Ideen und setzen diese um, ohne darüber nachzudenken, wie umsetzbar diese sind. Probleme werden vielleicht nicht perfekt, aber immer kreativ gelöst. Meier rebellieren gerne und auch häufig. Ihnen ist es egal, ob das irgendwer doof findet. Wenn Meier ein Finger wären, wären sie ein Mittelfinger.',
+    desc: 'Das Steinzeichen Meier ist the life of the party. Meier versammeln gerne Menschen auf Partys, mit denen dann zu Karaokeeinlagen von Vicky Leandros\' „Ich liebe das Leben“ sich in den Armen liegend gesungen wird. Meier sprühen voller Ideen und setzen diese um, ohne darüber nachzudenken, wie umsetzbar diese sind. Probleme werden vielleicht nicht perfekt, aber immer kreativ gelöst. Meier rebellieren gerne und auch häufig. Ihnen ist es egal, ob das irgendwer doof findet. Wenn Meier ein Finger wären, wären sie ein Mittelfinger.',
     quote: 'Meier Meier Pants on Fire!',
     img: 'Meier.png'
   }
@@ -558,7 +558,7 @@ function resetCeremony() {
 
 /* ══════ CURSOR ══════ */
 var mol=document.getElementById('molotov');
-var mouseX=0,mouseY=0,curX=0,curY=0,isThrown=false;
+var mouseX=-300,mouseY=-300,curX=-300,curY=-300,isThrown=false;
 window.addEventListener('mousemove',function(e){mouseX=e.clientX;mouseY=e.clientY;});
 (function loop(){if(!isThrown){curX+=(mouseX-curX)*.16;curY+=(mouseY-curY)*.16;mol.style.transform='translate('+(curX-12)+'px,'+(curY-32)+'px) rotate(-40deg)';}requestAnimationFrame(loop);})();
 window.addEventListener('click',function(e){
