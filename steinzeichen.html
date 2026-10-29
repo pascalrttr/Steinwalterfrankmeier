@@ -31,6 +31,11 @@
     /* ══ BACK NAV ══ */
     .back-nav { position:fixed; top:28px; left:36px; z-index:9999; font-size:10px; letter-spacing:.28em; text-transform:uppercase; font-weight:600; color:var(--off); opacity:.38; transition:opacity .2s; text-decoration:none; display:flex; align-items:center; gap:8px; }
     .back-nav:hover { opacity:.8; }
+    .lang-toggle { position:fixed; top:28px; right:36px; z-index:9999; display:flex; }
+    .lang-btn { background:transparent; border:1px solid rgba(232,228,221,.18); color:var(--off); font-family:'EG',sans-serif; font-weight:700; font-size:9px; letter-spacing:.22em; text-transform:uppercase; cursor:none; padding:6px 13px; opacity:.32; transition:opacity .2s,background .2s,border-color .2s,color .2s; }
+    .lang-btn:first-child { border-right:none; }
+    .lang-btn.active { opacity:1; background:rgba(254,64,185,.1); border-color:rgba(254,64,185,.45); color:var(--pink); }
+    .lang-btn:hover:not(.active) { opacity:.65; }
     .back-nav svg { width:13px; height:13px; }
 
     /* ══ PROGRESS BAR ══ */
@@ -167,32 +172,36 @@
 
 <a href="index.html" class="back-nav">
   <svg viewBox="0 0 13 13" fill="none"><path d="M8 2L3 6.5L8 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  Zurück
+  <span data-i18n="back">Zurück</span>
 </a>
+<div class="lang-toggle">
+  <button class="lang-btn active" data-lang="de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+</div>
 
 <!-- ══════════ INTRO ══════════ -->
 <div class="screen active" id="s-intro">
   <span class="intro-deco" style="top:-10%;left:-5%;">STEIN</span>
   <span class="intro-deco" style="bottom:-10%;right:-5%;">ZEICHEN</span>
   <div style="display:flex;flex-direction:column;align-items:center;gap:28px;position:relative;z-index:1;text-align:center;">
-    <p class="intro-label">stein walter frank meier präsentiert</p>
-    <h1 class="intro-title">Stein&shy;zeichen<br>Zeremonie</h1>
-    <p class="intro-subtitle">Acht Fragen. Ein Schicksal. Finde heraus, welches Steinzeichen dir das Universum zugedacht hat.</p>
+    <p class="intro-label" data-i18n="intro-label">stein walter frank meier präsentiert</p>
+    <h1 class="intro-title" data-i18n="intro-title">Stein&shy;zeichen<br>Zeremonie</h1>
+    <p class="intro-subtitle" data-i18n="intro-subtitle">Acht Fragen. Ein Schicksal. Finde heraus, welches Steinzeichen dir das Universum zugedacht hat.</p>
     <div class="intro-mascot">
       <img src="haubi.png" alt="Haubi" />
     </div>
-    <button class="start-btn" onclick="startCeremony()">Zeremonie beginnen</button>
+    <button class="start-btn" onclick="startCeremony()" data-i18n="start-btn">Zeremonie beginnen</button>
   </div>
 </div>
 
 <!-- ══════════ Q1 — SONNENAUFGANG ══════════ -->
 <div class="screen" id="s-q1">
   <div class="q-wrap">
-    <p class="q-number">Frage 1 von 8</p>
-    <h2 class="q-text">Sonnenaufgang oder<br>Sonnenuntergang?</h2>
+    <p class="q-number" data-i18n="q1-num">Frage 1 von 8</p>
+    <h2 class="q-text" data-i18n="q1-text">Sonnenaufgang oder<br>Sonnenuntergang?</h2>
     <div class="choices">
-      <button class="choice-btn" onclick="answer(1,'Sonnenaufgang',this)">Sonnenaufgang</button>
-      <button class="choice-btn" onclick="answer(1,'Sonnenuntergang',this)">Sonnenuntergang</button>
+      <button class="choice-btn" onclick="answer(1,'Sonnenaufgang',this)" data-i18n="q1-a">Sonnenaufgang</button>
+      <button class="choice-btn" onclick="answer(1,'Sonnenuntergang',this)" data-i18n="q1-b">Sonnenuntergang</button>
     </div>
   </div>
 </div>
@@ -200,24 +209,24 @@
 <!-- ══════════ Q2 — INSTRUMENT ══════════ -->
 <div class="screen" id="s-q2">
   <div class="q-wrap">
-    <p class="q-number">Frage 2 von 8</p>
-    <h2 class="q-text">Welches Instrument<br>wählst du?</h2>
+    <p class="q-number" data-i18n="q2-num">Frage 2 von 8</p>
+    <h2 class="q-text" data-i18n="q2-text">Welches Instrument<br>wählst du?</h2>
     <div class="img-grid">
       <button class="img-card" onclick="imgAnswer(2,'Gitarre',this)">
         <img src="gitarre.png" alt="Gitarre" />
-        <span>Gitarre</span>
+        <span data-i18n="q2-gitarre">Gitarre</span>
       </button>
       <button class="img-card" onclick="imgAnswer(2,'Bass',this)">
         <img src="bass.png" alt="Bass" />
-        <span>Bass</span>
+        <span data-i18n="q2-bass">Bass</span>
       </button>
       <button class="img-card" onclick="imgAnswer(2,'Drums',this)">
         <img src="drums.png" alt="Drums" />
-        <span>Drums</span>
+        <span data-i18n="q2-drums">Drums</span>
       </button>
       <button class="img-card" onclick="imgAnswer(2,'Nasenflöte',this)">
         <img src="nasenflöte.png" alt="Nasenflöte" />
-        <span>Nasenflöte</span>
+        <span data-i18n="q2-nasenfloete">Nasenflöte</span>
       </button>
     </div>
   </div>
@@ -226,24 +235,24 @@
 <!-- ══════════ Q3 — FEIND ══════════ -->
 <div class="screen" id="s-q3">
   <div class="q-wrap">
-    <p class="q-number">Frage 3 von 8</p>
-    <h2 class="q-text">Wer ist dein Feind<br>(most recently)?</h2>
+    <p class="q-number" data-i18n="q3-num">Frage 3 von 8</p>
+    <h2 class="q-text" data-i18n="q3-text">Wer ist dein Feind<br>(most recently)?</h2>
     <div class="img-grid">
       <button class="img-card" onclick="imgAnswer(3,'Macker',this)">
         <img src="macker.png" alt="Macker" />
-        <span>Macker</span>
+        <span data-i18n="q3-macker">Macker</span>
       </button>
       <button class="img-card" onclick="imgAnswer(3,'Vermieter',this)">
         <img src="vermieter.png" alt="Vermieter" />
-        <span>Vermieter</span>
+        <span data-i18n="q3-vermieter">Vermieter</span>
       </button>
       <button class="img-card" onclick="imgAnswer(3,'Nazi',this)">
         <img src="nazi.png" alt="Nazi" />
-        <span>Nazi</span>
+        <span data-i18n="q3-nazi">Nazi</span>
       </button>
       <button class="img-card" onclick="imgAnswer(3,'Cop',this)">
         <img src="cop.png" alt="Cop" />
-        <span>Cop</span>
+        <span data-i18n="q3-cop">Cop</span>
       </button>
     </div>
   </div>
@@ -252,12 +261,12 @@
 <!-- ══════════ Q4 — TIER ══════════ -->
 <div class="screen" id="s-q4">
   <div class="q-wrap">
-    <p class="q-number">Frage 4 von 8</p>
-    <h2 class="q-text">Welches Tier<br>wählst du?</h2>
+    <p class="q-number" data-i18n="q4-num">Frage 4 von 8</p>
+    <h2 class="q-text" data-i18n="q4-text">Welches Tier<br>wählst du?</h2>
     <div class="choices">
-      <button class="choice-btn" onclick="answer(4,'Ratte',this)">Ratte</button>
-      <button class="choice-btn" onclick="answer(4,'Mücke',this)">Mücke</button>
-      <button class="choice-btn" onclick="answer(4,'Zecke',this)">Zecke</button>
+      <button class="choice-btn" onclick="answer(4,'Ratte',this)" data-i18n="q4-ratte">Ratte</button>
+      <button class="choice-btn" onclick="answer(4,'Mücke',this)" data-i18n="q4-muecke">Mücke</button>
+      <button class="choice-btn" onclick="answer(4,'Zecke',this)" data-i18n="q4-zecke">Zecke</button>
     </div>
   </div>
 </div>
@@ -265,14 +274,14 @@
 <!-- ══════════ Q5 — DREIECK ══════════ -->
 <div class="screen" id="s-q5">
   <div class="q-wrap">
-    <p class="q-number">Frage 5 von 8</p>
-    <h2 class="q-text">Wo ordnest du dich<br>im Dreieck ein?</h2>
+    <p class="q-number" data-i18n="q5-num">Frage 5 von 8</p>
+    <h2 class="q-text" data-i18n="q5-text">Wo ordnest du dich<br>im Dreieck ein?</h2>
     <div class="triangle-wrap">
       <div class="tri-scene">
         <!-- Top: Fotzig -->
         <div class="tri-corner-blk" id="tcb-fotzig">
           <img src="fotzig.png" alt="Fotzig" />
-          <span>Fotzig</span>
+          <span data-i18n="q5-fotzig">Fotzig</span>
         </div>
         <!-- Triangle SVG -->
         <svg id="tri-svg" width="420" height="330" viewBox="0 0 280 220">
@@ -289,16 +298,16 @@
         <div class="tri-bottom-row">
           <div class="tri-corner-blk" id="tcb-atzig">
             <img src="atzig.png" alt="Atzig" />
-            <span>Atzig</span>
+            <span data-i18n="q5-atzig">Atzig</span>
           </div>
           <div class="tri-corner-blk" id="tcb-mausig">
             <img src="mausig.png" alt="Mausig" />
-            <span>Mausig</span>
+            <span data-i18n="q5-mausig">Mausig</span>
           </div>
         </div>
       </div>
-      <p id="tri-hint" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.3;margin-top:2px;">Ziehe den Punkt</p>
-      <button class="next-btn" id="tri-next-btn" onclick="confirmTri()" disabled>Weiter</button>
+      <p id="tri-hint" data-i18n="tri-hint" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.3;margin-top:2px;">Ziehe den Punkt</p>
+      <button class="next-btn" id="tri-next-btn" onclick="confirmTri()" disabled data-i18n="q5-weiter">Weiter</button>
     </div>
   </div>
 </div>
@@ -306,20 +315,20 @@
 <!-- ══════════ Q6 — MITTEL ══════════ -->
 <div class="screen" id="s-q6">
   <div class="q-wrap">
-    <p class="q-number">Frage 6 von 8</p>
-    <h2 class="q-text">Was ist dein<br>Mittel der Wahl?</h2>
+    <p class="q-number" data-i18n="q6-num">Frage 6 von 8</p>
+    <h2 class="q-text" data-i18n="q6-text">Was ist dein<br>Mittel der Wahl?</h2>
     <div class="img-grid">
       <button class="img-card" onclick="imgAnswer(6,'Molotow',this)">
         <img src="molotow.png" alt="Molotow" />
-        <span>Molotow</span>
+        <span data-i18n="q6-molotow">Molotow</span>
       </button>
       <button class="img-card" onclick="imgAnswer(6,'Diskutieren',this)">
         <img src="diskutieren.png" alt="Diskutieren" />
-        <span>Diskutieren</span>
+        <span data-i18n="q6-diskutieren">Diskutieren</span>
       </button>
       <button class="img-card" onclick="imgAnswer(6,'Blockieren',this)">
         <img src="blockieren.png" alt="Blockieren" />
-        <span>Blockieren</span>
+        <span data-i18n="q6-blockieren">Blockieren</span>
       </button>
     </div>
   </div>
@@ -328,20 +337,20 @@
 <!-- ══════════ Q7 — LIEBLINGSSONG ══════════ -->
 <div class="screen" id="s-q7">
   <div class="q-wrap">
-    <p class="q-number">Frage 7 von 8</p>
-    <h2 class="q-text">Welches ist dein<br>lieblings Stein Walter Song?</h2>
-    <input class="q-input" id="inp-q7" type="text" placeholder="Songtitel eingeben…" oninput="checkInput(7)" onkeydown="if(event.key==='Enter')nextFromInput(7)" />
-    <button class="next-btn" id="next-q7" onclick="nextFromInput(7)" disabled>Weiter</button>
+    <p class="q-number" data-i18n="q7-num">Frage 7 von 8</p>
+    <h2 class="q-text" data-i18n="q7-text">Welches ist dein<br>lieblings Stein Walter Song?</h2>
+    <input class="q-input" id="inp-q7" type="text" placeholder="Songtitel eingeben…" data-i18n-ph="q7-placeholder" oninput="checkInput(7)" onkeydown="if(event.key==='Enter')nextFromInput(7)" />
+    <button class="next-btn" id="next-q7" onclick="nextFromInput(7)" disabled data-i18n="q7-weiter">Weiter</button>
   </div>
 </div>
 
 <!-- ══════════ Q8 — PUNKNAME ══════════ -->
 <div class="screen" id="s-q8">
   <div class="q-wrap">
-    <p class="q-number">Frage 8 von 8</p>
-    <h2 class="q-text">Welches ist<br>dein Punkname?</h2>
-    <input class="q-input" id="inp-q8" type="text" placeholder="Dein Punkname…" oninput="checkInput(8)" onkeydown="if(event.key==='Enter')nextFromInput(8)" />
-    <button class="next-btn" id="next-q8" onclick="nextFromInput(8)" disabled>Ergebnis enthüllen</button>
+    <p class="q-number" data-i18n="q8-num">Frage 8 von 8</p>
+    <h2 class="q-text" data-i18n="q8-text">Welches ist<br>dein Punkname?</h2>
+    <input class="q-input" id="inp-q8" type="text" placeholder="Dein Punkname…" data-i18n-ph="q8-placeholder" oninput="checkInput(8)" onkeydown="if(event.key==='Enter')nextFromInput(8)" />
+    <button class="next-btn" id="next-q8" onclick="nextFromInput(8)" disabled data-i18n="q8-reveal">Ergebnis enthüllen</button>
   </div>
 </div>
 
@@ -353,18 +362,18 @@
 <!-- ══════════ RESULT ══════════ -->
 <div class="screen" id="s-result" style="overflow-y:auto;overflow-x:hidden;padding:80px 24px 60px;">
   <div class="result-wrap">
-    <p class="result-label">Dein Steinzeichen</p>
+    <p class="result-label" data-i18n="result-label">Dein Steinzeichen</p>
     <h2 class="result-name">
-      <span class="r-prefix" id="res-prefix">Das Steinzeichen</span>
+      <span class="r-prefix" id="res-prefix" data-i18n="res-prefix">Das Steinzeichen</span>
       <span class="glitch-text" id="res-name" data-text="">STEIN</span>
     </h2>
     <img class="result-graphic" id="res-graphic" src="" alt="" />
     <p class="result-desc" id="res-desc"></p>
-    <p class="result-quote-label">Dein Steinzeichen Inspirationsspruch des Tages:</p>
+    <p class="result-quote-label" data-i18n="result-quote-label">Dein Steinzeichen Inspirationsspruch des Tages:</p>
     <p class="result-quote" id="res-quote"></p>
     <div class="result-actions">
-      <button class="result-share-btn again" onclick="resetCeremony()">Nochmal spielen</button>
-      <a class="result-share-btn" href="index.html">Zur Website</a>
+      <button class="result-share-btn again" onclick="resetCeremony()" data-i18n="result-again">Nochmal spielen</button>
+      <a class="result-share-btn" href="index.html" data-i18n="result-site">Zur Website</a>
     </div>
   </div>
 </div>
@@ -374,26 +383,78 @@
 var answers = {};
 var triChoice = null;
 var currentScreen = 's-intro';
+var LANG = 'de';
+
+/* ══════ TRANSLATIONS ══════ */
+var STRINGS = {
+  de: {
+    'back':'Zurück','intro-label':'stein walter frank meier präsentiert','intro-title':'Stein&shy;zeichen<br>Zeremonie','intro-subtitle':'Acht Fragen. Ein Schicksal. Finde heraus, welches Steinzeichen dir das Universum zugedacht hat.','start-btn':'Zeremonie beginnen',
+    'q1-num':'Frage 1 von 8','q1-text':'Sonnenaufgang oder<br>Sonnenuntergang?','q1-a':'Sonnenaufgang','q1-b':'Sonnenuntergang',
+    'q2-num':'Frage 2 von 8','q2-text':'Welches Instrument<br>wählst du?','q2-gitarre':'Gitarre','q2-bass':'Bass','q2-drums':'Drums','q2-nasenfloete':'Nasenflöte',
+    'q3-num':'Frage 3 von 8','q3-text':'Wer ist dein Feind<br>(most recently)?','q3-macker':'Macker','q3-vermieter':'Vermieter','q3-nazi':'Nazi','q3-cop':'Cop',
+    'q4-num':'Frage 4 von 8','q4-text':'Welches Tier<br>wählst du?','q4-ratte':'Ratte','q4-muecke':'Mücke','q4-zecke':'Zecke',
+    'q5-num':'Frage 5 von 8','q5-text':'Wo ordnest du dich<br>im Dreieck ein?','q5-fotzig':'Fotzig','q5-atzig':'Atzig','q5-mausig':'Mausig','tri-hint':'Ziehe den Punkt','q5-weiter':'Weiter',
+    'q6-num':'Frage 6 von 8','q6-text':'Was ist dein<br>Mittel der Wahl?','q6-molotow':'Molotow','q6-diskutieren':'Diskutieren','q6-blockieren':'Blockieren',
+    'q7-num':'Frage 7 von 8','q7-text':'Welches ist dein<br>lieblings Stein Walter Song?','q7-placeholder':'Songtitel eingeben…','q7-weiter':'Weiter',
+    'q8-num':'Frage 8 von 8','q8-text':'Welches ist<br>dein Punkname?','q8-placeholder':'Dein Punkname…','q8-reveal':'Ergebnis enthüllen',
+    'trans-text':'Das Steinzeichen<br>entscheidet…','result-label':'Dein Steinzeichen','res-prefix':'Das Steinzeichen','result-quote-label':'Dein Steinzeichen Inspirationsspruch des Tages:','result-again':'Nochmal spielen','result-site':'Zur Website'
+  },
+  en: {
+    'back':'Back','intro-label':'stein walter frank meier presents','intro-title':'Stein&shy;zeichen<br>Ceremony','intro-subtitle':'Eight questions. One fate. Find out which Steinzeichen the universe has assigned you.','start-btn':'Begin Ceremony',
+    'q1-num':'Question 1 of 8','q1-text':'Sunrise or<br>sunset?','q1-a':'Sunrise','q1-b':'Sunset',
+    'q2-num':'Question 2 of 8','q2-text':'Which instrument<br>do you choose?','q2-gitarre':'Guitar','q2-bass':'Bass','q2-drums':'Drums','q2-nasenfloete':'Nose Flute',
+    'q3-num':'Question 3 of 8','q3-text':'Who is your enemy<br>(most recently)?','q3-macker':'Macho','q3-vermieter':'Landlord','q3-nazi':'Nazi','q3-cop':'Cop',
+    'q4-num':'Question 4 of 8','q4-text':'Which animal<br>do you choose?','q4-ratte':'Rat','q4-muecke':'Mosquito','q4-zecke':'Tick',
+    'q5-num':'Question 5 of 8','q5-text':'Where do you place yourself<br>in the triangle?','q5-fotzig':'Fotzig','q5-atzig':'Atzig','q5-mausig':'Mausig','tri-hint':'Drag the point','q5-weiter':'Next',
+    'q6-num':'Question 6 of 8','q6-text':'What is your<br>weapon of choice?','q6-molotow':'Molotov','q6-diskutieren':'Discuss','q6-blockieren':'Blockade',
+    'q7-num':'Question 7 of 8','q7-text':'What is your favourite<br>Stein Walter song?','q7-placeholder':'Enter song title…','q7-weiter':'Next',
+    'q8-num':'Question 8 of 8','q8-text':'What is<br>your punk name?','q8-placeholder':'Your punk name…','q8-reveal':'Reveal result',
+    'trans-text':'The Steinzeichen<br>decides…','result-label':'Your Steinzeichen','res-prefix':'The Steinzeichen','result-quote-label':'Your Steinzeichen inspiration quote of the day:','result-again':'Play again','result-site':'To the website'
+  }
+};
+
+function setLang(l) {
+  LANG = l;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var val = STRINGS[l][el.getAttribute('data-i18n')];
+    if (val !== undefined) el.innerHTML = val;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
+    var val = STRINGS[l][el.getAttribute('data-i18n-ph')];
+    if (val !== undefined) el.placeholder = val;
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-lang') === l);
+  });
+}
 
 var RESULTS = {
   Stein: {
-    desc: 'Das Steinzeichen Stein ist ein aktives, dynamisches, direktes Zeichen und liebt Aktion! Es wird nicht viel geplant, lieber gleich geworfen. Steine sind geradlinig und leben am liebsten in der Luft Richtung Auto. Sie sind provokativ, sitzen nicht gerne still und diskutieren gerne mal die ein oder anderen Bitcoin-Bros von der Demo weg. Sie sind mal fotzig und energiegeladen, während der Style nach dem Motto „ist das ein Top oder ist das ein Kleid" ihren Vibe nach außen trägt. Manchmal sind sie aber auch einfach mausig und zurückgezogen im Bettchen und gucken mit einer Packung Chips die neue Folge Game Changer.',
+    desc: 'Das Steinzeichen Stein ist ein aktives, dynamisches, direktes Zeichen und liebt Aktion! Es wird nicht viel geplant, lieber gleich geworfen. Steine sind geradlinig und leben am liebsten in der Luft Richtung Auto. Sie sind provokativ, sitzen nicht gerne still und diskutieren gerne mal die ein oder anderen Bitcoin-Bros von der Demo weg. Sie sind mal fotzig und energiegeladen, während der Style nach dem Motto „ist das ein Top oder ist das ein Kleid” ihren Vibe nach außen trägt. Manchmal sind sie aber auch einfach mausig und zurückgezogen im Bettchen und gucken mit einer Packung Chips die neue Folge Game Changer.',
+    descEn: 'The Steinzeichen Stein is an active, dynamic, direct sign that loves action! Not much planning happens — better to just throw it straight away. Steins are straightforward and love being airborne, ideally toward a car. They\'re provocative, can\'t sit still, and enjoy arguing the occasional Bitcoin bro right off the demo. They can be bratty and full of energy, with a style following the motto “is that a top or is that a dress?” But sometimes they\'re just quiet and withdrawn, tucked up in bed watching a new episode of Game Changer with a bag of chips.',
     quote: 'Wer ohne Immobilienportfolio ist, werfe den ersten Stein!',
+    quoteEn: 'Let he who is without a real estate portfolio cast the first stone!',
     img: 'stein.png'
   },
   Walter: {
     desc: 'Das Steinzeichen Walter ist entspannt und gelassen. Die Revolution wird durch Arbeitszeitbetrug und lustige Memes bequem von Zuhause aus angezettelt. Walter sind empathisch, bodenständig, stabil und stur — aber machen sofort die Klappe auf, wenn irgendein Macker wieder etwas Intolerables gemacht oder gesagt hat. Sie lieben und leben Genuss. Kulinarisch wird gerne einmal die ein oder andere Soßenkombination auf unkonventionellen Gerichten ausprobiert.',
+    descEn: 'The Steinzeichen Walter is chilled and laid-back. The revolution is plotted through strategic time-theft at work and funny memes, comfortably from home. Walters are empathetic, grounded, stable, and stubborn — but immediately speak up when some bro does or says something intolerable. They love pleasure and live for it. Culinarily, more than one unconventional sauce combination tends to be tested on unexpected dishes.',
     quote: 'Das wird hier alles Verboten, wenn ich Bundespräsident bin!',
+    quoteEn: 'All of this will be banned when I\'m Federal President!',
     img: 'walter.png'
   },
   Frank: {
     desc: 'Das Steinzeichen Frank ist gesprächig und wissbegierig. Franks haben mindestens einen Podcast am Laufen, um mitzubekommen, warum welcher Quatsch gerade auf der Welt passiert. Franks sind pragmatisch, obwohl ihnen Style auch sehr wichtig ist. Sie feiern gerne und sind häufig auf dem Sprung — brauchen aber auch gerne mal etwas längere Zeit für sich allein.',
+    descEn: 'The Steinzeichen Frank is talkative and curious. Franks have at least one podcast running at all times to keep up with whatever nonsense is currently happening in the world. Franks are pragmatic, though style is still very important to them. They love to party and are frequently on the move — but also need a good stretch of alone time every now and then.',
     quote: 'Verspeisen Sie Reich?',
+    quoteEn: 'Would you care to devour the Rich?',
     img: 'frank.png'
   },
   Meier: {
     desc: 'Das Steinzeichen Meier ist the life of the party. Meier versammeln gerne Menschen auf Partys, mit denen dann zu Karaokeeinlagen von Vicky Leandros\' „Ich liebe das Leben” sich in den Armen liegend gesungen wird. Meier sprühen voller Ideen und setzen diese um, ohne darüber nachzudenken, wie umsetzbar diese sind. Probleme werden vielleicht nicht perfekt, aber immer kreativ gelöst. Meier rebellieren gerne und auch häufig. Ihnen ist es egal, ob das irgendwer doof findet. Wenn Meier ein Finger wären, wären sie ein Mittelfinger.',
+    descEn: 'The Steinzeichen Meier is the life of the party. Meiers love gathering people, and those parties tend to end with karaoke renditions of Vicky Leandros\' “I Love Life,” everyone in each other\'s arms singing their hearts out. Meiers overflow with ideas and act on them without thinking too hard about feasibility. Problems get solved not perfectly, but always creatively. Meiers love to rebel — often and loudly. They don\'t care if anyone thinks it\'s dumb. If Meiers were a finger, they\'d be the middle one.',
     quote: 'Meier Meier Pants on Fire!',
+    quoteEn: 'Meier Meier Pants on Fire!',
     img: 'meier.png'
   }
 };
@@ -570,7 +631,7 @@ function confirmTri() {
 function showTransition() {
   var punkname = answers[8] || '';
   var transText = document.getElementById('trans-text');
-  transText.innerHTML = 'Das Steinzeichen<br>entscheidet…';
+  transText.innerHTML = STRINGS[LANG]['trans-text'];
 
   // Go to transition screen
   var prev = document.getElementById(currentScreen);
@@ -598,8 +659,8 @@ function showResult() {
 
   document.getElementById('res-graphic').src = data.img;
   document.getElementById('res-graphic').alt = pick;
-  document.getElementById('res-desc').textContent = data.desc;
-  document.getElementById('res-quote').textContent = data.quote;
+  document.getElementById('res-desc').textContent = LANG === 'en' ? data.descEn : data.desc;
+  document.getElementById('res-quote').textContent = LANG === 'en' ? data.quoteEn : data.quote;
 
   // Transition to result screen
   var prev = document.getElementById('s-transition');
